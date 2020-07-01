@@ -4,3 +4,4 @@
 ^\.travis\.yml$
 ^README\.Rmd$
 ^appveyor\.yml$
+^inst/extdata/archipelagos_in_datasets\.xlsx$
