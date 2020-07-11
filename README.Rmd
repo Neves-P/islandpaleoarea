@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Neves-P/DAISIErobustness)
 [![Travis build status](https://travis-ci.com/Neves-P/islandpaleoarea.svg?branch=master)](https://travis-ci.com/Neves-P/islandpaleoarea)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/Neves-P/islandpaleoarea?branch=master&svg=true)](https://ci.appveyor.com/project/Neves-P/islandpaleoarea)
+[![Codecov test coverage](https://codecov.io/gh/Neves-P/islandpaleoarea/branch/master/graph/badge.svg)](https://codecov.io/gh/Neves-P/islandpaleoarea?branch=master)
 <!-- badges: end -->
 
 The goal of islandpaleoarea is to study the effect of paleo-area vs current
