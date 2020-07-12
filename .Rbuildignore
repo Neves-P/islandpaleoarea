@@ -6,3 +6,4 @@
 ^appveyor\.yml$
 ^inst/extdata/archipelagos_in_datasets\.xlsx$
 ^data-raw$
+^codecov\.yml$
