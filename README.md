@@ -9,8 +9,7 @@
 yet, or the repository is only intended to be a limited example, demo,
 or
 proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
-![GitHub tag (latest by
-date)](https://img.shields.io/github/v/tag/Neves-P/DAISIErobustness)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Neves-P/islandpaleoarea?include_prereleases)
 [![Travis build
 status](https://travis-ci.com/Neves-P/islandpaleoarea.svg?branch=master)](https://travis-ci.com/Neves-P/islandpaleoarea)
 [![AppVeyor build
