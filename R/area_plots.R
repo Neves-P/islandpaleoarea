@@ -1,32 +1,77 @@
-data(archipelagos41, package = "DAISIE")
-archipelagos41[[1]][[1]]$name
 
-names_41 <- c()
-names_23 <- c()
+archipelagos_paleo_area_no_duplicates <- readr::read_csv(
+  "data-raw/archipelagos_paleo_area_no_duplicates.csv"
+)
 
-for (i in seq_along(archipelagos41)) {
-  names_41[i] <- archipelagos41[[i]][[1]]$name
-}
+plot(
+  archipelagos_paleo_area_no_duplicates$ka16_lambeck,
+  archipelagos_paleo_area_no_duplicates$k0_PIAC,
+  xlab = "16kya area Lambeck km^2",
+  ylab = "Current area PIAC km^2",
+  main = "Areas of 23 archipelagos"
+)
+abline(a = 0, b = 1, col = "red")
+plot(
+  archipelagos_paleo_area_no_duplicates$ka16_lambeck,
+  archipelagos_paleo_area_no_duplicates$k0_nature,
+  xlab = "16kya area Lambeck km^2",
+  ylab = "Current area Nature paper km^2",
+  main = "Areas of 23 archipelagos"
+)
+abline(a = 0, b = 1, col = "red")
+plot(
+  archipelagos_paleo_area_no_duplicates$ka16_lambeck,
+  archipelagos_paleo_area_no_duplicates$ka16_cutler,
+  xlab = "16kya area Lambeck km^2",
+  ylab = "16kya area Cutler km^2",
+  main = "Areas of 23 archipelagos"
+)
+abline(a = 0, b = 1, col = "red")
+plot(
+  archipelagos_paleo_area_no_duplicates$k0_PIAC,
+  archipelagos_paleo_area_no_duplicates$k0_nature,
+  xlab = "Current area PIAC km^2",
+  ylab = "Current area Nature paper km^2",
+  main = "Areas of 23 archipelagos"
+)
+abline(a = 0, b = 1, col = "red")
 
-for (i in seq_along(archipelagos23)) {
-  names_23[i] <- archipelagos23[[i]][[1]]$name
-}
 
-paleo_area_archipelago_indices <- which(names_41 %in% names_23)
+# Remove Seychelles
+
+archipelagos_sans_seyschelles <- archipelagos_paleo_area_no_duplicates[-9, ]
 
 
-areas_41 <- c()
-for (i in paleo_area_archipelago_indices) {
-  print(i)
-  areas_41[i] <- archipelagos41[[i]][[1]]$area
-}
+plot(
+  archipelagos_sans_seyschelles$ka16_lambeck,
+  archipelagos_sans_seyschelles$k0_PIAC,
+  xlab = "16kya area Lambeck km^2",
+  ylab = "Current area PIAC km^2",
+  main = "Areas of 22 archipelagos - no Seyschelles"
+)
+abline(a = 0, b = 1, col = "red")
+plot(
+  archipelagos_sans_seyschelles$ka16_lambeck,
+  archipelagos_sans_seyschelles$k0_nature,
+  xlab = "16kya area Lambeck km^2",
+  ylab = "Current area Nature paper km^2",
+  main = "Areas of 22 archipelagos - no Seyschelles"
+)
+abline(a = 0, b = 1, col = "red")
+plot(
+  archipelagos_sans_seyschelles$ka16_lambeck,
+  archipelagos_sans_seyschelles$ka16_cutler,
+  xlab = "16kya area Lambeck km^2",
+  ylab = "16kya area Cutler km^2",
+  main = "Areas of 22 archipelagos - no Seyschelles"
+)
+abline(a = 0, b = 1, col = "red")
+plot(
+  archipelagos_sans_seyschelles$k0_PIAC,
+  archipelagos_sans_seyschelles$k0_nature,
+  xlab = "Current area PIAC km^2",
+  ylab = "Current area Nature paper km^2",
+  main = "Areas of 22 archipelagos - no Seyschelles"
+)
+abline(a = 0, b = 1, col = "red")
 
-areas_41 <- areas_41[!is.na(areas_41)]
-
-areas_23 <- c()
-for (i in seq_along(archipelagos23)) {
-  areas_23[i] <- archipelagos23[[i]][[1]]$area
-}
-length(areas_41)
-plot(areas_41, areas_23)
-plot(log(areas_41), log(areas_23))
