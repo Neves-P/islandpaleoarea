@@ -7,9 +7,21 @@ archipelagos_paleo_area <- readr::read_csv(
 colnames(archipelagos_paleo_area) <- c("archipelago", "ka16_lambeck", "ka16_cutler", "k0_PIAC", "k0_nature")
 archipelagos_paleo_area <- with(archipelagos_paleo_area,  archipelagos_paleo_area[order(archipelago), ])
 archipelago_names <- c()
+areas <- c()
+area_comp <- data.frame(archipelago = character(), areas = numeric())
+for (i in seq_along(archipelagos41)) {
+  area_comp[i, 1] <- archipelagos41[[i]][[1]]$name
+  area_comp[i, 2] <- archipelagos41[[i]][[1]]$area
+}
+
+new_areas <- dplyr::group_by(area_cutler20220211, archipelago_name) |>
+  dplyr::filter(year_before_after_present == 0) |>
+  dplyr::arrange(archipelago_name) |>
+  dplyr::select(archipelago_name, area_km)
+out <- cbind(area_comp, new_areas)
 
 for (i in seq_along(archipelagos41)) {
-  archipelago_names[i] <- archipelagos41[[i]][[1]]$name
+  areas[i] <- archipelagos41[[i]][[1]]$area
 }
 
 a <- pmatch(
