@@ -1,11 +1,9 @@
-## code to prepare `archipelagos23` dataset goes here
+## code to prepare `archipelagos41_paleo` dataset goes here
 
 data(archipelagos41, package = "DAISIE")
 archipelagos_paleo_area <- readr::read_csv(
-  "data-raw/archipelagos_paleo_area_no_duplicates.csv"
+  "data-raw/area_cutler20220211.csv"
 )
-colnames(archipelagos_paleo_area) <- c("archipelago", "ka16_lambeck", "ka16_cutler", "k0_PIAC", "k0_nature")
-archipelagos_paleo_area <- with(archipelagos_paleo_area,  archipelagos_paleo_area[order(archipelago), ])
 archipelago_names <- c()
 areas <- c()
 area_comp <- data.frame(archipelago = character(), areas = numeric())
@@ -24,8 +22,10 @@ for (i in seq_along(archipelagos41)) {
   areas[i] <- archipelagos41[[i]][[1]]$area
 }
 
+dplyr::filter(archipelagos_paleo_area, archipelago_name %in% archipelago_names)
+
 a <- pmatch(
-  archipelagos_paleo_area[, 1]$archipelago,
+  archipelagos_paleo_area$archipelago_name,
   archipelago_names
 )
 b <- a[!is.na(a)]
