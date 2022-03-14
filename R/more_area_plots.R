@@ -1,5 +1,5 @@
 library(tidyverse)
-area_cutler <- read.csv("G:/O meu disco/PhD/Projects/paleoarea/geographic_data/area_cutler.csv")
+area_cutler <- read.csv("data-raw/area_cutler20220211.csv")
 with_hawaii <- ggplot(area_cutler, aes(x = year_before_after_present, y = area_km, color = archipelago_name)) +
   geom_line()
 ggsave(

@@ -1,10 +1,10 @@
 library(tidyverse)
 
-area_global_cutler <- read_csv("data-raw/area_global_cutler.csv")
+area_global_cutler <- read_csv("data-raw/area_cutler20220211.csv")
 
-area_global_cutler_grouped <- area_global_cutler %>% group_by(archipelago)
+area_global_cutler_grouped <- area_global_cutler %>% group_by(archipelago_name)
 cutler_summed_unique_areas <- area_global_cutler_grouped %>%
-  group_by(archipelago) %>%
+  group_by(archipelago_name) %>%
   summarise_if(is.numeric, function(x) sum(unique(na.omit(x))))
 
 
@@ -15,7 +15,7 @@ largest_arch <- max(
     summarise_if(
       .tbl = cutler_summed_unique_areas, .predicate = is.numeric,.funs = max)), na.rm = TRUE)
 
-# ggplot2::ggplot(cutler_summed_unique_areas, aes(y = Aladraba, x = Aladraba))
+ggplot2::ggplot(cutler_summed_unique_areas, aes(y = Aladraba, x = Aladraba))
 
 x_axis <- 1:141
 
