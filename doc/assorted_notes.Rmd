@@ -14,3 +14,24 @@ plot
 
 ```
 
+This is yet another stub
+
+```{r}
+data(archipelagos41, package = "DAISIE")
+data(archipelagos41_paleo)
+data(area_database)
+archipelago_names <- c()
+areas <- c()
+area_comp <- data.frame(archipelago = character(), areas = numeric())
+for (i in seq_along(archipelagos41)) {
+  area_comp[i, 1] <- archipelagos41[[i]][[1]]$name
+  area_comp[i, 2] <- archipelagos41[[i]][[1]]$area
+}
+
+new_areas <- dplyr::group_by(area_database, archipelago_name) |>
+  dplyr::filter(year_before_after_present == 0) |>
+  dplyr::arrange(archipelago_name) |>
+  dplyr::select(archipelago_name, area_km)
+out <- cbind(area_comp, new_areas)
+```
+
