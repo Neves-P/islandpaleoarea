@@ -10,10 +10,7 @@ yet, or the repository is only intended to be a limited example, demo,
 or
 proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Neves-P/islandpaleoarea?include_prereleases)
-[![Travis build
-status](https://travis-ci.com/Neves-P/islandpaleoarea.svg?branch=master)](https://travis-ci.com/Neves-P/islandpaleoarea)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/Neves-P/islandpaleoarea?branch=master&svg=true)](https://ci.appveyor.com/project/Neves-P/islandpaleoarea)
+[![R-CMD-check](https://github.com/Neves-P/islandpaleoarea/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Neves-P/islandpaleoarea/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/Neves-P/islandpaleoarea/branch/master/graph/badge.svg)](https://codecov.io/gh/Neves-P/islandpaleoarea?branch=master)
 <!-- badges: end -->
