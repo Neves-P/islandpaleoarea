@@ -1,0 +1,16 @@
+---
+title: "Assorted notes"
+output: html_notebook
+---
+
+This is one stub
+```{r}
+library(tidyverse)
+data(area_database)
+plot <- ggplot(area_database, aes(x = year_before_after_present, y = area_km, color = archipelago_name)) +
+  geom_line()
+
+plot
+
+```
+
