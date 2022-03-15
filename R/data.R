@@ -1,15 +1,15 @@
 #' DAISIE datalist object including bird phylogenetic data and
-#' physical data for 23 archipelagos
-#' @format A datalist containing data on 23 of the 41 archipelagos studied in
+#' physical data for 41 archipelagos
+#' @format A datalist containing data on 41 of the 41 archipelagos studied in
 #' Valente et al 2020 (Main Dataset D1). Contains colonisation and branching
 #' times for bird species in each of the archipelagos. It also contains
 #' information on archipelago name, area, age and distance from the nearest
 #' mainland. Unlike the dataset used in the Valente et al 2020 study, the area
 #' of each archipelago here refers to the estimated archipelago area 16kya
 #' obtained from the PIAC database (Norder et al 2017).
-#' @description A datalist with 23 items representing the 23 archipelagos.
-#' Each archipelago can be called separately using `archipelagos23[[x]]` with
-#' x being a number between 1 and 23 Using `archipelagos23[[x]][[1]]` will show
+#' @description A datalist with 41 items representing the 41 archipelagos.
+#' Each archipelago can be called separately using `archipelagos41[[x]]` with
+#' x being a number between 1 and 41 Using `archipelagos41[[x]][[1]]` will show
 #' just the top part of the archipelago item where the archipelago name and
 #' physical features are displayed. The structure of each of the archipelagos is
 #' the same as regular DAISIE datalist generated using
@@ -26,4 +26,4 @@
 #' Valente, L., Phillimore, A.B., Melo, M. et al. A simple dynamic model
 #' explains the diversity of island birds worldwide. Nature 579, 92–96 (2020).
 #' \url{https://doi.org/10.1038/s41586-020-2022-5}
-"archipelagos23"
+"archipelagos41_paleo"
