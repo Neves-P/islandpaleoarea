@@ -27,3 +27,10 @@
 #' explains the diversity of island birds worldwide. Nature 579, 92–96 (2020).
 #' \url{https://doi.org/10.1038/s41586-020-2022-5}
 "archipelagos41_paleo"
+
+#' STUB
+#' @format STUB
+#' @description STUB.
+#' @source
+#' STUB
+"area_database"
