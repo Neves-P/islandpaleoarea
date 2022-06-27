@@ -3,17 +3,14 @@ args <- commandArgs(trailingOnly = TRUE)
 library(DAISIE)
 
 array_index <- as.numeric(args[1])
-methode <- args[4]
-optimmethod <- args[5]
-start_time <- args[2]
-end_time <- args[3]
+time_slice <- as.numeric(args[2])
+methode <- args[3]
+optimmethod <- args[4]
 
+model_vec <- sort(rep(1:28, 15))
 
-
-a_vals <- read.table("a_vals.txt", header = F)
-
-the_dataset <- a_vals[array_index, 1]
-model <- a_vals[array_index, 3]
+time_slice <- a_vals[array_index, 1]
+model <- model_vec[array_index]
 
 parallel <- "local"
 
@@ -42,7 +39,7 @@ output_folder_path <- DAISIEutils::create_output_folder(
   results_dir = NULL
 )
 
-datalist <- archipelagos41_paleo[[the_dataset]]
+datalist <- archipelagos41_paleo[[time_slice]]
 
 model_args <- setup_mw_model(model)
 initparsopt <- model_args$initparsopt
@@ -94,7 +91,7 @@ if (!file.exists(output_path)) {
 }
 to_write <- c(
   array_index,
-  the_dataset,
+  time_slice,
   seed,
   model,
   distance_dep,
