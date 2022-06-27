@@ -7,6 +7,12 @@
 
 ml R
 
-replicate_number=$SLURM_ARRAY_TASK_ID
+array_index=$SLURM_ARRAY_TASK_ID
+time_slice=$1
+methode=$2
+optimmethod=$3
 
-Rscript --vanilla ML_script.R ${replicate_number}
+Rscript --vanilla scripts/paleo_ml.R ${array_index} \
+                                     ${time_slice} \
+                                     ${methode} \
+                                     ${optimmethod}
