@@ -1,6 +1,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 
 library(DAISIE)
+library(islandpaleoarea)
 
 array_index <- as.numeric(args[1])
 time_slice <- as.numeric(args[2])
@@ -8,16 +9,11 @@ methode <- args[3]
 optimmethod <- args[4]
 
 model_vec <- sort(rep(1:28, 15))
-
-time_slice <- a_vals[array_index, 1]
 model <- model_vec[array_index]
-
 parallel <- "local"
-
 data_name <- data(archipelagos41_paleo)
 
 seed <- as.integer(Sys.time()) %% 10000L * array_index
-
 set.seed(
   seed,
   kind = "Mersenne-Twister",
@@ -46,7 +42,7 @@ initparsopt <- model_args$initparsopt
 idparsopt <- model_args$idparsopt
 parsfix <- model_args$parsfix
 idparsfix <- model_args$idparsfix
-res <- model_args$initparsopt
+res <- model_args$res
 ddmodel <- model_args$ddmodel
 cpus <- model_args$cpus
 tol <- model_args$tol
@@ -102,4 +98,4 @@ to_write <- c(
 )
 
 file_name <- paste0("results_", array_index, ".txt")
-cat(to_write, file = file_name, append = TRUE)
+cat(to_write, file = file.path(output_folder_path, file_name), append = TRUE)
