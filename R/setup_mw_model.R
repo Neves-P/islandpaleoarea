@@ -281,10 +281,7 @@ setup_mw_model <- function(model) {
     idparsfix <- c(5, 6)
     res <- 100
     ddmodel <- 0
-
     cpus <- 5
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "area_interactive_clado"
@@ -297,10 +294,7 @@ setup_mw_model <- function(model) {
     idparsfix <- c(5, 6)
     res <- 100
     ddmodel <- 0
-
     cpus <- 5
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "area_interactive_clado1"
@@ -313,10 +307,7 @@ setup_mw_model <- function(model) {
     idparsfix <- c(5, 6)
     res <- 100
     ddmodel <- 0
-
     cpus <- 5
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "area_interactive_clado2"
@@ -331,10 +322,7 @@ setup_mw_model <- function(model) {
     idparsfix <- c(2, 5, 6)
     res <- 100
     ddmodel <- 0
-
     cpus <- 6
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "area_interactive_clado"
@@ -354,9 +342,6 @@ setup_mw_model <- function(model) {
     res <- 100
     ddmodel <- 11
     cpus <- 6
-
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_col"
@@ -371,10 +356,7 @@ setup_mw_model <- function(model) {
     idparsfix <- NULL
     res <- 100
     ddmodel <- 11
-
     cpus <- 6
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_ana"
@@ -389,9 +371,6 @@ setup_mw_model <- function(model) {
     res <- 100
     ddmodel <- 11
     cpus <- 6
-
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_clado"
@@ -407,9 +386,6 @@ setup_mw_model <- function(model) {
     res <- 100
     ddmodel <- 11
     cpus <- 6
-
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_col_ana"
@@ -425,9 +401,6 @@ setup_mw_model <- function(model) {
     res <- 100
     ddmodel <- 0
     cpus <- 6
-
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_col"
@@ -442,10 +415,7 @@ setup_mw_model <- function(model) {
     idparsfix <- c(5, 6)
     res <- 100
     ddmodel <- 0
-
     cpus <- 6
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_ana"
@@ -460,9 +430,6 @@ setup_mw_model <- function(model) {
     res <- 100
     ddmodel <- 0
     cpus <- 6
-
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_clado"
@@ -478,9 +445,6 @@ setup_mw_model <- function(model) {
     res <- 100
     ddmodel <- 0
     cpus <- 6
-
-
-
     tol <- c(1E-4, 1E-5, 1E-7)
     distance_type <- distance_type
     distance_dep <- "sigmoidal_col_ana"
@@ -513,4 +477,5 @@ setup_mw_model <- function(model) {
     distance_type = distance_type,
     distance_dep = distance_dep
   )
+  out
 }
