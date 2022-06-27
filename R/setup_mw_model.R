@@ -1,17 +1,16 @@
 #' Title
 #'
-#' @param model
+#' @param model A numeric from 1 to 28, corresponding to the model to be run.
 #'
 #' @return
+#' A list with the necessary parameters for the [DAISIE::DAISIE_MW_ML()] run.
 #' @export
 #'
 #' @examples
+#' model_parameters <- setup_mw_model(model = 1)
 setup_mw_model <- function(model) {
 
-
   distance_type <- "continent"
-
-
 
   lam_c <- runif(1, min = 0.01, max = 2)
   y <- 0
@@ -503,8 +502,15 @@ setup_mw_model <- function(model) {
   }
 
   out <- list(
-    optimmethod = "subplex",
-    parallel = "local",
-    methode = "lsodes"
+    initparsopt = initparsopt,
+    idparsopt = idparsopt,
+    parsfix = parsfix,
+    idparsfix = idparsfix,
+    res = res,
+    ddmodel = ddmodel,
+    cpus = cpus,
+    tol = tol,
+    distance_type = distance_type,
+    distance_dep = distance_dep
   )
 }
