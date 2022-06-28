@@ -1,7 +1,10 @@
-# islandpaleoarea (development version)
+# islandpaleoarea 1.0.0
 
-* Create `archipelagos23` dataset.
-* Add code to generate `archipelagos23` and required source files (from PIAC database, see Norder et al 2017).
+* Add `setup_mw_model()` to prepare parameters for the analyses.
+* Add R and bash scripts to run the analyses in Peregrine HPCC.
+* Replace Travis-CI and AppVeyor with GHA.
+* Create `archipelagos41_paleo` dataset.
+* Add code to generate `archipelagos41_paleo` and required source files (from PIAC database, see Norder et al 2017).
 
 # islandpaleoarea 0.0.0.9000
 
