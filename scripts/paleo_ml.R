@@ -22,7 +22,7 @@ set.seed(
 )
 
 DAISIEutils::print_metadata(
-  data_name = data_name,
+  data_name = paste(data_name, time_slice, sep = "_"),
   array_index = array_index,
   model = model,
   seed = seed,
