@@ -4,9 +4,8 @@ library(DAISIE)
 library(islandpaleoarea)
 
 array_index <- as.numeric(args[1])
-time_slice <- as.numeric(args[2])
-methode <- args[3]
-optimmethod <- args[4]
+methode <- args[2]
+optimmethod <- args[3]
 
 model_vec <- sort(rep(1:28, 15))
 model <- model_vec[array_index]
@@ -22,7 +21,7 @@ set.seed(
 )
 
 DAISIEutils::print_metadata(
-  data_name = paste(data_name, time_slice, sep = "_"),
+  data_name = data_name,
   array_index = array_index,
   model = model,
   seed = seed,
