@@ -1,3 +1,5 @@
+# islandpaleoarea (development version)
+
 # islandpaleoarea 1.0.0
 
 * Add `setup_mw_model()` to prepare parameters for the analyses.
