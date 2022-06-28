@@ -74,6 +74,8 @@ output_path <- file.path(
     "_",
     model,
     "_",
+    time_slice,
+    "_",
     array_index,
     ".rds"
   )
