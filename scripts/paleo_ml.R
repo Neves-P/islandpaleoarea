@@ -99,5 +99,15 @@ to_write <- c(
   "\n"
 )
 
-file_name <- paste0("results_", array_index, ".txt")
+file_name <- paste0(
+  "results_",
+  data_name,
+  "_",
+  model,
+  "_",
+  time_slice,
+  "_",
+  array_index,
+  ".txt"
+)
 cat(to_write, file = file.path(output_folder_path, file_name), append = TRUE)
