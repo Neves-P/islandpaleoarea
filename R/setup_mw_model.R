@@ -1,10 +1,12 @@
-#' Title
+#' Setup parameters needed for MW version of DAISIE
 #'
 #' @param model A numeric from 1 to 28, corresponding to the model to be run.
 #'
 #' @return
 #' A list with the necessary parameters for the [DAISIE::DAISIE_MW_ML()] run.
 #' @export
+#' @author Luis Valente, Pedro Santos Neves
+#'
 #'
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
