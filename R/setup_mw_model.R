@@ -9,7 +9,6 @@
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
 setup_mw_model <- function(model) {
-
   distance_type <- "continent"
 
   lam_c <- runif(1, min = 0.01, max = 2)

@@ -38,7 +38,7 @@ for (i in seq_along(archipelagos41_paleo)) {
       area_database,
       archipelago_name == archipelagos41[[j]][[1]]$name,
       year_before_after_present == age_slices[i]
-    ) |>  dplyr::select(archipelago_name, area_km)
+    ) |> dplyr::select(archipelago_name, area_km)
     archipelagos41_paleo[[i]][[j]][[1]]$area <- area_slice$area_km
     testit::assert(
       archipelagos41_paleo[[i]][[j]][[1]]$name == area_slice$archipelago_name
