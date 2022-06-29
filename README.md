@@ -4,12 +4,9 @@
 # islandpaleoarea
 
 <!-- badges: start -->
-
-[![Project Status: Concept – Minimal or no implementation has been done
-yet, or the repository is only intended to be a limited example, demo,
-or
-proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Neves-P/islandpaleoarea?include_prereleases)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+![GitHub R package version](https://img.shields.io/github/r-package/v/Neves-P/islandpaleoarea)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6774538.svg)](https://doi.org/10.5281/zenodo.6774538)
 [![R-CMD-check](https://github.com/Neves-P/islandpaleoarea/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Neves-P/islandpaleoarea/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/Neves-P/islandpaleoarea/branch/master/graph/badge.svg)](https://codecov.io/gh/Neves-P/islandpaleoarea?branch=master)

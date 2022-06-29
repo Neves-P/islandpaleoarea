@@ -3,7 +3,7 @@
 #SBATCH --array=1-420
 #SBATCH --time=48:00:00
 #SBATCH --mem=1000
-#SBATCH --job-name=paleo_ml
+#SBATCH --job-name=nature_ml
 #SBATCH --output=logs/%x-%j-array-%a.log
 # islandpaleoarea: Paleo-Area Influence on Island Evolutionary Models
 # Copyright (C) 2022 Pedro Santos Neves
@@ -21,19 +21,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Example job using defaults
-# sbatch islandpaleoarea/bash/submit_paleo_ml.sh 1
+# sbatch islandpaleoarea/bash/submit_nature_ml.sh 1
 # Example job using non-default arguments
-# sbatch islandpaleoarea/bas/submit_paleo_ml.sh 1 lsoda simplex
+# sbatch islandpaleoarea/bas/submit_nature_ml.sh 1 lsoda simplex
 
 mkdir -p logs
 ml R
 
 array_index=$SLURM_ARRAY_TASK_ID
-time_slice=$1
 methode=${2-lsodes}
 optimmethod=${3-subplex}
 
-Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
-                                                     ${time_slice} \
-                                                     ${methode} \
-                                                     ${optimmethod}
+Rscript --vanilla islandpaleoarea/scripts/nature_ml.R ${array_index} \
+                                                      ${methode} \
+                                                      ${optimmethod}

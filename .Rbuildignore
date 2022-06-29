@@ -9,3 +9,5 @@
 ^codecov\.yml$
 ^\.github$
 ^doc$
+^bash$
+^scripts$

@@ -2,7 +2,7 @@
 % Please edit documentation in R/setup_mw_model.R
 \name{setup_mw_model}
 \alias{setup_mw_model}
-\title{Title}
+\title{Setup parameters needed for MW version of DAISIE}
 \usage{
 setup_mw_model(model)
 }
@@ -13,8 +13,11 @@ setup_mw_model(model)
 A list with the necessary parameters for the \code{\link[DAISIE:DAISIE_MW_ML]{DAISIE::DAISIE_MW_ML()}} run.
 }
 \description{
-Title
+Setup parameters needed for MW version of DAISIE
 }
 \examples{
 model_parameters <- setup_mw_model(model = 1)
+}
+\author{
+Luis Valente, Pedro Santos Neves
 }

@@ -4,14 +4,13 @@ library(DAISIE)
 library(islandpaleoarea)
 
 array_index <- as.numeric(args[1])
-time_slice <- as.numeric(args[2])
-methode <- args[3]
-optimmethod <- args[4]
+methode <- args[2]
+optimmethod <- args[3]
 
 model_vec <- sort(rep(1:28, 15))
 model <- model_vec[array_index]
 parallel <- "local"
-data_name <- data(archipelagos41_paleo)
+data_name <- data(archipelagos41)
 
 seed <- as.integer(Sys.time()) %% 10000L * array_index
 set.seed(
@@ -22,7 +21,7 @@ set.seed(
 )
 
 DAISIEutils::print_metadata(
-  data_name = paste(data_name, time_slice, sep = "_"),
+  data_name = data_name,
   array_index = array_index,
   model = model,
   seed = seed,
@@ -35,7 +34,7 @@ output_folder_path <- DAISIEutils::create_output_folder(
   results_dir = NULL
 )
 
-datalist <- archipelagos41_paleo[[time_slice]]
+datalist <- archipelagos41
 
 model_args <- setup_mw_model(model)
 initparsopt <- model_args$initparsopt
@@ -74,8 +73,6 @@ output_path <- file.path(
     "_",
     model,
     "_",
-    time_slice,
-    "_",
     array_index,
     ".rds"
   )
@@ -89,7 +86,6 @@ if (!file.exists(output_path)) {
 }
 to_write <- c(
   array_index,
-  time_slice,
   seed,
   model,
   distance_dep,
@@ -99,15 +95,5 @@ to_write <- c(
   "\n"
 )
 
-file_name <- paste0(
-  "results_",
-  data_name,
-  "_",
-  model,
-  "_",
-  time_slice,
-  "_",
-  array_index,
-  ".txt"
-)
+file_name <- paste0("results_", array_index, ".txt")
 cat(to_write, file = file.path(output_folder_path, file_name), append = TRUE)

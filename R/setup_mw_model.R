@@ -1,39 +1,41 @@
-#' Title
+#' Setup parameters needed for MW version of DAISIE
 #'
 #' @param model A numeric from 1 to 28, corresponding to the model to be run.
 #'
 #' @return
 #' A list with the necessary parameters for the [DAISIE::DAISIE_MW_ML()] run.
 #' @export
+#' @author Luis Valente, Pedro Santos Neves
+#'
 #'
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
 setup_mw_model <- function(model) {
   distance_type <- "continent"
 
-  lam_c <- runif(1, min = 0.01, max = 2)
+  lam_c <- stats::runif(1, min = 0.01, max = 2)
   y <- 0
-  mu <- runif(1, min = 0, max = 2)
+  mu <- stats::runif(1, min = 0, max = 2)
   x <- 0
-  K <- runif(1, min = 35, max = 100)
+  K <- stats::runif(1, min = 35, max = 100)
   z <- 0
-  gam <- runif(1, min = 0, max = 0.1)
+  gam <- stats::runif(1, min = 0, max = 0.1)
   alpha <- 0
-  lam_a <- runif(1, min = 0, max = 2)
+  lam_a <- stats::runif(1, min = 0, max = 2)
   beta_par <- 0.0001
 
   #### New initpars sigmoidal colonisation
-  kg <- runif(1, min = 10, max = 70)
-  xg <- runif(1, min = 0.1, max = 1)
-  d0g <- runif(1, min = 1, max = 600000)
+  kg <- stats::runif(1, min = 10, max = 70)
+  xg <- stats::runif(1, min = 0.1, max = 1)
+  d0g <- stats::runif(1, min = 1, max = 600000)
 
   ####  initpars sigmoidal anagenesis and cladogenesis
-  kf <- runif(1, min = 0.01, max = 0.04)
-  xf <- runif(1, min = 0.1, max = 0.4)
-  d0f <- runif(1, min = 1, max = 600000)
+  kf <- stats::runif(1, min = 0.01, max = 0.04)
+  xf <- stats::runif(1, min = 0.1, max = 0.4)
+  d0f <- stats::runif(1, min = 1, max = 600000)
 
   ####  initpars power interactive_clado1; interactive_clado2
-  d0 <- runif(1, min = 0, max = 50000)
+  d0 <- stats::runif(1, min = 0, max = 50000)
 
   ## for area_additive_clado and area_interactive_clado
   d0A <- 0
