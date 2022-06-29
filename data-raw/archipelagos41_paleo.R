@@ -1,5 +1,17 @@
 ## code to prepare `archipelagos41_paleo` dataset goes here
 
+
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  stop("This script requires 'dplyr', please install it.")
+}
+if (!requireNamespace("DAISIEutils", quietly = TRUE)) {
+  stop("This script requires 'DAISIEutils', please install it from the
+       tece-lab/DAISIEutils GitHub repo.")
+}
+if (!requireNamespace("testit", quietly = TRUE)) {
+  stop("This script requires 'testit', please install it.")
+}
+
 data(archipelagos41, package = "DAISIE")
 data(area_database, package = "islandpaleoarea")
 # Get names and assign them as attributes to list
