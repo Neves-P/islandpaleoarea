@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
-setup_mw_model <- function(model) {
+setup_mw_model <- function(model) { # nolint: cyclocomp_linter start
   distance_type <- "continent"
 
   lam_c <- stats::runif(1, min = 0.01, max = 2)
@@ -263,7 +263,7 @@ setup_mw_model <- function(model) {
 
   ## post hoc power models
   if (model == 15) {
-    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0a)
+    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0_a)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -276,7 +276,7 @@ setup_mw_model <- function(model) {
   }
 
   if (model == 16) {
-    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0a)
+    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0_a)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -317,7 +317,7 @@ setup_mw_model <- function(model) {
 
   ## M19 BEST MODEL
   if (model == 19) {
-    initparsopt <- c(lam_c, mu, x, gam, alpha, lam_a, beta_par, d0a)
+    initparsopt <- c(lam_c, mu, x, gam, alpha, lam_a, beta_par, d0_a)
     idparsopt <- c(1, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(0, Inf, 0)
     idparsfix <- c(2, 5, 6)
@@ -479,4 +479,4 @@ setup_mw_model <- function(model) {
     distance_dep = distance_dep
   )
   out
-}
+} # nolint end.
