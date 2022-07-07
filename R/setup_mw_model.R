@@ -10,15 +10,14 @@
 #'
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
-setup_mw_model <- function(model) {
-
+setup_mw_model <- function(model) { # nolint: cyclocomp_linter start
   distance_type <- "continent"
 
   lam_c <- stats::runif(1, min = 0.01, max = 2)
   y <- 0
   mu <- stats::runif(1, min = 0, max = 2)
   x <- 0
-  K <- stats::runif(1, min = 35, max = 100)
+  k <- stats::runif(1, min = 35, max = 100)
   z <- 0
   gam <- stats::runif(1, min = 0, max = 0.1)
   alpha <- 0
@@ -39,7 +38,7 @@ setup_mw_model <- function(model) {
   d0 <- stats::runif(1, min = 0, max = 50000)
 
   ## for area_additive_clado and area_interactive_clado
-  d0A <- 0
+  d0_a <- 0
 
 
   ### distance_dep key
@@ -58,7 +57,7 @@ setup_mw_model <- function(model) {
   ## power models
 
   if (model == 1) {
-    initparsopt <- c(lam_c, y, mu, x, K, z, gam, alpha, lam_a, beta_par)
+    initparsopt <- c(lam_c, y, mu, x, k, z, gam, alpha, lam_a, beta_par)
     idparsopt <- 1:10
     parsfix <- NULL
     idparsfix <- NULL
@@ -72,7 +71,7 @@ setup_mw_model <- function(model) {
 
   ## No beta
   if (model == 2) {
-    initparsopt <- c(lam_c, y, mu, x, K, z, gam, alpha, lam_a)
+    initparsopt <- c(lam_c, y, mu, x, k, z, gam, alpha, lam_a)
     idparsopt <- 1:9
     parsfix <- 0
     idparsfix <- 10
@@ -86,7 +85,7 @@ setup_mw_model <- function(model) {
 
   ## No beta and z
   if (model == 3) {
-    initparsopt <- c(lam_c, y, mu, x, K, gam, alpha, lam_a)
+    initparsopt <- c(lam_c, y, mu, x, k, gam, alpha, lam_a)
     idparsopt <- c(1, 2, 3, 4, 5, 7, 8, 9)
     parsfix <- c(0, 0)
     idparsfix <- c(6, 10)
@@ -99,7 +98,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## No beta, K and z
+  ## No beta, k and z
   if (model == 4) {
     initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9)
@@ -114,7 +113,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## No beta, K, z, no lam_a
+  ## No beta, k, z, no lam_a
   if (model == 5) {
     initparsopt <- c(lam_c, y, mu, x, gam, alpha)
     idparsopt <- c(1, 2, 3, 4, 7, 8)
@@ -129,7 +128,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## No beta, K, z, lam_a, y
+  ## No beta, k, z, lam_a, y
   if (model == 6) {
     initparsopt <- c(lam_c, mu, x, gam, alpha)
     idparsopt <- c(1, 3, 4, 7, 8)
@@ -143,7 +142,7 @@ setup_mw_model <- function(model) {
     distance_dep <- "power"
   }
 
-  ## No beta, K, z, y
+  ## No beta, k, z, y
   if (model == 7) {
     initparsopt <- c(lam_c, mu, x, gam, alpha, lam_a)
     idparsopt <- c(1, 3, 4, 7, 8, 9)
@@ -157,7 +156,7 @@ setup_mw_model <- function(model) {
     distance_dep <- "power"
   }
 
-  ## No beta, K, z and alpha
+  ## No beta, k, z and alpha
   if (model == 8) {
     initparsopt <- c(lam_c, y, mu, x, gam, lam_a)
     idparsopt <- c(1, 2, 3, 4, 7, 9)
@@ -202,7 +201,7 @@ setup_mw_model <- function(model) {
 
 
 
-  ## No beta, K, z, alpha, y
+  ## No beta, k, z, alpha, y
   if (model == 11) {
     initparsopt <- c(lam_c, mu, x, gam, lam_a)
     idparsopt <- c(1, 3, 4, 7, 9)
@@ -216,7 +215,7 @@ setup_mw_model <- function(model) {
     distance_dep <- "power"
   }
 
-  ## No beta, K, z, alpha, x
+  ## No beta, k, z, alpha, x
   if (model == 12) {
     initparsopt <- c(lam_c, y, mu, gam, lam_a)
     idparsopt <- c(1, 2, 3, 7, 9)
@@ -264,7 +263,7 @@ setup_mw_model <- function(model) {
 
   ## post hoc power models
   if (model == 15) {
-    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0A)
+    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0_a)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -277,7 +276,7 @@ setup_mw_model <- function(model) {
   }
 
   if (model == 16) {
-    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0A)
+    initparsopt <- c(lam_c, y, mu, x, gam, alpha, lam_a, beta_par, d0_a)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -318,7 +317,7 @@ setup_mw_model <- function(model) {
 
   ## M19 BEST MODEL
   if (model == 19) {
-    initparsopt <- c(lam_c, mu, x, gam, alpha, lam_a, beta_par, d0A)
+    initparsopt <- c(lam_c, mu, x, gam, alpha, lam_a, beta_par, d0_a)
     idparsopt <- c(1, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(0, Inf, 0)
     idparsfix <- c(2, 5, 6)
@@ -337,7 +336,7 @@ setup_mw_model <- function(model) {
 
   ## Sigmoidal colonisation
   if (model == 20) {
-    initparsopt <- c(lam_c, y, mu, x, K, z, kg, xg, lam_a, beta_par, d0g)
+    initparsopt <- c(lam_c, y, mu, x, k, z, kg, xg, lam_a, beta_par, d0g)
     idparsopt <- 1:11
     parsfix <- NULL
     idparsfix <- NULL
@@ -352,7 +351,7 @@ setup_mw_model <- function(model) {
 
   ## Sigmoidal anagenesis
   if (model == 21) {
-    initparsopt <- c(lam_c, y, mu, x, K, z, gam, alpha, kf, xf, d0f)
+    initparsopt <- c(lam_c, y, mu, x, k, z, gam, alpha, kf, xf, d0f)
     idparsopt <- 1:11
     parsfix <- NULL
     idparsfix <- NULL
@@ -366,7 +365,7 @@ setup_mw_model <- function(model) {
 
   ## Sigmoidal cladogenesis
   if (model == 22) {
-    initparsopt <- c(kf, xf, mu, x, K, z, gam, alpha, lam_a, beta_par, d0f)
+    initparsopt <- c(kf, xf, mu, x, k, z, gam, alpha, lam_a, beta_par, d0f)
     idparsopt <- 1:11
     parsfix <- NULL
     idparsfix <- NULL
@@ -381,7 +380,7 @@ setup_mw_model <- function(model) {
   ## Sigmoidal colonisation and anagenesis
 
   if (model == 23) {
-    initparsopt <- c(lam_c, y, mu, x, K, z, kg, xg, kf, xf, d0g, d0f)
+    initparsopt <- c(lam_c, y, mu, x, k, z, kg, xg, kf, xf, d0g, d0f)
     idparsopt <- 1:12
     parsfix <- NULL
     idparsfix <- NULL
@@ -394,7 +393,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## Sigmoidal colonisation, no K, z, beta
+  ## Sigmoidal colonisation, no k, z, beta
   if (model == 24) {
     initparsopt <- c(lam_c, y, mu, x, kg, xg, lam_a, d0g)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 11)
@@ -409,7 +408,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## Sigmoidal anagenesis, no K, z
+  ## Sigmoidal anagenesis, no k, z
   if (model == 25) {
     initparsopt <- c(lam_c, y, mu, x, gam, alpha, kf, xf, d0f)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
@@ -423,7 +422,7 @@ setup_mw_model <- function(model) {
     distance_dep <- "sigmoidal_ana"
   }
 
-  ## Sigmoidal cladogenesis, no K, z, beta
+  ## Sigmoidal cladogenesis, no k, z, beta
   if (model == 26) {
     initparsopt <- c(kf, xf, mu, x, gam, alpha, lam_a, d0f)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 11)
@@ -438,7 +437,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## Sigmoidal colonisation and anagenesis, no K, z
+  ## Sigmoidal colonisation and anagenesis, no k, z
   if (model == 27) {
     initparsopt <- c(lam_c, y, mu, x, kg, xg, kf, xf, d0g, d0f)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11, 12)
@@ -453,7 +452,7 @@ setup_mw_model <- function(model) {
   }
 
 
-  ## Sigmoidal anagenesis, no K, z, y
+  ## Sigmoidal anagenesis, no k, z, y
   if (model == 28) {
     initparsopt <- c(lam_c, mu, x, gam, alpha, kf, xf, d0f)
     idparsopt <- c(1, 3, 4, 7, 8, 9, 10, 11)
@@ -480,4 +479,4 @@ setup_mw_model <- function(model) {
     distance_dep = distance_dep
   )
   out
-}
+} # nolint end.
