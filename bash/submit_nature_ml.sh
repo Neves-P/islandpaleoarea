@@ -3,6 +3,7 @@
 #SBATCH --array=1-420
 #SBATCH --time=48:00:00
 #SBATCH --mem=1000
+#SBATCH --ntasks=6
 #SBATCH --job-name=nature_ml
 #SBATCH --output=logs/%x-%j-array-%a.log
 # islandpaleoarea: Paleo-Area Influence on Island Evolutionary Models
