@@ -1,37 +1,49 @@
-#' Title
+#' Read model fitting results
 #'
-#' @param results_path
+#' @inheritParams default_params_doc
 #'
-#' @return
+#' @return A data frame with model parameters, model ID, seed and age in ky.
 #' @export
-#'
-#' @examples
-read_data <- function(results_path = "results") {
+#' @author Pedro Santos Neves
+read_results <- function(results_path = "results") {
   results_files <- list.files(results_path, pattern = "*.rds", full.names = TRUE)
   out <- data.frame(
-    age = numeric(),
-    model = numeric(),
-    seed = numeric(),
-    lambra_c0 = numeric(),
-    y = numeric(),
-    mu_0 = numeric(),
-    x = numeric(),
-    K_0 = numeric(),
-    z = numeric(),
-    gamma_0 = numeric(),
-    alpha = numeric(),
-    lambda_a0 = numeric(),
-    beta = numeric(),
-    loglik = numeric(),
-    df = numeric(),
-    conv = numeric()
+    age = rep(NA, length(results_files)),
+    model = rep(NA, length(results_files)),
+    seed = rep(NA, length(results_files)),
+    lambda_c0 = rep(NA, length(results_files)),
+    y = rep(NA, length(results_files)),
+    mu_0 = rep(NA, length(results_files)),
+    x = rep(NA, length(results_files)),
+    K_0 = rep(NA, length(results_files)),
+    z = rep(NA, length(results_files)),
+    gamma_0 = rep(NA, length(results_files)),
+    alpha = rep(NA, length(results_files)),
+    lambda_a0 = rep(NA, length(results_files)),
+    beta = rep(NA, length(results_files)),
+    loglik = rep(NA, length(results_files)),
+    df = rep(NA, length(results_files)),
+    conv = rep(NA, length(results_files))
   )
   for (i in seq_along(results_files)) {
     input <- readRDS(results_files[i])
     split_name <- strsplit(results_files[i], "_")[[1]]
-    model <- as.numeric(split_name[4])
-    age <- as.numeric(split_name[5])
-    seed <- grep(x = split_name[6], pattern = "*.")
-    out <- rbind(out, cbind(model, age, seed, input))
+    out$model[i] <- as.numeric(split_name[4])
+    out$age[i] <- as.numeric(split_name[5])
+    out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+    out$lambda_c0[i] <- input$lambda_c0
+    out$y[i] <- input$y
+    out$mu_0[i] <- input$mu_0
+    out$x[i] <- input$x
+    out$K_0[i] <- input$K_0
+    out$z[i] <- input$z
+    out$gamma_0[i] <- input$gamma_0
+    out$alpha[i] <- input$alpha
+    out$lambda_a0[i] <- input$lambda_a0
+    out$beta[i] <- input$beta
+    out$loglik[i] <- input$loglik
+    out$df[i] <- input$df
+    out$conv[i] <- input$conv
   }
+  out
 }
