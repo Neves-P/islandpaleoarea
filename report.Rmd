@@ -1,0 +1,41 @@
+---
+title: "Prelim results paleo"
+author: "Pedro Santos Neves"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Preliminary results
+
+19 of the 141 island age runs have been completed and all have yielded a best model.
+Here I present an overview of the best models selected for each age.
+
+```{r Read results, include=TRUE}
+library(islandpaleoarea)
+results <- read_results(file.path("results", "archipelagos41_paleo"))
+```
+
+## Basic sanity checks
+```{r sanity check 1, include=TRUE}
+nrow(results)
+length(unique(results$age))
+```
+
+7143 runs completed. Submitted jobs consisted of 15 randomly sampled starting parameters for optimization for each of the 28 models in each island age. Thus, out of a total of 7980 submissions, 89.5% was successful.
+
+```{r sanity check 2, include=TRUE}
+saved_results_tally <- results |> dplyr::group_by(age, model) |> dplyr::summarise(n = dplyr::n())
+
+
+```
+
+
+```{r Filter and present results, include=TRUE}
+ordered_results <- results |>
+  dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
+  dplyr::group_by(age) |>
+  dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
+knitr::kable(ordered_results)
+```
+
