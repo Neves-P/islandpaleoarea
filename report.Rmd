@@ -13,6 +13,8 @@ Here, I present an overview of the best models selected for each age. I submitte
 ```{r Read results, include=TRUE}
 library(islandpaleoarea)
 results <- read_results(file.path("results", "archipelagos41_paleo"))
+results_paleo <- read_results(file.path("results", "archipelagos41_paleo"))
+results_nature <- read_results(file.path("results", "archipelagos41"))
 ```
 
 ## Basic sanity checks
@@ -26,11 +28,16 @@ length(unique(results$age))
 The following table lists the age and model combinations for which the optimisation procedure was unable to estimate any paremeters. A higher number in n_na how many of the 15 randomly sampled initial parameter combinations failed at obtaining results. Note that this does not account for HPCC jobs that crashed or timed out.
 
 ```{r sanity check 2, include=TRUE}
-saved_results_tally <- results |> 
+result_na_tally <- results_paleo |> 
   dplyr::group_by(age, model) |> 
-  dplyr::summarise(n_na = sum(is.na(lambda_c0))) |>
-  dplyr::arrange(dplyr::desc(n_na))
-knitr::kable(head(saved_results_tally))
+  dplyr::summarise(n_na = sum(is.na(lambda_c0)))
+
+produced_results_tally <- results_paleo |> 
+  dplyr::group_by(age, model) |> 
+  dplyr::tally()
+
+successful_runs_tally <- cbind(produced_results_tally, actual_n = produced_results_tally$n - result_na_tally$n_na)
+knitr::kable(successful_runs_tally)
 ```
 
 For every age/model of the total to 532, 504 age/model combinations finished. All of the 504 sets have at least 3 successful seeds.
