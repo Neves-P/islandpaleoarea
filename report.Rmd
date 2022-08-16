@@ -47,11 +47,38 @@ For every age/model of the total to 532, 504 age/model combinations finished. Al
 The following table presents the best model for each completed island age run. 
 
 ```{r Filter and present results, include=TRUE}
+ordered_results_paleo <- results_paleo |>
+  dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
+  dplyr::group_by(age) |>
+  dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
+ordered_results_nature <- results_nature |>
+  dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
+  dplyr::group_by(age) |>
+  dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
+ordered_results <- rbind(ordered_results_nature, ordered_results_paleo)
+knitr::kable(ordered_results, digits = 2)
+
+
 ordered_results <- results |>
   dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
   dplyr::group_by(age) |>
   dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
-knitr::kable(ordered_results, digits = 2)
+results_nature
+rbind(results_nature[1, ], ordered_results)
+
+View(area_database)
+total_area <- c()
+for (time_slice in seq_along(archipelagos41_paleo)) {
+  area <- c()
+  for (archipelago in seq_along(archipelagos41_paleo[[time_slice]])) {
+    area <- c(area, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$area)
+  }
+  total_area[time_slice] <- sum(area)
+}
+
+cbind(ordered_results_paleo, total_area = numeric(length = 19))
+
+
 ```
 
 There is a clear preference for models 17 and 19. Models 14 and 19 were chosen as the best models in the Nature paper. Models 17 and 19 are both _post hoc_ power models and vary only in the exponent of the power law in the cladogenesis rate.
