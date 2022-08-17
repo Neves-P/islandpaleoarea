@@ -2,9 +2,9 @@
 title: "Preliminary results paleoarea project"
 author: "Pedro Santos Neves"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 19 of the 141 island age runs have been completed and all have yielded a best model.
@@ -12,15 +12,14 @@ Here, I present an overview of the best models selected for each age. I submitte
 
 ```{r Read results, include=TRUE}
 library(islandpaleoarea)
-results <- read_results(file.path("results", "archipelagos41_paleo"))
 results_paleo <- read_results(file.path("results", "archipelagos41_paleo"))
 results_nature <- read_results(file.path("results", "archipelagos41"))
 ```
 
 ## Basic sanity checks
 ```{r sanity check 1, include=TRUE}
-nrow(results)
-length(unique(results$age))
+nrow(results_paleo)
+length(unique(results_paleo$age))
 ```
 
 7143 runs completed. Submitted jobs consisted of 15 randomly sampled starting parameters for optimization for each of the 28 models in each island age. Thus, out of a total of 7980 submissions, 89.5% was successful.
@@ -37,7 +36,8 @@ produced_results_tally <- results_paleo |>
   dplyr::tally()
 
 successful_runs_tally <- cbind(produced_results_tally, actual_n = produced_results_tally$n - result_na_tally$n_na)
-knitr::kable(successful_runs_tally)
+successful_runs_tally <- dplyr::arrange(successful_runs_tally, actual_n)
+knitr::kable(head(successful_runs_tally))
 ```
 
 For every age/model of the total to 532, 504 age/model combinations finished. All of the 504 sets have at least 3 successful seeds.
@@ -67,7 +67,6 @@ for (time_slice in seq_along(archipelagos41_paleo)) {
   total_area[time_slice] <- sum(area)
 }
 
-ordered_results[1, 1] <- 1
 ordered_results <- cbind(ordered_results, total_area = total_area[ordered_results$age])
 ```
 
@@ -84,22 +83,22 @@ For a very course grained visualisation of the effect of area on estimates, belo
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, lambda_c0)) +
   ggplot2::geom_point() +
   ggplot2::theme_minimal() +
-  ggplot2::xlab("Island age") +
+  ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated cladogenesis rate")
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, mu_0)) +
   ggplot2::geom_point() +
   ggplot2::theme_minimal() +
-  ggplot2::xlab("Island age") +
+  ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated extinction rate")
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, gamma_0)) +
   ggplot2::geom_point() +
   ggplot2::theme_minimal() +
-  ggplot2::xlab("Island age") +
+  ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated colonisation rate")
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, lambda_a0)) +
   ggplot2::geom_point() +
   ggplot2::theme_minimal() +
-  ggplot2::xlab("Island age") +
+  ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated anagenesis rate")
 ```
 

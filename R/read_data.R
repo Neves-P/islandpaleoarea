@@ -28,9 +28,15 @@ read_results <- function(results_path = "results") {
   for (i in seq_along(results_files)) {
     input <- readRDS(results_files[i])
     split_name <- strsplit(results_files[i], "_")[[1]]
-    out$model[i] <- as.numeric(split_name[4])
-    out$age[i] <- as.numeric(split_name[5])
-    out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+    if ("paleo" %in% split_name) {
+      out$model[i] <- as.numeric(split_name[4])
+      out$age[i] <- as.numeric(split_name[5])
+      out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+    } else {
+      out$model[i] <- as.numeric(split_name[2])
+      out$age[i] <- 1
+      out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[3]))
+    }
     out$lambda_c0[i] <- input$lambda_c0
     out$y[i] <- input$y
     out$mu_0[i] <- input$mu_0

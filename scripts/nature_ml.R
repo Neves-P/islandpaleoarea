@@ -66,6 +66,17 @@ lik_res <- DAISIE::DAISIE_MW_ML(
   distance_dep = distance_dep
 )
 
+file_name <- paste0(
+  "results_",
+  data_name,
+  "_",
+  model,
+  "_",
+  1,
+  "_",
+  array_index,
+  ".txt"
+)
 output_path <- file.path(
   output_folder_path,
   paste0(
@@ -73,13 +84,13 @@ output_path <- file.path(
     "_",
     model,
     "_",
+    time_slice,
+    "_",
     array_index,
     ".rds"
   )
 )
-saveRDS(
-  lik_res,
-  file = output_path
+saveRDS(lik_res, file = output_path
 )
 if (!file.exists(output_path)) {
   message("Error writing RDS file.")
