@@ -53,7 +53,7 @@ ordered_results_paleo <- results_paleo |>
   dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
 ordered_results_nature <- results_nature |>
   dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
-  dplyr::group_by(age) |>
+  dplyr::group_by(model) |>
   dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
 ordered_results <- rbind(ordered_results_nature, ordered_results_paleo)
 knitr::kable(ordered_results, digits = 2)
@@ -81,22 +81,22 @@ For a very course grained visualisation of the effect of area on estimates, belo
 
 ```{r Estimate plots, echo=FALSE}
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, lambda_c0)) +
-  ggplot2::geom_point() +
+  ggplot2::geom_path() +
   ggplot2::theme_minimal() +
   ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated cladogenesis rate")
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, mu_0)) +
-  ggplot2::geom_point() +
+  ggplot2::geom_path() +
   ggplot2::theme_minimal() +
   ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated extinction rate")
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, gamma_0)) +
-  ggplot2::geom_point() +
+  ggplot2::geom_path() +
   ggplot2::theme_minimal() +
   ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated colonisation rate")
 ggplot2::ggplot(ordered_results, ggplot2::aes(age, lambda_a0)) +
-  ggplot2::geom_point() +
+  ggplot2::geom_path() +
   ggplot2::theme_minimal() +
   ggplot2::xlab("Time before present") +
   ggplot2::ylab("Estimated anagenesis rate")
