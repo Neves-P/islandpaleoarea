@@ -103,3 +103,28 @@ ggplot2::ggplot(ordered_results, ggplot2::aes(age, lambda_a0)) +
 ```
 
 The most striking observation relates to the large discrepancy of all CES estimates from present (age = 0) to any of the older island age estimates, being substantially lower at present and consistently higher up to 60kya. Whether this linear pattern will hold to the oldest available area estimates remains to be seen as more results become available.
+
+
+
+
+## Comparison between nature, paleo and nature with new DAISIE
+
+```{r Comparison}
+ordered_results_paleo_comparison <- results_paleo |>
+  dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
+  dplyr::filter(age == 1) |>
+  dplyr::group_by(model) |>
+  dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |>
+  dplyr::slice_min(bic) |>
+  dplyr::mutate(source = "paleo")
+ordered_results_nature_comparison <- results_nature |>
+  dplyr::mutate(bic = calc_bic(loglik, df, 1000)) |>
+  dplyr::group_by(model) |>
+  dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> 
+  dplyr::slice_min(bic) |>
+  dplyr::mutate(source = "new_nature")
+rbind(ordered_results_paleo_comparison, ordered_results_nature_comparison)
+# Now here add results from Luis' excel
+```
+
+

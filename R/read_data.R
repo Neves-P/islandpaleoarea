@@ -21,6 +21,9 @@ read_results <- function(results_path = "results") {
     alpha = rep(NA, length(results_files)),
     lambda_a0 = rep(NA, length(results_files)),
     beta = rep(NA, length(results_files)),
+    d_0 = rep(NA, length(results_files)),
+    d0_col = rep(NA, length(results_files)),
+    d0_ana = rep(NA, length(results_files)),
     loglik = rep(NA, length(results_files)),
     df = rep(NA, length(results_files)),
     conv = rep(NA, length(results_files))
@@ -47,6 +50,9 @@ read_results <- function(results_path = "results") {
     out$alpha[i] <- input$alpha
     out$lambda_a0[i] <- input$lambda_a0
     out$beta[i] <- input$beta
+    out$d_0[i] <- ifelse(is.null(input$d_0), NA, input$d_0)
+    out$d0_col[i] <- ifelse(is.null(input$d0_col), NA, input$d0_col)
+    out$d0_ana[i] <- ifelse(is.null(input$d0_ana), NA, input$d0_ana)
     out$loglik[i] <- input$loglik
     out$df[i] <- input$df
     out$conv[i] <- input$conv
