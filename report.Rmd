@@ -56,18 +56,26 @@ ordered_results_nature <- results_nature |>
   dplyr::group_by(model) |>
   dplyr::arrange(dplyr::desc(bic), .by_group = TRUE) |> dplyr::slice_min(bic)
 ordered_results <- rbind(ordered_results_nature, ordered_results_paleo)
-knitr::kable(ordered_results, digits = 2)
+
+tally_selected_models <- ordered_results |> dplyr::tally()
 
 total_area <- c()
+total_distance <- c()
 for (time_slice in seq_along(archipelagos41_paleo)) {
   area <- c()
+  distance <- c()
   for (archipelago in seq_along(archipelagos41_paleo[[time_slice]])) {
     area <- c(area, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$area)
+    distance <- c(distance, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$distance_continent)
+    
   }
   total_area[time_slice] <- sum(area)
 }
+total_distance <- sum(distance)
 
 ordered_results <- cbind(ordered_results, total_area = total_area[ordered_results$age])
+
+knitr::kable(ordered_results, digits = 2)
 ```
 
 There is a clear preference for models 17 and 19. Models 14 and 19 were chosen as the best models in the Nature paper. Models 17 and 19 are both _post hoc_ power models and vary only in the exponent of the power law in the cladogenesis rate.

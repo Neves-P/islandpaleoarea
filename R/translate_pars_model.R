@@ -1,4 +1,36 @@
-translate_pars_model <- function(variables) {
+#' Title
+#'
+#' @param area
+#' @param distance
+#' @param Age
+#' @param lamc_0
+#' @param y
+#' @param mu_0
+#' @param x
+#' @param K_0
+#' @param z
+#' @param gam_0timesM
+#' @param alpha
+#' @param lama_0
+#' @param beta
+#'
+#' @return
+#' @export
+#'
+#' @examples
+translate_pars_model <- function(area,
+                                 distance,
+                                 Age,
+                                 lamc_0,
+                                 y,
+                                 mu_0,
+                                 x,
+                                 K_0,
+                                 z,
+                                 gam_0timesM,
+                                 alpha,
+                                 lama_0,
+                                 beta) {
 
 
   Archipelago <- archipelago_data$Archipelago
@@ -29,12 +61,12 @@ translate_pars_model <- function(variables) {
       d0 <- pars[11]
       lambda_c <- lamc_0 * (Area^y) * (Distance^d0)
     }
-    if (model_number %in% c(15, 19) {
+    if (model_number %in% c(15, 19)) {
       check_length_pars(11)
       d0 <- pars[11]
       lambda_c <- lamc_0 * Area^(y + d0 * log(Distance))
     }
-    if (identical(model_number, 17) {
+    if (identical(model_number, 17)) {
       check_length_pars(11)
       d0 <- pars[11]
       lambda_c <- lamc_0 * Area^(y + Distance/d0)
@@ -44,7 +76,7 @@ translate_pars_model <- function(variables) {
       d0 <- pars[11]
       lambda_c <- lamc_0 * Area^(y + 1/(1 + d0/Distance))
     }
-    }
+  }
 
   if (model_number %in% 20:28) {
     check_length_pars(11)
@@ -84,6 +116,5 @@ translate_pars_model <- function(variables) {
       lambda_c <- f(Distance, xf, d0_f, kf)
     }
   }
-  }
-  }
 }
+
