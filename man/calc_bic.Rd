@@ -4,11 +4,21 @@
 \alias{calc_bic}
 \title{Calculate BIC}
 \usage{
-calc_bic(loglik, k, n)
+calc_bic(loglik, df, n)
 }
 \arguments{
-\item{n}{}
+\item{loglik}{Numeric vector with loglikelihood values}
+
+\item{df}{Numeric vector with degrees of freedom (number of parameters)}
+
+\item{n}{Numeric with sample size}
+}
+\value{
+Numeric vector with BIC values
 }
 \description{
 Calculate BIC
+}
+\examples{
+bic <- calc_bic(c(-40, -35), c(2, 1), 100)
 }

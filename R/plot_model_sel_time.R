@@ -1,4 +1,4 @@
-#' Title
+#' Plot model selection area plot
 #'
 #' @param ordered_results
 #' @param best_models
