@@ -12,3 +12,4 @@
 ^bash$
 ^scripts$
 ^results$
+^figures$
