@@ -41,7 +41,11 @@ plot_model_sel_time <- function(ordered_results,
   out <- ggplot2::ggplot(plot_data_frame,
                          ggplot2::aes(x = age, y = bic_weights, fill = model)) +
     ggplot2::geom_area() +
-    ggplot2::scale_fill_brewer(palette = "Set2")
+    ggplot2::scale_fill_brewer(palette = "Set2") +
+    ggplot2::theme_classic() +
+    ggplot2::xlab("Age") +
+    ggplot2::ylab("BIC weight") +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = "Model"))
   out
 }
 

@@ -10,7 +10,7 @@ plot_area_time <- function(ordered_results) {
   area_plot <- ggplot2::ggplot(ordered_results) +
     ggplot2::geom_line(ggplot2::aes(age, total_area)) +
     ggplot2::ylab("Total archipelago area km\U00B2")+
-    ggplot2::theme_minimal() +
+    ggplot2::theme_classic() +
     ggplot2::theme(axis.title.x = ggplot2::element_blank())
   area_plot
 }
