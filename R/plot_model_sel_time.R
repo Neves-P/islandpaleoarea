@@ -28,7 +28,10 @@ plot_model_sel_time <- function(ordered_results,
     bad_model_lines <- which(subset_df$model == 0)
     bad_model_weights <- 1 - good_weights
     testit::assert(bad_model_weights >= 0)
-    lines_to_keep <- cbind(subset_df[good_model_lines, 1:2], subset_df[good_model_lines, "bic_weights"])
+    lines_to_keep <- cbind(
+      subset_df[good_model_lines, 1:2],
+      subset_df[good_model_lines, "bic_weights"]
+    )
     line_to_insert <- data.frame(
       age = age_slice,
       model = factor(0),
