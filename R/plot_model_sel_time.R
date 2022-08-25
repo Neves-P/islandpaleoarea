@@ -28,13 +28,20 @@ plot_model_sel_time <- function(ordered_results,
     bad_model_lines <- which(subset_df$model == 0)
     bad_model_weights <- 1 - good_weights
     testit::assert(bad_model_weights >= 0)
-    subset_df
+    lines_to_keep <- cbind(subset_df[good_model_lines, 1:2], subset_df[good_model_lines, "bic_weights"])
+    line_to_insert <- data.frame(
+      age = age_slice,
+      model = factor(0),
+      bic_weights = bad_model_weights
+    )
+    plot_data_frame <- rbind(plot_data_frame, lines_to_keep, line_to_insert)
   }
 
 
-  out <- ggplot2::ggplot(ordered_results,
+  out <- ggplot2::ggplot(plot_data_frame,
                          ggplot2::aes(x = age, y = bic_weights, fill = model)) +
-    ggplot2::geom_area()
+    ggplot2::geom_area() +
+    ggplot2::scale_fill_brewer(palette = "Set2")
   out
 }
 

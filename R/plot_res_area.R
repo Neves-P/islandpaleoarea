@@ -1,3 +1,11 @@
+#' Title
+#'
+#' @param ordered_results
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plot_res_area <- function(ordered_results) {
   estimate_plots <- plot_line_estimates(ordered_results)
   area_plot <- plot_area_time(ordered_results)
