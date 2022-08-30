@@ -21,8 +21,9 @@ plot_line_estimates <- function(ordered_results) {
     ggplot2::geom_line(ggplot2::aes(age, lambda_a0, colour = "\U03BB\U1D43")) +
     ggplot2::geom_line(ggplot2::aes(age, gamma_0 / 15, colour = "\U03B3")) +
     ggplot2::scale_y_continuous(
-      name = "Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
-      sec.axis = ggplot2::sec_axis(~.*15, name = "Estimated \U03B3")
+      name = "Estimated log10(\U03BB\U1D9C; \U03BC; \U03BB\U1D43)",
+      sec.axis = ggplot2::sec_axis(~.*15, name = "Estimated log10(\U03B3)"),
+      trans = "log10"
     ) +
     ggplot2::theme_classic() +
     ggplot2::xlab("Time before present") +
