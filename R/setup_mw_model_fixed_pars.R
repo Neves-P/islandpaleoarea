@@ -29,8 +29,8 @@ setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
 
   #### New initpars sigmoidal colonisation
   kg <- dataset_comparison[[model, "gamma_0"]]
-  xg <- stats::runif(1, min = 0.1, max = 1) # CONTINUE HERE
-  d0g <- stats::runif(1, min = 1, max = 600000)
+  xg <- dataset_comparison[[model, "alpha"]]
+  d0g <- dataset_comparison[[model, "d_0"]]
 
   ####  initpars sigmoidal anagenesis and cladogenesis
   kf <- stats::runif(1, min = 0.01, max = 0.04)
