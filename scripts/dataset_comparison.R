@@ -1,7 +1,7 @@
 data("dataset_comparison")
 
-nature_old_vs_new_data <- dataset_comparison[1:28, -1] - dataset_comparison[29:56, -1]
-nature_comparison <- dataset_comparison[1:28, -1] - dataset_comparison[57:84, -1]
+nature_old_vs_new_data <- (dataset_comparison[1:28, -1] - dataset_comparison[29:56, -1]) / (dataset_comparison[1:28, -1] - dataset_comparison[29:56, -1])
+nature_comparison <- (dataset_comparison[1:28, -1] - dataset_comparison[57:84, -1]) / (dataset_comparison[1:28, -1] + dataset_comparison[57:84, -1])
 new_vs_nature_new <- dataset_comparison[29:56, -1] - dataset_comparison[57:84, -1]
 
 nature_old_vs_new_data_no_d0 <- nature_old_vs_new_data[-12]
