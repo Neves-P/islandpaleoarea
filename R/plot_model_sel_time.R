@@ -9,7 +9,7 @@
 #' @examples
 plot_model_sel_time <- function(ordered_results,
                                 best_models = c(17, 19, 4, 18)) {
-  levels(ordered_results$model) <- c(0, levels(ordered_results$model))
+  # levels(ordered_results$model) <- c(0, levels(ordered_results$model))
   for (i in seq_along(ordered_results$model)) {
     if (!(ordered_results$model[i] %in% best_models)) {
       ordered_results$model[i] <- factor(0)
