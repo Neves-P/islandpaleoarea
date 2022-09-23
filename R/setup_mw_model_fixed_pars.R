@@ -11,6 +11,7 @@
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
 setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
+  # TODO: go model by model and define/read variables within if statements
   distance_type <- "continent"
   data("dataset_comparison")
   dataset_comparison <- dataset_comparison[
@@ -30,18 +31,18 @@ setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
   #### New initpars sigmoidal colonisation
   kg <- dataset_comparison[[model, "gamma_0"]]
   xg <- dataset_comparison[[model, "alpha"]]
-  d0g <- dataset_comparison[[model, "d_0"]]
+  d0g <- dataset_comparison[[model, "d_0"]] # this is wrong
 
   ####  initpars sigmoidal anagenesis and cladogenesis
-  kf <- stats::runif(1, min = 0.01, max = 0.04)
+  kf <- stats::runif(1, min = 0.01, max = 0.04) # These must be made
   xf <- stats::runif(1, min = 0.1, max = 0.4)
-  d0f <- dataset_comparison[[model, "d_0"]]
+  d0f <- dataset_comparison[[model, "d_0"]] # Review
 
   ####  initpars power interactive_clado1; interactive_clado2
-  d0 <- dataset_comparison[[model, "d_0"]]
+  d0 <- dataset_comparison[[model, "d_0"]] # review
 
   ## for area_additive_clado and area_interactive_clado
-  d0_a <- 0
+  d0_a <- dataset_comparison[[model, "d_0ana"]] # Review
 
 
   ### distance_dep key
