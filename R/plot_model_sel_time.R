@@ -7,9 +7,11 @@
 #' @export
 #'
 #' @examples
+#' data(ordered_results_paleo)
+#' model_sel_plot <- plot_model_sel_time(ordered_results)
 plot_model_sel_time <- function(ordered_results,
-                                best_models = c(17, 19, 4, 18)) {
-  levels(ordered_results$model) <- c(0, levels(ordered_results$model))
+                                best_models = c(17, 19, 18)) {
+  levels(ordered_results$model) <- c(levels(ordered_results$model), 0)
   for (i in seq_along(ordered_results$model)) {
     if (!(ordered_results$model[i] %in% best_models)) {
       ordered_results$model[i] <- factor(0)
@@ -38,9 +40,14 @@ plot_model_sel_time <- function(ordered_results,
       bic_weights = bad_model_weights
     )
     plot_data_frame <- rbind(plot_data_frame, lines_to_keep, line_to_insert)
+    testit::assert(identical(sum(
+      plot_data_frame[
+        which(plot_data_frame["age"] == age_slice), "bic_weights"
+      ]),
+      1
+    )
+    )
   }
-
-
   out <- ggplot2::ggplot(plot_data_frame,
                          ggplot2::aes(x = age, y = bic_weights, fill = model)) +
     ggplot2::geom_area() +

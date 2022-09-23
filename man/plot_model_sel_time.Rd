@@ -12,3 +12,7 @@ plot_model_sel_time(ordered_results, best_models = c(17, 19, 4, 18))
 \description{
 Plot model selection area plot
 }
+\examples{
+data(ordered_results_paleo)
+model_sel_plot <- plot_model_sel_time(ordered_results)
+}
