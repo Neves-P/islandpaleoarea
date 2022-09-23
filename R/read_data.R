@@ -28,6 +28,7 @@ read_results <- function(results_path = "results") {
     df = rep(NA, length(results_files)),
     conv = rep(NA, length(results_files))
   )
+  pb <- utils::txtProgressBar(min = 1, max = length(results_files), style = 3)
   for (i in seq_along(results_files)) {
     input <- readRDS(results_files[i])
     split_name <- strsplit(results_files[i], "_")[[1]]
@@ -56,6 +57,7 @@ read_results <- function(results_path = "results") {
     out$loglik[i] <- input$loglik
     out$df[i] <- input$df
     out$conv[i] <- input$conv
+    utils::setTxtProgressBar(pb, i)
   }
   out
 }
