@@ -10,39 +10,24 @@
 #'
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
-setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
-  # TODO: go model by model and define/read variables within if statements
+translate_mw_params <- function(model) { # nolint: cyclocomp_linter start
   distance_type <- "continent"
-  data("dataset_comparison")
-  dataset_comparison <- dataset_comparison[
-    which(dataset_comparison$source == "nature_paper"),
-  ]
-  lam_c <- dataset_comparison[[model, "lambda_c0"]]
-  y <- dataset_comparison[[model, "y"]]
-  mu <- dataset_comparison[[model, "mu_0"]]
-  x <- dataset_comparison[[model, "x"]]
-  k <- dataset_comparison[[model, "K_0"]]
-  z <- dataset_comparison[[model, "z"]]
-  gam <- dataset_comparison[[model, "gamma_0"]]
-  alpha <- dataset_comparison[[model, "alpha"]]
-  lam_a <- dataset_comparison[[model, "lambda_a0"]]
-  beta_par <- dataset_comparison[[model, "beta"]]
 
   #### New initpars sigmoidal colonisation
-  kg <- dataset_comparison[[model, "gamma_0"]]
-  xg <- dataset_comparison[[model, "alpha"]]
-  d0g <- dataset_comparison[[model, "d_0"]] # this is wrong
+  kg <- stats::runif(1, min = 10, max = 70)
+  xg <- stats::runif(1, min = 0.1, max = 1)
+  d0g <- stats::runif(1, min = 1, max = 600000)
 
   ####  initpars sigmoidal anagenesis and cladogenesis
-  kf <- stats::runif(1, min = 0.01, max = 0.04) # These must be made
+  kf <- stats::runif(1, min = 0.01, max = 0.04)
   xf <- stats::runif(1, min = 0.1, max = 0.4)
-  d0f <- dataset_comparison[[model, "d_0"]] # Review
+  d0f <- stats::runif(1, min = 1, max = 600000)
 
   ####  initpars power interactive_clado1; interactive_clado2
-  d0 <- dataset_comparison[[model, "d_0"]] # review
+  d0 <- stats::runif(1, min = 0, max = 50000)
 
   ## for area_additive_clado and area_interactive_clado
-  d0_a <- dataset_comparison[[model, "d_0ana"]] # Review
+  d0_a <- 0
 
 
   ### distance_dep key
