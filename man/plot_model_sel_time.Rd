@@ -4,7 +4,7 @@
 \alias{plot_model_sel_time}
 \title{Plot model selection area plot}
 \usage{
-plot_model_sel_time(ordered_results, best_models = c(17, 19, 4, 18))
+plot_model_sel_time(ordered_results, best_models = c(17, 19, 18))
 }
 \arguments{
 \item{best_models}{}

@@ -233,8 +233,6 @@ setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
     distance_dep <- "power"
   }
 
-
-
   ##
   if (model == 13) {
     initparsopt <- c(lam_c, mu, x, gam, lam_a, beta_par)
@@ -262,8 +260,6 @@ setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
     distance_type <- distance_type
     distance_dep <- "power"
   }
-
-
 
   ## post hoc power models
   if (model == 15) {
