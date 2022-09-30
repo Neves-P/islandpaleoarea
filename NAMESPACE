@@ -3,6 +3,7 @@
 export(calc_bic)
 export(calc_bic_weights)
 export(default_params_doc)
+export(get_base_rates)
 export(plot_area_time)
 export(plot_line_estimates)
 export(plot_model_sel_time)
