@@ -9,6 +9,10 @@ plot_model_sel_time(ordered_results, best_models = c(17, 19, 18))
 \arguments{
 \item{best_models}{}
 }
+\value{
+An area plot. Area corresponds to BIC weights of the models defined
+in the \code{ordered_results} vector.
+}
 \description{
 Plot model selection area plot
 }

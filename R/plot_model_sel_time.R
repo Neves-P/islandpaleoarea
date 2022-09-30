@@ -3,7 +3,8 @@
 #' @param ordered_results
 #' @param best_models
 #'
-#' @return
+#' @return An area plot. Area corresponds to BIC weights of the models defined
+#' in the `ordered_results` vector.
 #' @export
 #'
 #' @examples
