@@ -4,10 +4,10 @@
 \alias{get_base_rates}
 \title{Calculate base rates per archipelago and model}
 \usage{
-get_base_rates(archipelago_data, pars, model)
+get_base_rates(archipelago_data, M, pars_res_df, area, distance, model)
 }
 \arguments{
-\item{model}{}
+\item{M}{}
 }
 \description{
 Calculate base rates per archipelago and model
