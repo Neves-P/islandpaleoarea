@@ -28,8 +28,5 @@ plot_line_estimates <- function(ordered_results) {
     ggplot2::theme_classic() +
     ggplot2::xlab("Time before present") +
     ggplot2::labs(colour = "Parameter")
-
-
-
-
+  param_plot
 }
