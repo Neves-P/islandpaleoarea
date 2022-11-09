@@ -24,6 +24,7 @@ get_base_rates <- function(archipelago_data, M, pars_res_df, area, distance, mod
   lama_0 <- pars_res_df$lambda_a0
   beta <- pars_res_df$beta
   d0 <- pars_res_df$d0
+  # age <- archipelago_data$island_age
 
   # M16 & M19
   if (isTRUE(model %in% c(16, 19))) {
@@ -44,5 +45,13 @@ get_base_rates <- function(archipelago_data, M, pars_res_df, area, distance, mod
   K <- K_0 * area^z
   gamma <- (gam_0timesM * distance^-alpha) / M
   lambda_a <- lama_0 * distance^beta
-  return(data.frame(model = model, lambda_c = lambda_c, mu = mu, K = K, gamma = gamma, lambda_a = lambda_a))
+  return(data.frame(
+    model = model,
+    age = age,
+    lambda_c0 = lambda_c,
+    mu_0 = mu,
+    K = K,
+    gamma_0 = gamma,
+    lambda_a0 = lambda_a
+  ))
 }

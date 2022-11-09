@@ -22,7 +22,6 @@ pars_res_df <- data.frame(
 area <- c()
 distance <- c()
 for (time_slice in pars_res_df$age) {
-
   area <- c(area, archipelagos41_paleo[[time_slice]][["Galapagos"]][[1]]$area)
   distance <- c(distance, archipelagos41_paleo[[time_slice]][["Galapagos"]][[1]]$distance_continent)
 }
@@ -35,6 +34,6 @@ base_rates <- get_base_rates(
   area = area,
   distance = distance
 )
-
+base_rates$age <- pars_res_df$age
 plot_line_estimates(base_rates)
 
