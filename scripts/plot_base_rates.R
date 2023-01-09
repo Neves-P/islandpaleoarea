@@ -1,5 +1,4 @@
 
-galapagos <- archipelagos41_paleo$`0`$Galapagos[[1]]
 model_number <- 19
 model_res <- dplyr::filter(ordered_results_paleo, model == model_number)
 
@@ -46,23 +45,42 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
   base_rates[[archipelago]]$age <- pars_res_df$age
 }
 
-
-plots <- list()
+rates_plots <- list()
+combined_plots <- list()
+area_plots <- list()
+hyperpars_plots <- list()
 for(i in 1:41) {
-  plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
-    ggplot2::geom_line(ggplot2::aes(age, lambda_c0, colour = "\U03BB\U1D9C")) +
-    ggplot2::ggtitle(names(base_rates[i]))
-}
-names(base_rates)
+  rates_plots[[i]] <- plot_line_estimates(base_rates[[i]])
 
+  area_plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
+    ggplot2::geom_line(ggplot2::aes(age, area)) +
+    ggplot2::theme_classic() +
+    ggplot2::xlab("Time before present") +
+    ggplot2::ylab("Area")
+
+  rates_plots[[i]] <- rates_plots[[i]] +
+    # ggplot2::ggplot(base_rates[[i]]) +
+    ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
+    ggplot2::geom_line(ggplot2::aes(age, d0, colour = "d0")) +
+    ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
+    ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
+    ggplot2::theme_classic() +
+    ggplot2::theme(legend.title = ggplot2::element_blank()) +
+    ggplot2::xlab("Time before present") +
+    ggplot2::ylab("Hyperparameter")
+
+
+  combined_plots[[i]] <- area_plots[[i]] + hyperpars_plots[[i]] + rates_plots[[i]] +
+    patchwork::plot_annotation(
+      title = gsub("_", " ", names(base_rates[i]), "_")
+    )
+}
 
 # Combine single arch plots with area curve
 # Plot also the hyperparameters per model
 # If applicable, choose then one model to look across
 # If hyperparameters are stable, then area is driving the change
 # Area and base parameters through time in plot. Will have to rescale. Main point is: do parameters follow area?
-
-
 
 
 # Choose 1 model for which

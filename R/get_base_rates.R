@@ -52,6 +52,13 @@ get_base_rates <- function(archipelago_data, M, pars_res_df, area, distance, mod
     mu_0 = mu,
     K = K,
     gamma_0 = gamma,
-    lambda_a0 = lambda_a
+    lambda_a0 = lambda_a,
+    area = area,
+    x,
+    y,
+    z,
+    d0,
+    beta,
+    alpha
   ))
 }
