@@ -56,7 +56,8 @@ for(i in 1:41) {
     ggplot2::geom_line(ggplot2::aes(age, area)) +
     ggplot2::theme_classic() +
     ggplot2::xlab("Time before present") +
-    ggplot2::ylab("Area")
+    ggplot2::ylab("Area") +
+  ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank())
 
   rates_plots[[i]] <- rates_plots[[i]] +
     # ggplot2::ggplot(base_rates[[i]]) +
@@ -65,16 +66,22 @@ for(i in 1:41) {
     ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
     ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
     ggplot2::theme_classic() +
-    ggplot2::theme(legend.title = ggplot2::element_blank()) +
+    ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank()) +
     ggplot2::xlab("Time before present") +
     ggplot2::ylab("Hyperparameter")
 
 
-  combined_plots[[i]] <- area_plots[[i]] + hyperpars_plots[[i]] + rates_plots[[i]] +
+  combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]] +
     patchwork::plot_annotation(
-      title = gsub("_", " ", names(base_rates[i]), "_")
-    )
+      title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
+    )) +
+    ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
+    ggplot2::theme(legend.position = "bottom")
 }
+
+patchwork::wrap_plots(combined_plots, guides = "collect", ncol = 6, nrow = 7)  &
+  ggplot2::theme(legend.position = "bottom")
+
 
 # Combine single arch plots with area curve
 # Plot also the hyperparameters per model
@@ -88,3 +95,33 @@ for(i in 1:41) {
 # 41 Plot with archipelago rates and areas as function of age
 # Combine in 6x7
 
+# Overlay area
+
+rates_plots <- list()
+combined_plots <- list()
+area_plots <- list()
+hyperpars_plots <- list()
+for(i in 1:41) {
+  rates_plots[[i]] <- plot_line_estimates(base_rates[[i]])
+
+
+  rates_plots[[i]] <- rates_plots[[i]] +
+    # ggplot2::ggplot(base_rates[[i]]) +
+    ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
+    ggplot2::geom_line(ggplot2::aes(age, d0, colour = "d0")) +
+    ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
+    ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
+    ggplot2::geom_line(ggplot2::aes(age, area)) +
+    ggplot2::theme_classic() +
+    ggplot2::xlab("Time before present") +
+    ggplot2::ylab("Hyperparameter")
+
+
+
+  # combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]] +
+  #                           patchwork::plot_annotation(
+  #                             title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
+  #                           )) +
+  #   ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
+  #   ggplot2::theme(legend.position = "bottom")
+}
