@@ -95,42 +95,12 @@ ggsa
 # 41 Plot with archipelago rates and areas as function of age
 # Combine in 6x7
 
-# Overlay area
 
-rates_plots <- list()
-combined_plots <- list()
-area_plots <- list()
-hyperpars_plots <- list()
-for(i in 1:41) {
-  rates_plots[[i]] <- plot_line_estimates(base_rates[[i]])
-
-
-  rates_plots[[i]] <- rates_plots[[i]] +
-    # ggplot2::ggplot(base_rates[[i]]) +
-    ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
-    ggplot2::geom_line(ggplot2::aes(age, d0, colour = "d0")) +
-    ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
-    ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
-    ggplot2::geom_line(ggplot2::aes(age, area)) +
-    ggplot2::theme_classic() +
-    ggplot2::xlab("Time before present") +
-    ggplot2::ylab("Hyperparameter")
-
-
-
-  # combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]] +
-  #                           patchwork::plot_annotation(
-  #                             title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
-  #                           )) +
-  #   ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
-  #   ggplot2::theme(legend.position = "bottom")
-}
-
-
+# Notes 11/01
 
 # 1 plot with hyperparameters through time (global) plus area. This plot is global, as
 # set of hyperpars is global by definition
-# Set of model estimates per archipelago (4 or 5, 41 times, one per archipelago)
 # Plot of loglikelihood through time. Is peak in LL the better one? In a panel hyperpars plot
+# Set of model estimates per archipelago (4 or 5, 41 times, one per archipelago)
 # Make 3 versions of plots above for each of the 3 best models. Some go in supmat, others are panels
 # Plot with overlay of all 41 areas
