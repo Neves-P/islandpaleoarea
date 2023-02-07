@@ -46,6 +46,8 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
   base_rates[[archipelago]]$age <- pars_res_df$age
 }
 
+
+# Individual plots
 rates_plots <- list()
 combined_plots <- list()
 area_plots <- list()
@@ -79,8 +81,6 @@ for(i in 1:41) {
     ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
     ggplot2::theme(legend.position = "bottom")
 }
-
-
 
 out <- patchwork::wrap_plots(combined_plots, guides = "collect", ncol = 6, nrow = 7)  &
   ggplot2::theme(legend.position = "bottom")
@@ -136,7 +136,7 @@ for(i in 1:41) {
 # set of hyperpars is global by definition
 # Set of model estimates per archipelago (4 or 5, 41 times, one per archipelago)
 # Plot of loglikelihood through time. Is peak in LL the better one? In a panel hyperpars plot
-# Make 3 versions of plots above for each of the 3 best models. Some go in supmat, others are panels
+# Make 3 versions of plots above for each of the 3 best models. Some go in suppmat, others are panels
 # Plot with overlay of all 41 areas
 
 
