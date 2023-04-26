@@ -89,6 +89,6 @@ for (model_number in model_numbers) {
 
   out <- patchwork::wrap_plots(combined_plots, guides = "collect", ncol = 6, nrow = 7)  &
     ggplot2::theme(legend.position = "bottom")
-  ggplot2::ggsave(paste0("combined_", model_number, ".pdf"), out)
+  ggplot2::ggsave(paste0("combined_", model_number, ".png"), out, width = 60, height = 30, units = "cm")
 }
 
