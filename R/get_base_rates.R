@@ -32,12 +32,12 @@ get_base_rates <- function(archipelago_data, M, pars_res_df, area, distance, mod
   }
 
   # M17
-  if (isTRUE(identical(model, 17))) {
+  if (isTRUE(identical(model, 17L))) {
     lambda_c <- lamc_0 * area^(y + 1/(1 + d0 / distance))
   }
 
   # M18
-  if (isTRUE(identical(model, 18))) {
+  if (isTRUE(identical(model, 18L))) {
     lambda_c <- lamc_0 * area^(y + 1/(1 + d0 / distance))
   }
 
