@@ -16,17 +16,18 @@ plot_line_estimates <- function(ordered_results) {
   right_ylim <- gamma_0_ylim
 
   param_plot <- ggplot2::ggplot(ordered_results) +
-    ggplot2::geom_line(ggplot2::aes(age, lambda_c0, colour = "\U03BB\U1D9C")) +
-    ggplot2::geom_line(ggplot2::aes(age, mu_0, colour = "\U03BC")) +
-    ggplot2::geom_line(ggplot2::aes(age, lambda_a0, colour = "\U03BB\U1D43")) +
-    ggplot2::geom_line(ggplot2::aes(age, gamma_0 * 15, colour = "\U03B3")) +
-    ggplot2::scale_y_continuous(
-      name = "Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
-      sec.axis = ggplot2::sec_axis(~./15, name = "Estimated \U03B3"),
-      trans = "log10"
-    ) +
+    ggplot2::geom_line(ggplot2::aes(age, lambda_c0 / lambda_c0[1], colour = "\U03BB\U1D9C")) +
+    ggplot2::geom_line(ggplot2::aes(age, mu_0 / mu_0[1], colour = "\U03BC")) +
+    ggplot2::geom_line(ggplot2::aes(age, lambda_a0 / lambda_a0[1], colour = "\U03BB\U1D43")) +
+    ggplot2::geom_line(ggplot2::aes(age, gamma_0 / gamma_0[1], colour = "\U03B3")) +
+    # ggplot2::scale_y_continuous(
+    #   name = "Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
+    #   sec.axis = ggplot2::sec_axis(~./15, name = "Estimated \U03B3"),
+    #   trans = "log10"
+    # ) +
     ggplot2::theme_classic() +
     ggplot2::xlab("Time before present") +
+    ggplot2::ylab("Standardised estimated/nrate variation") +
     ggplot2::labs(colour = "Parameter")
   param_plot
 }

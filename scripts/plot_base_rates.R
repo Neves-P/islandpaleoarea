@@ -70,8 +70,8 @@ for(i in 1:41) {
     # ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
     # ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
     ggplot2::theme_classic() +
-    ggplot2::theme(legend.title = ggplot2::element_blank(),
-                   axis.title = ggplot2::element_blank()
+    ggplot2::theme(legend.title = ggplot2::element_blank()
+                   # axis.title = ggplot2::element_blank()
                    ) +
     ggplot2::xlab("Time before present")
 
@@ -86,7 +86,7 @@ for(i in 1:41) {
 
 out <- patchwork::wrap_plots(combined_plots, guides = "collect", ncol = 6, nrow = 7)  &
   ggplot2::theme(legend.position = "bottom")
-ggplot2::ggsave("combined.png", out)
+ggplot2::ggsave("combined.pdf", out, width = 30, height = 10)
 
 
 # Combine single arch plots with area curve
