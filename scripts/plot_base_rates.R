@@ -47,46 +47,13 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 }
 
 
-# Individual plots
-rates_plots <- list()
-combined_plots <- list()
-area_plots <- list()
-hyperpars_plots <- list()
-for(i in 1:41) {
-  rates_plots[[i]] <- plot_line_estimates(base_rates[[i]])
-
-  area_plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
-    ggplot2::geom_line(ggplot2::aes(age, area)) +
-    ggplot2::theme_classic() +
-    ggplot2::xlab("Time before present") +
-    ggplot2::ylab("Area") +
-  ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank())
-
-  rates_plots[[i]] <- rates_plots[[i]] +
-    # ggplot2::ggplot(base_rates[[i]]) +
-    # No need to plot the hyperpars, they are global and not archipelago level
-    # ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
-    # ggplot2::geom_line(ggplot2::aes(age, d0, colour = "d0")) +
-    # ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
-    # ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
-    ggplot2::theme_classic() +
-    ggplot2::theme(legend.title = ggplot2::element_blank()
-                   # axis.title = ggplot2::element_blank()
-                   ) +
-    ggplot2::xlab("Time before present")
-
-
-  combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]] +
-    patchwork::plot_annotation(
-      title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
-    )) +
-    ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
-    ggplot2::theme(legend.position = "bottom")
-}
-
-out <- patchwork::wrap_plots(combined_plots, guides = "collect", ncol = 6, nrow = 7)  &
-  ggplot2::theme(legend.position = "bottom")
-ggplot2::ggsave("combined.pdf", out, width = 30, height = 10)
+out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
+out_ratio <- facet_archipelagos(base_rates, standardisation = "difference")
+out <- facet_archipelagos(base_rates, standardisation = FALSE)
+library(Cairo)
+ggplot2::ggsave("combined_diff.pdf", out_diff, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("combined_ratio.pdf", out_ratio, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("combined.pdf", out, width = 30, height = 10, device = cairo_pdf)
 
 
 # Combine single arch plots with area curve
