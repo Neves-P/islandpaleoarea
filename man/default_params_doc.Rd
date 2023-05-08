@@ -4,12 +4,46 @@
 \alias{default_params_doc}
 \title{Default parameter documentation to inherit from}
 \usage{
-default_params_doc(results_path)
+default_params_doc(
+  results_path,
+  archipelago_data,
+  pars,
+  model,
+  M,
+  pars_res_df,
+  ordered_results,
+  best_models,
+  standardisation
+)
 }
 \arguments{
 \item{results_path}{A string with valid path for folder containing model
 fitting results as obtained from runs on Peregrine HPCC via the contained
 R and bash scripts on this package.}
+
+\item{archipelago_data}{List with DAISIE data for one of the considered
+archipelagos}
+
+\item{pars}{Numeric vector with CES rates and K: lamda_c, mu, K, gamma, lambda_a}
+
+\item{model}{Numeric integer or vector of integers:
+model number as described in Valente et al 2020.}
+
+\item{M}{Numeric, number of mainland species}
+
+\item{pars_res_df}{Data frame with results of one model for all archipelagos
+and ages}
+
+\item{ordered_results}{Data frame with all the results, BIC and BIC weights ordered
+by age and model for all archipelagos}
+
+\item{best_models}{A numeric vector with the numbers of the parameters to be plotted}
+
+\item{standardisation}{String which can be \code{"difference"} or \code{"ratio"}, or defaults to \code{FALSE}.
+\code{"difference"} standardises estimated parameters by taking the difference of
+each time point in relation to the first time point, \code{"ratio"} does the same
+but takes the ratio as opposed to the difference and \code{FALSE} presents the
+absolute estimates}
 }
 \value{
 Nothing

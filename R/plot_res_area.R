@@ -1,11 +1,9 @@
-#' Title
+#' Plot archipelago area and parameter estimates through time
 #'
-#' @param ordered_results
+#' @inheritParams default_params_doc
 #'
-#' @return
+#' @return A faceted ggplot with the areas and parameters estimates through time
 #' @export
-#'
-#' @examples
 plot_res_area <- function(ordered_results) {
   estimate_plots <- plot_line_estimates(ordered_results)
   area_plot <- plot_area_time(ordered_results)

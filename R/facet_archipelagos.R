@@ -22,7 +22,7 @@ facet_archipelagos <- function(base_rates, standardisation = FALSE) {
       ggplot2::ylab("Area") +
       ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank()) +
       ggplot2::ggtitle(
-        paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
+        paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model)
       )
 
     rates_plots[[i]] <- rates_plots[[i]] +

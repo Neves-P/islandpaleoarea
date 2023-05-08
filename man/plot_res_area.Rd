@@ -2,13 +2,17 @@
 % Please edit documentation in R/plot_res_area.R
 \name{plot_res_area}
 \alias{plot_res_area}
-\title{Title}
+\title{Plot archipelago area and parameter estimates through time}
 \usage{
 plot_res_area(ordered_results)
 }
 \arguments{
-\item{ordered_results}{}
+\item{ordered_results}{Data frame with all the results, BIC and BIC weights ordered
+by age and model for all archipelagos}
+}
+\value{
+A faceted ggplot with the areas and parameters estimates through time
 }
 \description{
-Title
+Plot archipelago area and parameter estimates through time
 }

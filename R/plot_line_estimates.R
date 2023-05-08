@@ -1,11 +1,9 @@
 #' Title
 #'
-#' @param ordered_results
+#' @inheritParams default_params_doc
 #'
-#' @return
+#' @return A plot with the line
 #' @export
-#'
-#' @examples
 plot_line_estimates <- function(ordered_results, standardisation) {
 
   if (identical(standardisation, "ratio")) {

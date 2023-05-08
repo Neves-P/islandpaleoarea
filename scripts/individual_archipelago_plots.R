@@ -1,10 +1,10 @@
 library(Cairo)
 
-model_numbers <- 17:19
-for (model_number in model_numbers) {
+models <- 17:19
+for (model in models) {
 
 
-  model_res <- dplyr::filter(ordered_results_paleo, model == model_number)
+  model_res <- dplyr::filter(ordered_results_paleo, model == model)
 
   pars_res_df <- data.frame(
     age = model_res$age,
@@ -41,7 +41,7 @@ for (model_number in model_numbers) {
       archipelago_data = archipelagos41_paleo[[1]][[archipelago]][[1]],
       M = 1000,
       pars_res_df = pars_res_df,
-      model = model_number,
+      model = model,
       area = areas[[archipelago]],
       distance = distances[[archipelago]]
     )
@@ -52,9 +52,9 @@ for (model_number in model_numbers) {
   out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
   out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio")
   out <- facet_archipelagos(base_rates, standardisation = FALSE)
-  ggplot2::ggsave(paste0("figures/combined_diff_", model_number, ".pdf"), out_diff, width = 30, height = 10, device = cairo_pdf)
-  ggplot2::ggsave(paste0("figures/combined_ratio_", model_number, ".pdf"), out_ratio, width = 30, height = 10, device = cairo_pdf)
-  ggplot2::ggsave(paste0("figures/combined_", model_number, ".pdf"), out, width = 30, height = 10, device = cairo_pdf)
+  ggplot2::ggsave(paste0("figures/combined_diff_", model, ".pdf"), out_diff, width = 30, height = 10, device = cairo_pdf)
+  ggplot2::ggsave(paste0("figures/combined_ratio_", model, ".pdf"), out_ratio, width = 30, height = 10, device = cairo_pdf)
+  ggplot2::ggsave(paste0("figures/combined_", model, ".pdf"), out, width = 30, height = 10, device = cairo_pdf)
 
 
 

@@ -1,6 +1,6 @@
 
-model_number <- 19
-model_res <- dplyr::filter(ordered_results_paleo, model == model_number)
+model <- 19
+model_res <- dplyr::filter(ordered_results_paleo, model == model)
 
 pars_res_df <- data.frame(
   age = model_res$age,
@@ -37,7 +37,7 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
     archipelago_data = archipelagos41_paleo[[1]][[archipelago]][[1]],
     M = 1000,
     pars_res_df = pars_res_df,
-    model = model_number,
+    model = model,
     area = areas[[archipelago]],
     distance = distances[[archipelago]]
   )
@@ -93,7 +93,7 @@ for(i in 1:41) {
 
 combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]] +
                           patchwork::plot_annotation(
-                            title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
+                            title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model)
                           )) +
   ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
   ggplot2::theme(legend.position = "bottom")

@@ -1,7 +1,6 @@
 #' Plot model selection area plot
 #'
-#' @param ordered_results
-#' @param best_models
+#' @inheritParams default_params_doc
 #'
 #' @return An area plot. Area corresponds to BIC weights of the models defined
 #' in the `ordered_results` vector.

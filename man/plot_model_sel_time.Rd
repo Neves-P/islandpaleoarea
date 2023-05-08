@@ -7,7 +7,10 @@
 plot_model_sel_time(ordered_results, best_models = c(17, 19, 18))
 }
 \arguments{
-\item{best_models}{}
+\item{ordered_results}{Data frame with all the results, BIC and BIC weights ordered
+by age and model for all archipelagos}
+
+\item{best_models}{A numeric vector with the numbers of the parameters to be plotted}
 }
 \value{
 An area plot. Area corresponds to BIC weights of the models defined

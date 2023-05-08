@@ -1,15 +1,15 @@
 #' Calculate base rates per archipelago and model
 #'
-#' @param archipelago_data
-#' @param pars
-#' @param model
-#' @param M
+#' @inheritParams default_params_doc
 #'
-#' @return
+#' @return A data frame with base rates which depend on the model and archipelago
 #' @export
-#'
-#' @examples
-get_base_rates <- function(archipelago_data, M, pars_res_df, area, distance, model) {
+get_base_rates <- function(archipelago_data,
+                           M,
+                           pars_res_df,
+                           area,
+                           distance,
+                           model) {
 
   # General for all models
 

@@ -7,7 +7,19 @@
 get_base_rates(archipelago_data, M, pars_res_df, area, distance, model)
 }
 \arguments{
-\item{M}{}
+\item{archipelago_data}{List with DAISIE data for one of the considered
+archipelagos}
+
+\item{M}{Numeric, number of mainland species}
+
+\item{pars_res_df}{Data frame with results of one model for all archipelagos
+and ages}
+
+\item{model}{Numeric integer or vector of integers:
+model number as described in Valente et al 2020.}
+}
+\value{
+A data frame with base rates which depend on the model and archipelago
 }
 \description{
 Calculate base rates per archipelago and model

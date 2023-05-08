@@ -13,7 +13,6 @@
 setup_mw_model_fixed_pars <- function(model) { # nolint: cyclocomp_linter start
   # TODO: go model by model and define/read variables within if statements
   distance_type <- "continent"
-  data("dataset_comparison")
   dataset_comparison <- dataset_comparison[
     which(dataset_comparison$source == "nature_paper"),
   ]

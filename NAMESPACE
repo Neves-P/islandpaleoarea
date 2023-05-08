@@ -3,6 +3,7 @@
 export(calc_bic)
 export(calc_bic_weights)
 export(default_params_doc)
+export(facet_archipelagos)
 export(get_base_rates)
 export(plot_area_time)
 export(plot_line_estimates)

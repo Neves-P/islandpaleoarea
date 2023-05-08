@@ -4,10 +4,20 @@
 \alias{plot_line_estimates}
 \title{Title}
 \usage{
-plot_line_estimates(ordered_results)
+plot_line_estimates(ordered_results, standardisation)
 }
 \arguments{
-\item{ordered_results}{}
+\item{ordered_results}{Data frame with all the results, BIC and BIC weights ordered
+by age and model for all archipelagos}
+
+\item{standardisation}{String which can be \code{"difference"} or \code{"ratio"}, or defaults to \code{FALSE}.
+\code{"difference"} standardises estimated parameters by taking the difference of
+each time point in relation to the first time point, \code{"ratio"} does the same
+but takes the ratio as opposed to the difference and \code{FALSE} presents the
+absolute estimates}
+}
+\value{
+A plot with the line
 }
 \description{
 Title
