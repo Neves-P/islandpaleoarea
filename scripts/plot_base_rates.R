@@ -48,7 +48,7 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 
 
 out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
-out_ratio <- facet_archipelagos(base_rates, standardisation = "difference")
+out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio")
 out <- facet_archipelagos(base_rates, standardisation = FALSE)
 library(Cairo)
 ggplot2::ggsave("combined_diff.pdf", out_diff, width = 30, height = 10, device = cairo_pdf)

@@ -20,7 +20,10 @@ facet_archipelagos <- function(base_rates, standardisation = FALSE) {
       ggplot2::theme_classic() +
       ggplot2::xlab("Time before present") +
       ggplot2::ylab("Area") +
-      ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank())
+      ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank()) +
+      ggplot2::ggtitle(
+        paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
+      )
 
     rates_plots[[i]] <- rates_plots[[i]] +
       ggplot2::theme_classic() +
@@ -30,10 +33,7 @@ facet_archipelagos <- function(base_rates, standardisation = FALSE) {
       ggplot2::xlab("Time before present")
 
 
-    combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]] +
-                              patchwork::plot_annotation(
-                                title = paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model_number)
-                              )) +
+    combined_plots[[i]] <- (area_plots[[i]] + rates_plots[[i]]) +
       ggplot2::scale_fill_continuous(guide = ggplot2::guide_legend()) +
       ggplot2::theme(legend.position = "bottom")
   }
