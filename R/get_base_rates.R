@@ -12,7 +12,7 @@ get_base_rates <- function(archipelago_data,
                            model) {
 
   # General for all models
-
+  print(model)
   lamc_0 <- pars_res_df$lambda_c0
   y <- pars_res_df$y
   mu_0 <- pars_res_df$mu_0

@@ -26,5 +26,6 @@ Depends:
 Remotes: 
     tece-lab/DAISIEutils
 Imports: 
+    Cairo,
     ggplot2,
     patchwork

@@ -13,6 +13,7 @@ facet_archipelagos <- function(base_rates, standardisation = FALSE) {
   area_plots <- list()
   hyperpars_plots <- list()
   for(i in 1:41) {
+
     rates_plots[[i]] <- plot_line_estimates(base_rates[[i]], standardisation)
 
     area_plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
