@@ -4,7 +4,7 @@
 #'
 #' @return A plot with the line
 #' @export
-plot_line_estimates <- function(ordered_results, standardisation) {
+plot_line_estimates <- function(ordered_results, standardisation = FALSE) {
 
   if (identical(standardisation, "ratio")) {
     ordered_results$lambda_c0 <- ordered_results$lambda_c0 / ordered_results$lambda_c0[1]
