@@ -14,7 +14,7 @@ facet_archipelagos <- function(base_rates, standardisation = FALSE) {
   hyperpars_plots <- list()
   for(i in 1:41) {
 
-    rates_plots[[i]] <- plot_line_estimates(base_rates[[i]], standardisation)
+    rates_plots[[i]] <- plot_line_estimates
 
     area_plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
       ggplot2::geom_line(ggplot2::aes(age, area)) +

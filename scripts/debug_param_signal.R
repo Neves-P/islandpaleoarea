@@ -43,7 +43,13 @@ for (archipelago in archipelago_names) {
     area = areas[[archipelago]],
     distance = distances[[archipelago]]
   )
+  base_rates[[archipelago]]$age <- pars_res_df$age
 }
 
+plot(base_rates[[1]]$mu_0 - base_rates[[1]]$mu_0[1], type = "l")
+plot(base_rates[[2]]$mu_0 - base_rates[[2]]$mu_0[1], type = "l")
+plot(pars_res_df$mu_0, type = "l")
+plot(pars_res_df$x, type = "l")
+plot(base_rates[[2]]$mu_0 - base_rates[[2]]$mu_0[1], type = "l")
 # Note: Maybe the issue is the baseline is higher in Ascension vs Chatham.
 # 1st time point is not representative?

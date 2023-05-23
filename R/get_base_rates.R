@@ -33,15 +33,16 @@ get_base_rates <- function(archipelago_data,
 
   # M17
   if (isTRUE(identical(model, 17L))) {
-    lambda_c <- lamc_0 * area^(y + 1/(1 + d0 / distance))
+    lambda_c <- lamc_0 * area^(y + 1 / (1 + d0 / distance))
   }
 
   # M18
   if (isTRUE(identical(model, 18L))) {
-    lambda_c <- lamc_0 * area^(y + 1/(1 + d0 / distance))
+    lambda_c <- lamc_0 * area^(y + 1 / (1 + d0 / distance))
   }
 
-  mu <- mu_0 * area^-x
+  # mu <- mu_0 * area^-x
+  mu <- area^-x
   K <- K_0 * area^z
   gamma <- (gam_0timesM * distance^-alpha) / M
   lambda_a <- lama_0 * distance^beta
@@ -54,11 +55,11 @@ get_base_rates <- function(archipelago_data,
     gamma_0 = gamma,
     lambda_a0 = lambda_a,
     area = area,
-    x,
-    y,
-    z,
-    d0,
-    beta,
-    alpha
+    x = x,
+    y = y,
+    z = z,
+    d0 = d0,
+    beta = beta,
+    alpha = alpha
   ))
 }
