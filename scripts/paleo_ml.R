@@ -87,27 +87,3 @@ saveRDS(
 if (!file.exists(output_path)) {
   message("Error writing RDS file.")
 }
-to_write <- c(
-  array_index,
-  time_slice,
-  seed,
-  model,
-  distance_dep,
-  distance_type,
-  as.matrix(lik_res),
-  initparsopt,
-  "\n"
-)
-
-file_name <- paste0(
-  "results_",
-  data_name,
-  "_",
-  model,
-  "_",
-  time_slice,
-  "_",
-  array_index,
-  ".txt"
-)
-cat(to_write, file = file.path(output_folder_path, file_name), append = TRUE)
