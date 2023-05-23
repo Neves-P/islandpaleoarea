@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=gelifes
+#SBATCH --partition=regular
 #SBATCH --array=1-420
 #SBATCH --time=48:00:00
 #SBATCH --mem=1000
