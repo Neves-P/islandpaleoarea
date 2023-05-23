@@ -7,7 +7,7 @@
 #SBATCH --job-name=paleo_ml
 #SBATCH --output=logs/%x-%j-array-%a.log
 # islandpaleoarea: Paleo-Area Influence on Island Evolutionary Models
-# Copyright (C) 2022 Pedro Santos Neves
+# Copyright (C) 2023 Pedro Santos Neves
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ ml R
 
 array_index=$SLURM_ARRAY_TASK_ID
 time_slice=$1
-methode=${2-lsodes}
+methode=${2-odeint::runge_kutta_fehlberg78}
 optimmethod=${3-subplex}
 
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \

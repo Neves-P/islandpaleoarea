@@ -31,7 +31,7 @@ ml R
 
 array_index=$SLURM_ARRAY_TASK_ID
 time_slice=$1
-methode=${2-lsodes}
+methode=${2-odeint::runge_kutta_fehlberg78}
 optimmethod=${3-subplex}
 
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
