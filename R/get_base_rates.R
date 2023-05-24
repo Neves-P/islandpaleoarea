@@ -41,8 +41,8 @@ get_base_rates <- function(archipelago_data,
     lambda_c <- lamc_0 * area^(y + 1 / (1 + d0 / distance))
   }
 
-  # mu <- mu_0 * area^-x
-  mu <- area^-x
+  mu <- mu_0 * area^-x
+  # mu <- area^-x
   K <- K_0 * area^z
   gamma <- (gam_0timesM * distance^-alpha) / M
   lambda_a <- lama_0 * distance^beta
