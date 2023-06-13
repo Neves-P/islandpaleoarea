@@ -22,7 +22,7 @@ set.seed(
 )
 
 DAISIEutils::print_metadata(
-  data_name = paste(data_name, time_slice, sep = "_"),
+  data_name = paste(data_name, model, time_slice, sep = "_"),
   array_index = array_index,
   model = model,
   seed = seed,
@@ -35,9 +35,39 @@ output_folder_path <- DAISIEutils::create_output_folder(
   results_dir = NULL
 )
 
+# Find previous timeslice results
+prev_time_slice <- time_slice - 1
+if (prev_time_slice > 0) {
+
+files_to_read <- list.files(
+  path = output_folder_path,
+  pattern = paste(data_name, model, prev_time_slice, sep = "_"),
+  full.names = TRUE
+)
+
+previous_time_slice_res <- data.frame(
+  age = rep(NA, length(files_to_read)),
+  model = rep(NA, length(files_to_read)),
+  seed = rep(NA, length(files_to_read)),
+  loglik
+)
+
+}
+for (i in seq_along(files_to_read)) {
+  input <- readRDS(files_to_read[i])
+  split_name <- strsplit(files_to_read[i], "_")[[1]]
+  out$model[i] <- as.numeric(split_name[4])
+  out$age[i] <- as.numeric(split_name[5])
+  out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+  out$loglik[i] <- input$loglik
+}
 datalist <- archipelagos41_paleo[[time_slice]]
 
+read_data
+
+
 model_args <- setup_mw_model(model)
+# initparsopt <- model_args$initparsopt
 initparsopt <- model_args$initparsopt
 idparsopt <- model_args$idparsopt
 parsfix <- model_args$parsfix

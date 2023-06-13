@@ -41,8 +41,7 @@ get_base_rates <- function(archipelago_data,
     lambda_c <- lamc_0 * area^(y + 1 / (1 + d0 / distance))
   }
 
-  mu <- mu_0 * area^-x
-  # mu <- area^-x
+  mu_arch <- mu_0 * area^-x
   K <- K_0 * area^z
   gamma <- (gam_0timesM * distance^-alpha) / M
   lambda_a <- lama_0 * distance^beta
@@ -50,7 +49,8 @@ get_base_rates <- function(archipelago_data,
     model = model,
     age = age,
     lambda_c0 = lambda_c,
-    mu_0 = mu,
+    mu_arch = mu_arch,
+    mu_0 = mu_0,
     K = K,
     gamma_0 = gamma,
     lambda_a0 = lambda_a,
