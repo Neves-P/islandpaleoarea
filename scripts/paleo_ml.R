@@ -39,31 +39,43 @@ output_folder_path <- DAISIEutils::create_output_folder(
 prev_time_slice <- time_slice - 1
 if (prev_time_slice > 0) {
 
-files_to_read <- list.files(
-  path = output_folder_path,
-  pattern = paste(data_name, model, prev_time_slice, sep = "_"),
-  full.names = TRUE
-)
+  files_to_read <- list.files(
+    path = "G:/My Drive/PhD/Projects/paleoarea/results/archipelagos41_paleo",
+    pattern = paste0(data_name, "_", model, "_", prev_time_slice, "_"),
+    full.names = TRUE
+  )
 
-previous_time_slice_res <- data.frame(
-  age = rep(NA, length(files_to_read)),
-  model = rep(NA, length(files_to_read)),
-  seed = rep(NA, length(files_to_read)),
-  loglik
-)
+  previous_time_slice_res <- data.frame(
+    age = rep(NA, length(files_to_read)),
+    model = rep(NA, length(files_to_read)),
+    seed = rep(NA, length(files_to_read)),
+    loglik = rep(NA, length(files_to_read)),
+    lambda_c0 = rep(NA, length(files_to_read)),
+    mu_0 = rep(NA, length(files_to_read)),
+    K_0 = rep(NA, length(files_to_read)),
+    gamma_0 = rep(NA, length(files_to_read)),
+    lambda_a0 = rep(NA, length(files_to_read))
+  )
 
 }
+
 for (i in seq_along(files_to_read)) {
   input <- readRDS(files_to_read[i])
   split_name <- strsplit(files_to_read[i], "_")[[1]]
-  out$model[i] <- as.numeric(split_name[4])
-  out$age[i] <- as.numeric(split_name[5])
-  out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
-  out$loglik[i] <- input$loglik
+  previous_time_slice_res$model[i] <- as.numeric(split_name[4])
+  previous_time_slice_res$age[i] <- as.numeric(split_name[5])
+  previous_time_slice_res$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+  previous_time_slice_res$loglik[i] <- input$loglik
+  previous_time_slice_res$lambda_c0[i] = input$lambda_c0
+  previous_time_slice_res$mu_0[i] = input$mu_0
+  previous_time_slice_res$K_0[i] = input$K_0
+  previous_time_slice_res$gamma_0[i] = input$gamma_0
+  previous_time_slice_res$lambda_a0[i] = input$lambda_a0
 }
+
 datalist <- archipelagos41_paleo[[time_slice]]
 
-read_data
+
 
 
 model_args <- setup_mw_model(model)
