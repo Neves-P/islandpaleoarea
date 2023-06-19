@@ -13,7 +13,7 @@ time_slice <- 2
 methode <- "lsodes"
 optimmethod <- "subplex"
 
-model_vec <- sort(rep(1:28, 15))
+model_vec <- sort(rep(1:28, 140))
 model <- model_vec[array_index]
 parallel <- "local"
 data_name <- data(archipelagos41_paleo)
@@ -45,18 +45,21 @@ prev_time_slice <- time_slice - 1
 if (prev_time_slice > 0) {
 
   files_to_read <- list.files(
-    # path = "G:/My Drive/PhD/Projects/paleoarea/results/archipelagos41_paleo",
-    path = "G:/O meu disco/PhD/Projects/paleoarea/results/archipelagos41_paleo",
+    path = "G:/My Drive/PhD/Projects/paleoarea/results/archipelagos41_paleo",
+    # path = "G:/O meu disco/PhD/Projects/paleoarea/results/archipelagos41_paleo",
     pattern = paste0(data_name, "_", model, "_", prev_time_slice, "_"),
     full.names = TRUE
   )
+  if (length(files_to_read) <= 0) {
+    stop("No files found.")
+  }
 
   previous_time_slice_res <- data.frame(
     age = rep(NA, length(files_to_read)),
     model = rep(NA, length(files_to_read)),
     seed = rep(NA, length(files_to_read)),
     loglik = rep(NA, length(files_to_read)),
-    df <- rep(NA, length(files_to_read)),
+    df = rep(NA, length(files_to_read)),
     lambda_c0 = rep(NA, length(files_to_read)),
     mu_0 = rep(NA, length(files_to_read)),
     K_0 = rep(NA, length(files_to_read)),
@@ -87,17 +90,16 @@ bics <- calc_bic(
   n = 1000
 )
 
+if (all(is.na(bics))) {
+  stop("Files found, but no valid previous results available.")
+}
 
 best_previous_time_slice <- previous_time_slice_res[which(bics == sort(bics)[1]), ]
 
 datalist <- archipelagos41_paleo[[time_slice]]
 
-
-
-
 model_args <- setup_mw_model(model)
-# initparsopt <- model_args$initparsopt
-initparsopt <- model_args$initparsopt
+initparsopt <- as.numeric(best_previous_time_slice[6:10]) # Previous time slice
 idparsopt <- model_args$idparsopt
 parsfix <- model_args$parsfix
 idparsfix <- model_args$idparsfix

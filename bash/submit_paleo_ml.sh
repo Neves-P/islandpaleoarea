@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=regular
-#SBATCH --array=1-420
+#SBATCH --array=2-141
 #SBATCH --time=3-00:00:00
 #SBATCH --mem=1000
 #SBATCH --cpus-per-task=6
@@ -30,11 +30,9 @@ mkdir -p logs
 ml R
 
 array_index=$SLURM_ARRAY_TASK_ID
-time_slice=$1
-methode=${2-lsodes}
-optimmethod=${3-subplex}
+methode=${1-lsodes}
+optimmethod=${2-subplex}
 
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
-                                                     ${time_slice} \
                                                      ${methode} \
                                                      ${optimmethod}
