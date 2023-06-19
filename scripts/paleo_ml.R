@@ -3,10 +3,15 @@ args <- commandArgs(trailingOnly = TRUE)
 library(DAISIE)
 library(islandpaleoarea)
 
-array_index <- as.numeric(args[1])
-time_slice <- as.numeric(args[2])
-methode <- args[3]
-optimmethod <- args[4]
+# array_index <- as.numeric(args[1])
+# time_slice <- as.numeric(args[2])
+# methode <- args[3]
+# optimmethod <- args[4]
+
+array_index <- 1
+time_slice <- 2
+methode <- "lsodes"
+optimmethod <- "subplex"
 
 model_vec <- sort(rep(1:28, 15))
 model <- model_vec[array_index]
@@ -40,7 +45,8 @@ prev_time_slice <- time_slice - 1
 if (prev_time_slice > 0) {
 
   files_to_read <- list.files(
-    path = "G:/My Drive/PhD/Projects/paleoarea/results/archipelagos41_paleo",
+    # path = "G:/My Drive/PhD/Projects/paleoarea/results/archipelagos41_paleo",
+    path = "G:/O meu disco/PhD/Projects/paleoarea/results/archipelagos41_paleo",
     pattern = paste0(data_name, "_", model, "_", prev_time_slice, "_"),
     full.names = TRUE
   )
@@ -50,6 +56,7 @@ if (prev_time_slice > 0) {
     model = rep(NA, length(files_to_read)),
     seed = rep(NA, length(files_to_read)),
     loglik = rep(NA, length(files_to_read)),
+    df <- rep(NA, length(files_to_read)),
     lambda_c0 = rep(NA, length(files_to_read)),
     mu_0 = rep(NA, length(files_to_read)),
     K_0 = rep(NA, length(files_to_read)),
@@ -66,12 +73,22 @@ for (i in seq_along(files_to_read)) {
   previous_time_slice_res$age[i] <- as.numeric(split_name[5])
   previous_time_slice_res$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
   previous_time_slice_res$loglik[i] <- input$loglik
+  previous_time_slice_res$df[i] <- input$df
   previous_time_slice_res$lambda_c0[i] = input$lambda_c0
   previous_time_slice_res$mu_0[i] = input$mu_0
   previous_time_slice_res$K_0[i] = input$K_0
   previous_time_slice_res$gamma_0[i] = input$gamma_0
   previous_time_slice_res$lambda_a0[i] = input$lambda_a0
 }
+
+bics <- calc_bic(
+  loglik = previous_time_slice_res$loglik,
+  df = previous_time_slice_res$df,
+  n = 1000
+)
+
+
+best_previous_time_slice <- previous_time_slice_res[which(bics == sort(bics)[1]), ]
 
 datalist <- archipelagos41_paleo[[time_slice]]
 
