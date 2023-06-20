@@ -4,7 +4,7 @@
 #SBATCH --time=3-00:00:00
 #SBATCH --mem=1000
 #SBATCH --cpus-per-task=6
-#SBATCH --job-name=paleo_ml
+#SBATCH --job-name=paleo_ml_prev_time
 #SBATCH --output=logs/%x-%j-array-%a.log
 # islandpaleoarea: Paleo-Area Influence on Island Evolutionary Models
 # Copyright (C) 2022 Pedro Santos Neves
