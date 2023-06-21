@@ -57,7 +57,8 @@ if (prev_time_slice > 0) {
     mu_0 = rep(NA, length(files_to_read)),
     K_0 = rep(NA, length(files_to_read)),
     gamma_0 = rep(NA, length(files_to_read)),
-    lambda_a0 = rep(NA, length(files_to_read))
+    lambda_a0 = rep(NA, length(files_to_read)),
+    conv = rep(NA, length(files_to_read))
   )
 }
 
@@ -74,6 +75,7 @@ for (i in seq_along(files_to_read)) {
   previous_time_slice_res$K_0[i] = input$K_0
   previous_time_slice_res$gamma_0[i] = input$gamma_0
   previous_time_slice_res$lambda_a0[i] = input$lambda_a0
+  previous_time_slice_res$conv[i] = input$conv # TODO: Skip if not conv
 }
 
 bics <- calc_bic(
