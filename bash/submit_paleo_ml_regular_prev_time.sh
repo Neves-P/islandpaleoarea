@@ -22,9 +22,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Example job using defaults
-# sbatch islandpaleoarea/bash/submit_paleo_ml.sh 1
+# sbatch islandpaleoarea/bash/submit_paleo_ml_prev_time.sh 2
 # Example job using non-default arguments
-# sbatch islandpaleoarea/bas/submit_paleo_ml.sh 1 lsoda simplex
+# sbatch islandpaleoarea/bash/submit_paleo_ml_prev_time.sh 2 lsoda simplex
 
 mkdir -p logs
 ml R
@@ -34,7 +34,7 @@ time_slice=$1
 methode=${2-lsodes}
 optimmethod=${3-subplex}
 
-Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
-${time_slice} \
-${methode} \
-${optimmethod}
+Rscript --vanilla islandpaleoarea/scripts/paleo_ml_prev_time.R ${array_index} \
+                                                               ${time_slice} \
+                                                               ${methode} \
+                                                               ${optimmethod}
