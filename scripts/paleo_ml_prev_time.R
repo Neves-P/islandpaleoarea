@@ -39,7 +39,7 @@ prev_time_slice <- time_slice - 1
 if (prev_time_slice > 0) {
 
   files_to_read <- list.files(
-    path = "$HOME/results/archipelagos41_paleo/",
+    path = output_folder_path,
     pattern = paste0(data_name, "_", model, "_", prev_time_slice, "_"),
     full.names = TRUE
   )
