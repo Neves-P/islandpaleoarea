@@ -47,6 +47,7 @@ if (prev_time_slice > 0) {
     stop("No files found.")
   }
 
+  # TODO: ADD OTHER PARS
   previous_time_slice_res <- data.frame(
     age = rep(NA, length(files_to_read)),
     model = rep(NA, length(files_to_read)),
@@ -135,10 +136,7 @@ output_path <- file.path(
     model,
     "_",
     time_slice,
-    "_prev_time",
-
-    ".rds"
-  )
+    "_prev_time.rds")
 )
 saveRDS(
   lik_res,
