@@ -47,19 +47,25 @@ if (prev_time_slice > 0) {
     stop("No files found.")
   }
 
-  # TODO: ADD OTHER PARS
   previous_time_slice_res <- data.frame(
     age = rep(NA, length(files_to_read)),
     model = rep(NA, length(files_to_read)),
     seed = rep(NA, length(files_to_read)),
+    lambda_c0 = rep(NA, length(results_files)),
+    y = rep(NA, length(results_files)),
+    mu_0 = rep(NA, length(results_files)),
+    x = rep(NA, length(results_files)),
+    K_0 = rep(NA, length(results_files)),
+    z = rep(NA, length(results_files)),
+    gamma_0 = rep(NA, length(results_files)),
+    alpha = rep(NA, length(results_files)),
+    lambda_a0 = rep(NA, length(results_files)),
+    beta = rep(NA, length(results_files)),
+    d_0 = rep(NA, length(results_files)),
+    d0_col = rep(NA, length(results_files)),
+    d0_ana = rep(NA, length(results_files)),
     loglik = rep(NA, length(files_to_read)),
-    df = rep(NA, length(files_to_read)),
-    lambda_c0 = rep(NA, length(files_to_read)),
-    mu_0 = rep(NA, length(files_to_read)),
-    K_0 = rep(NA, length(files_to_read)),
-    gamma_0 = rep(NA, length(files_to_read)),
-    lambda_a0 = rep(NA, length(files_to_read)),
-    conv = rep(NA, length(files_to_read))
+    df = rep(NA, length(files_to_read))
   )
 }
 
@@ -69,14 +75,22 @@ for (i in seq_along(files_to_read)) {
   previous_time_slice_res$model[i] <- as.numeric(split_name[4])
   previous_time_slice_res$age[i] <- as.numeric(split_name[5])
   previous_time_slice_res$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+  previous_time_slice_res$lambda_c0[i] <- input$lambda_c0
+  previous_time_slice_res$y[i] <- input$y
+  previous_time_slice_res$mu_0[i] <- input$mu_0
+  previous_time_slice_res$x[i] <- input$x
+  previous_time_slice_res$K_0[i] <- input$K_0
+  previous_time_slice_res$z[i] <- input$z
+  previous_time_slice_res$gamma_0[i] <- input$gamma_0
+  previous_time_slice_res$alpha[i] <- input$alpha
+  previous_time_slice_res$lambda_a0[i] <- input$lambda_a0
+  previous_time_slice_res$beta[i] <- input$beta
+  previous_time_slice_res$d_0[i] <- ifelse(is.null(input$d_0), NA, input$d_0)
+  previous_time_slice_res$d0_col[i] <- ifelse(is.null(input$d_0), NA, input$d0_col)
+  previous_time_slice_res$d0_ana[i] <- ifelse(is.null(input$d_0), NA, input$d0_ana)
   previous_time_slice_res$loglik[i] <- input$loglik
   previous_time_slice_res$df[i] <- input$df
-  previous_time_slice_res$lambda_c0[i] = input$lambda_c0
-  previous_time_slice_res$mu_0[i] = input$mu_0
-  previous_time_slice_res$K_0[i] = input$K_0
-  previous_time_slice_res$gamma_0[i] = input$gamma_0
-  previous_time_slice_res$lambda_a0[i] = input$lambda_a0
-  previous_time_slice_res$conv[i] = input$conv # TODO: Skip if not conv
+  previous_time_slice_res$conv[i] <- input$conv # TODO: Skip if not conv
 }
 
 bics <- calc_bic(
@@ -89,6 +103,10 @@ if (all(is.na(bics))) {
   stop("Files found, but no valid previous results available.")
 }
 
+if (all(previous_time_slice_res$conv == 0)) {
+  stop("Files found, nothing converged.")
+}
+
 best_previous_time_slice <- previous_time_slice_res[which(bics == sort(bics)[1]), ]
 
 message("Using parameters from preceeding time slice.")
@@ -98,7 +116,7 @@ message("The previous time slice initpars are: ", paste(unlist(best_previous_tim
 
 datalist <- archipelagos41_paleo[[time_slice]]
 
-model_args <- setup_mw_model(model)
+model_args <- setup_mw_model_fixed_pars(model, best_previous_time_slice)
 initparsopt <- as.numeric(best_previous_time_slice[6:10]) # Previous time slice
 idparsopt <- model_args$idparsopt
 parsfix <- model_args$parsfix
