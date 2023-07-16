@@ -103,7 +103,7 @@ if (all(is.na(bics))) {
   stop("Files found, but no valid previous results available.")
 }
 
-if (all(previous_time_slice_res$conv == 0)) {
+if (all(previous_time_slice_res$conv != 0)) {
   stop("Files found, nothing converged.")
 }
 
