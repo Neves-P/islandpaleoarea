@@ -251,7 +251,7 @@ setup_mw_model_fixed_pars <- function(model, best_previous_time_slice) { # nolin
 
   ## post hoc power models
   if (model == 15) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0_a)
+    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, beta, d_0)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
