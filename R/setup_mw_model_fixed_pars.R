@@ -28,22 +28,6 @@ setup_mw_model_fixed_pars <- function(model, best_previous_time_slice) { # nolin
   d0_col <- best_previous_time_slice$d0_col
   d0_ana <- best_previous_time_slice$d0_ana
 
-  #### New initpars sigmoidal colonisation
-  kg <- stats::runif(1, min = 10, max = 70)
-  xg <- stats::runif(1, min = 0.1, max = 1)
-  d0g <- stats::runif(1, min = 1, max = 600000)
-
-  ####  initpars sigmoidal anagenesis and cladogenesis
-  kf <- stats::runif(1, min = 0.01, max = 0.04)
-  xf <- stats::runif(1, min = 0.1, max = 0.4)
-  d0f <- stats::runif(1, min = 1, max = 600000)
-
-  ####  initpars power interactive_clado1; interactive_clado2
-  d0 <- stats::runif(1, min = 0, max = 50000)
-
-  ## for area_additive_clado and area_interactive_clado
-  d0_a <- 0
-
 
   ### distance_dep key
 
