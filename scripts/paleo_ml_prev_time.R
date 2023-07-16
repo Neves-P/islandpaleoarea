@@ -33,7 +33,7 @@ output_folder_path <- DAISIEutils::create_output_folder(
   data_name = data_name,
   results_dir = NULL
 )
-
+output_folder_path <- "C:/Users/pedro/Desktop/archipelagos41_paleo/"
 # Find previous timeslice results
 prev_time_slice <- time_slice - 1
 if (prev_time_slice > 0) {
@@ -70,6 +70,7 @@ if (prev_time_slice > 0) {
 }
 
 for (i in seq_along(files_to_read)) {
+  print(i)
   input <- readRDS(files_to_read[i])
   split_name <- strsplit(files_to_read[i], "_")[[1]]
   previous_time_slice_res$model[i] <- as.numeric(split_name[4])
@@ -86,14 +87,14 @@ for (i in seq_along(files_to_read)) {
   previous_time_slice_res$lambda_a0[i] <- input$lambda_a0
   previous_time_slice_res$beta[i] <- input$beta
   previous_time_slice_res$d_0[i] <- ifelse(is.null(input$d_0), NA, input$d_0)
-  previous_time_slice_res$d0_col[i] <- ifelse(is.null(input$d_0), NA, input$d0_col)
-  previous_time_slice_res$d0_ana[i] <- ifelse(is.null(input$d_0), NA, input$d0_ana)
+  previous_time_slice_res$d0_col[i] <- ifelse(is.null(input$d0_col), NA, input$d0_col)
+  previous_time_slice_res$d0_ana[i] <- ifelse(is.null(input$d0_ana), NA, input$d0_ana)
   previous_time_slice_res$loglik[i] <- input$loglik
   previous_time_slice_res$df[i] <- input$df
   previous_time_slice_res$conv[i] <- input$conv # TODO: Skip if not conv
 }
 
-bics <- calc_bic(
+ibics <- calc_bic(
   loglik = previous_time_slice_res$loglik,
   df = previous_time_slice_res$df,
   n = 1000
