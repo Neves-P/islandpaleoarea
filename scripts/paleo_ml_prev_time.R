@@ -110,14 +110,15 @@ if (all(previous_time_slice_res$conv == 0)) {
 best_previous_time_slice <- previous_time_slice_res[which(bics == sort(bics)[1]), ]
 
 message("Using parameters from preceeding time slice.")
+message("Files to read were: ", files_to_read)
 message("The current time slice is: ", time_slice)
 message("The previous time slice is: ", time_slice - 1)
-message("The previous time slice initpars are: ", paste(unlist(best_previous_time_slice[6:10]), collapse = " "))
+message("The previous time slice initpars are: ", paste(unlist(best_previous_time_slice[4:16]), collapse = " "))
 
 datalist <- archipelagos41_paleo[[time_slice]]
 
 model_args <- setup_mw_model_fixed_pars(model, best_previous_time_slice)
-initparsopt <- as.numeric(best_previous_time_slice[6:10]) # Previous time slice
+initparsopt <- model_args$initparsopt
 idparsopt <- model_args$idparsopt
 parsfix <- model_args$parsfix
 idparsfix <- model_args$idparsfix
