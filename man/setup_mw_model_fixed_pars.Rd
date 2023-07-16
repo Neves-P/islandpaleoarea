@@ -4,7 +4,7 @@
 \alias{setup_mw_model_fixed_pars}
 \title{Setup parameters needed for MW version of DAISIE}
 \usage{
-setup_mw_model_fixed_pars(model)
+setup_mw_model_fixed_pars(model, best_previous_time_slice)
 }
 \arguments{
 \item{model}{A numeric from 1 to 28, corresponding to the model to be run.}

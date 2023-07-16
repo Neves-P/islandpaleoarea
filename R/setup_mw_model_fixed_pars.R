@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' model_parameters <- setup_mw_model(model = 1)
-setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocomp_linter start
+setup_mw_model_fixed_pars <- function(model, best_previous_time_slice) { # nolint: cyclocomp_linter start
   distance_type <- "continent"
 
 
@@ -280,7 +280,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
   }
 
   if (model == 16) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0_a)
+    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -321,7 +321,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## M19 BEST MODEL
   if (model == 19) {
-    initparsopt <- c(lambda_c0, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0_a)
+    initparsopt <- c(lambda_c0, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0)
     idparsopt <- c(1, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(0, Inf, 0)
     idparsfix <- c(2, 5, 6)
@@ -340,7 +340,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal colonisation
   if (model == 20) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, kg, xg, lambda_a0, beta, d0g)
+    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, gamma_0, alpha, lambda_a0, beta, d0)
     idparsopt <- 1:11
     parsfix <- NULL
     idparsfix <- NULL
@@ -355,7 +355,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal anagenesis
   if (model == 21) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, gamma_0, alpha, kf, xf, d0f)
+    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, gamma_0, alpha, lambda_a0, beta, d0)
     idparsopt <- 1:11
     parsfix <- NULL
     idparsfix <- NULL
@@ -369,7 +369,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal cladogenesis
   if (model == 22) {
-    initparsopt <- c(kf, xf, mu_0, x, K_0, z, gamma_0, alpha, lambda_a0, beta, d0f)
+    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, gamma_0, alpha, lambda_a0, beta, d0)
     idparsopt <- 1:11
     parsfix <- NULL
     idparsfix <- NULL
@@ -384,7 +384,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
   ## Sigmoidal colonisation and anagenesis
 
   if (model == 23) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, kg, xg, kf, xf, d0g, d0f)
+    initparsopt <- c(lambda_c0, y, mu_0, x, K_0, z, gamma_0, alpha, lambda_a0, beta, d0_col, d0_ana)
     idparsopt <- 1:12
     parsfix <- NULL
     idparsfix <- NULL
@@ -399,7 +399,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal colonisation, no k, z, beta
   if (model == 24) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, kg, xg, lambda_a0, d0g)
+    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, d0)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 11)
     parsfix <- c(Inf, 0, 0)
     idparsfix <- c(5, 6, 10)
@@ -414,7 +414,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal anagenesis, no k, z
   if (model == 25) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, kf, xf, d0f)
+    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, alpha, d0)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -428,7 +428,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal cladogenesis, no k, z, beta
   if (model == 26) {
-    initparsopt <- c(kf, xf, mu_0, x, gamma_0, alpha, lambda_a0, d0f)
+    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, d0)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 11)
     parsfix <- c(Inf, 0, 0)
     idparsfix <- c(5, 6, 10)
@@ -443,7 +443,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal colonisation and anagenesis, no k, z
   if (model == 27) {
-    initparsopt <- c(lambda_c0, y, mu_0, x, kg, xg, kf, xf, d0g, d0f)
+    initparsopt <- c(lambda_c0, y, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0_col, d0_ana)
     idparsopt <- c(1, 2, 3, 4, 7, 8, 9, 10, 11, 12)
     parsfix <- c(Inf, 0)
     idparsfix <- c(5, 6)
@@ -458,7 +458,7 @@ setup_mw_model <- function(model, best_previous_time_slice) { # nolint: cyclocom
 
   ## Sigmoidal anagenesis, no k, z, y
   if (model == 28) {
-    initparsopt <- c(lambda_c0, mu_0, x, gamma_0, alpha, kf, xf, d0f)
+    initparsopt <- c(lambda_c0, mu_0, x, gamma_0, alpha, lambda_a0, beta, d0)
     idparsopt <- c(1, 3, 4, 7, 8, 9, 10, 11)
     parsfix <- c(0, Inf, 0)
     idparsfix <- c(2, 5, 6)
