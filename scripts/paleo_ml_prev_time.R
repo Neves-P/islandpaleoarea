@@ -33,7 +33,7 @@ output_folder_path <- DAISIEutils::create_output_folder(
   data_name = data_name,
   results_dir = NULL
 )
-output_folder_path <- "C:/Users/pedro/Desktop/archipelagos41_paleo/"
+
 # Find previous timeslice results
 prev_time_slice <- time_slice - 1
 if (prev_time_slice > 0) {
