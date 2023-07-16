@@ -70,7 +70,7 @@ if (prev_time_slice > 0) {
 }
 
 for (i in seq_along(files_to_read)) {
-  print(i)
+  message("reading file ", files_to_read[i])
   input <- readRDS(files_to_read[i])
   split_name <- strsplit(files_to_read[i], "_")[[1]]
   previous_time_slice_res$model[i] <- as.numeric(split_name[4])
@@ -94,7 +94,7 @@ for (i in seq_along(files_to_read)) {
   previous_time_slice_res$conv[i] <- input$conv # TODO: Skip if not conv
 }
 
-ibics <- calc_bic(
+bics <- calc_bic(
   loglik = previous_time_slice_res$loglik,
   df = previous_time_slice_res$df,
   n = 1000
