@@ -55,6 +55,16 @@ ggplot2::ggsave("combined_diff.pdf", out_diff, width = 30, height = 10, device =
 ggplot2::ggsave("combined_ratio.pdf", out_ratio, width = 30, height = 10, device = cairo_pdf)
 ggplot2::ggsave("combined.pdf", out, width = 30, height = 10, device = cairo_pdf)
 
+# mu_0 and x fixed as present parameter, let area change with time, plot again
+# other parameters too?
+# y axis on
+
+
+
+
+
+
+
 
 # Combine single arch plots with area curve
 # Plot also the hyperparameters per model
