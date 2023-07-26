@@ -35,7 +35,11 @@ read_results <- function(results_path = "results") {
     if ("paleo" %in% split_name) {
       out$model[i] <- as.numeric(split_name[4])
       out$age[i] <- as.numeric(split_name[5])
-      out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6]))
+      if ("prev" %in% split_name) {
+        out$seed[i] <- 0 # 0 meaning prev time, not a seed
+      }
+        out$seed[i] <- as.numeric(sub("*.rds.*", "\\1", split_name[6])) # normal
+                                                                        #seed
     } else {
       out$model[i] <- as.numeric(split_name[2])
       out$age[i] <- 1
