@@ -51,9 +51,9 @@ out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
 out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio")
 out <- facet_archipelagos(base_rates, standardisation = FALSE)
 library(Cairo)
-ggplot2::ggsave("combined_diff.pdf", out_diff, width = 30, height = 10, device = cairo_pdf)
-ggplot2::ggsave("combined_ratio.pdf", out_ratio, width = 30, height = 10, device = cairo_pdf)
-ggplot2::ggsave("combined.pdf", out, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("combined_diff_log10.pdf", out_diff, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("combined_ratio_log10.pdf", out_ratio, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("combined_log10.pdf", out, width = 30, height = 10, device = cairo_pdf)
 
 # mu_0 and x fixed as present parameter, let area change with time, plot again
 # other parameters too?
