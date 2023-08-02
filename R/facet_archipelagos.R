@@ -12,15 +12,22 @@ facet_archipelagos <- function(base_rates, standardisation = FALSE) {
   combined_plots <- list()
   area_plots <- list()
   hyperpars_plots <- list()
+  ylim_max_global <- max(unlist(lapply(base_rates, `[[`, 8)))
   for(i in 1:41) {
 
     rates_plots[[i]] <- plot_line_estimates(base_rates[[i]], standardisation)
-
+    # ylim_max <- max(base_rates[[i]]$area)
     area_plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
-      ggplot2::geom_line(ggplot2::aes(age, area)) +
+      ggplot2::geom_line(ggplot2::aes(age, log10(area))) +
       ggplot2::theme_classic() +
       ggplot2::xlab("Time before present") +
       ggplot2::ylab("Area") +
+      ggplot2::coord_cartesian(ylim = c(0, log10(ylim_max_global))) +
+      # ggplot2::scale_y_log10(breaks = scales::trans_breaks("log10", function(x) 10^x),
+      #               labels = scales::trans_format("log10", scales::math_format(10^.x))) +
+      # ggplot2::scale_y_continuous(
+      #   trans = "log10", labels = scales::math_format(10^.x, format = log10)
+      # ) +
       ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank()) +
       ggplot2::ggtitle(
         paste0(gsub("_", " ", names(base_rates[i]), "_"), " m ", model)
