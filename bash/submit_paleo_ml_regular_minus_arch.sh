@@ -35,7 +35,7 @@ arch_to_remove=$2
 methode=${3-lsodes}
 optimmethod=${4-subplex}
 
-Rscript --vanilla islandpaleoarea/scripts/paleo_ml_prev_time.R ${array_index} \
+Rscript --vanilla islandpaleoarea/scripts/paleo_ml_minus_arch.R ${array_index} \
                                                                ${time_slice} \
                                                                ${methode} \
                                                                ${optimmethod} \
