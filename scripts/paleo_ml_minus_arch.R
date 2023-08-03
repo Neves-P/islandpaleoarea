@@ -7,7 +7,8 @@ array_index <- as.numeric(args[1])
 time_slice <- as.numeric(args[2])
 methode <- args[3]
 optimmethod <- args[4]
-model <- array_index
+arch_to_remove <- as.numeric(args[5])
+model_to_run <- array_index
 parallel <- "local"
 
 data_name <- data(archipelagos41_paleo)
@@ -21,9 +22,9 @@ set.seed(
 )
 
 DAISIEutils::print_metadata(
-  data_name = paste(data_name, model, time_slice, "minus_arch", sep = "_"),
+  data_name = paste(data_name, model_to_run, time_slice, "minus_arch", sep = "_"),
   array_index = "minus_arch",
-  model = model,
+  model = model_to_run,
   seed = seed,
   methode = methode,
   optimmethod = optimmethod
@@ -42,30 +43,22 @@ prev_time_slice <- time_slice - 1
 best_previous_time_slice <- dplyr::filter(
   ordered_results_paleo,
   age == prev_time_slice,
-  model == model
+  model == model_to_run
 )
 
-if (all(is.na(bics))) {
-  stop("Files found, but no valid previous results available.")
-}
+testit::assert(
+  "nrow best time slice = 1", identical(nrow(best_previous_time_slice), 1L)
+)
 
 message("Using parameters from preceeding time slice.")
-message("Files to read were: ", files_to_read)
-message("The current time slice is: ", time_slice)
-message("The previous time slice is: ", prev_time_slice)
-message("The previous time slice initpars are: ", paste(unlist(best_previous_time_slice[4:16]), collapse = " "))
-
-
-
-message("Using parameters from preceeding time slice.")
-message("Archipelago removed: ", files_to_read)
+message("Archipelago removed: ", names(archipelagos41_paleo[[time_slice]][arch_to_remove]))
 message("The current time slice is: ", time_slice)
 message("The previous time slice is: ", time_slice - 1)
 message("The previous time slice initpars are: ", paste(unlist(best_previous_time_slice[4:16]), collapse = " "))
 
-datalist <- archipelagos41_paleo[[time_slice]]
+datalist <- archipelagos41_paleo[[time_slice]][-arch_to_remove]
 
-model_args <- setup_mw_model_fixed_pars(model, best_previous_time_slice)
+model_args <- setup_mw_model_fixed_pars(model_to_run, best_previous_time_slice)
 initparsopt <- model_args$initparsopt
 idparsopt <- model_args$idparsopt
 parsfix <- model_args$parsfix
@@ -103,6 +96,8 @@ output_path <- file.path(
     model,
     "_",
     time_slice,
+    "_",
+    arch_to_remove
     "_minus_arch.rds")
 )
 saveRDS(
