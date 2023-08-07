@@ -104,7 +104,7 @@ output_path <- file.path(
   paste0(
     data_name,
     "_",
-    model,
+    model_to_run,
     "_",
     time_slice,
     "_",
