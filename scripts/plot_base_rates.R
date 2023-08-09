@@ -47,14 +47,26 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 }
 
 
-out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
-out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio")
-out <- facet_archipelagos(base_rates, standardisation = FALSE)
 library(Cairo)
-ggplot2::ggsave("combined_diff_log10.pdf", out_diff, width = 30, height = 10, device = cairo_pdf)
-ggplot2::ggsave("combined_ratio_log10.pdf", out_ratio, width = 30, height = 10, device = cairo_pdf)
-ggplot2::ggsave("combined_log10.pdf", out, width = 30, height = 10, device = cairo_pdf)
+out_diff <- facet_archipelagos(base_rates, standardisation = "difference", transformation = FALSE)
+out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio", transformation = FALSE)
+out <- facet_archipelagos(base_rates, standardisation = FALSE, transformation = FALSE)
 
+ggplot2::ggsave("figures/combined_diff.pdf", out_diff, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("figures/combined_ratio.pdf", out_ratio, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("figures/combined.pdf", out, width = 30, height = 10, device = cairo_pdf)
+
+ggplot2::ggsave("figures/combined_diff.png", out_diff, width = 30, height = 10)
+ggplot2::ggsave("figures/combined_ratio.png", out_ratio, width = 30, height = 10)
+ggplot2::ggsave("figures/combined.png", out, width = 30, height = 10)
+
+out_diff_log10 <- facet_archipelagos(base_rates, standardisation = "difference", transformation = TRUE)
+out_ratio_log10 <- facet_archipelagos(base_rates, standardisation = "ratio", transformation = TRUE)
+out_log10 <- facet_archipelagos(base_rates, standardisation = FALSE, transformation = TRUE)
+
+ggplot2::ggsave("figures/combined_diff_log10.pdf", out_diff_log10, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("figures/combined_ratio_log10.pdf", out_ratio_log10, width = 30, height = 10, device = cairo_pdf)
+ggplot2::ggsave("figures/combined_log10.pdf", out_log10, width = 30, height = 10, device = cairo_pdf)
 # mu_0 and x fixed as present parameter, let area change with time, plot again
 # other parameters too?
 # y axis on

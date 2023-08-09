@@ -6,23 +6,30 @@
 #' in a facet
 #' @export
 #'
-facet_archipelagos <- function(base_rates, standardisation = FALSE) {
+facet_archipelagos <- function(base_rates,
+                               standardisation = FALSE,
+                               transformation = FALSE) {
+
 
   rates_plots <- list()
   combined_plots <- list()
   area_plots <- list()
   hyperpars_plots <- list()
   ylim_max_global <- max(unlist(lapply(base_rates, `[[`, 8)))
+  ylim_max_global <- ifelse(transformation == TRUE, log10(ylim_max_global), ylim_max_global)
   for(i in 1:41) {
 
     rates_plots[[i]] <- plot_line_estimates(base_rates[[i]], standardisation)
+    if(isTRUE(transformation)) {
+      base_rates[[i]]$area <- log10(base_rates[[i]]$area)
+    }
     # ylim_max <- max(base_rates[[i]]$area)
     area_plots[[i]] <- ggplot2::ggplot(base_rates[[i]]) +
-      ggplot2::geom_line(ggplot2::aes(age, log10(area))) +
+      ggplot2::geom_line(ggplot2::aes(age, area)) +
       ggplot2::theme_classic() +
       ggplot2::xlab("Time before present") +
       ggplot2::ylab("Area") +
-      ggplot2::coord_cartesian(ylim = c(0, log10(ylim_max_global))) +
+      ggplot2::coord_cartesian(ylim = c(0, ylim_max_global)) +
       # ggplot2::scale_y_log10(breaks = scales::trans_breaks("log10", function(x) 10^x),
       #               labels = scales::trans_format("log10", scales::math_format(10^.x))) +
       # ggplot2::scale_y_continuous(
