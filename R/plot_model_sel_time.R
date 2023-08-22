@@ -53,7 +53,7 @@ plot_model_sel_time <- function(ordered_results,
     ggplot2::geom_area() +
     ggplot2::scale_fill_brewer(palette = "Set2") +
     ggplot2::theme_classic() +
-    ggplot2::xlab("Age (kyr)") +
+    ggplot2::xlab("Age (ka)") +
     ggplot2::ylab("BIC weight") +
     ggplot2::guides(fill = ggplot2::guide_legend(title = "Model"))
   out
