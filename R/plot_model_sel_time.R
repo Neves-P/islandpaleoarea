@@ -56,7 +56,6 @@ plot_model_sel_time <- function(ordered_results,
     ggplot2::xlab("Age (ka)") +
     ggplot2::ylab("BIC weight") +
     ggplot2::guides(fill = ggplot2::guide_legend(title = "Model"))
-    # ggthemes::scale_fill_colorblind()
   out
 }
 

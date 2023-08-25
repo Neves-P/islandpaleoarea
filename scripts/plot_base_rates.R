@@ -94,16 +94,16 @@ ggplot2::ggsave("figures/combined_log10.pdf", out_log10, width = 30, height = 10
 
 rates_plots <- list()
 combined_plots <- list()
-# area_plots <- list()
+area_plots <- list()
 hyperpars_plots <- list()
 for(i in 1:41) {
   rates_plots[[i]] <- plot_line_estimates(base_rates[[i]])
 
 
   rates_plots[[i]] <- rates_plots[[i]] +
-    # ggplot2::ggplot(base_rates[[i]]) +
+    ggplot2::ggplot(base_rates[[i]]) +
     ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
-    ggplot2::geom_line(ggplot2::aes(age, d0, colour = "d0")) +
+    ggplot2::geom_line(ggplot2::aes(age, d_0, colour = "d_0")) +
     ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
     ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
     ggplot2::geom_line(ggplot2::aes(age, area)) +
@@ -153,7 +153,7 @@ for (time_slice in seq_along(base_rates[[1]]$age)) { # Loop over ages for which 
 hyperpars_df <- data.frame(base_rates[[1]], total_area)
 max_hyperpars <- max(
   hyperpars_df$x,
-  hyperpars_df$d0,
+  hyperpars_df$d_0,
   hyperpars_df$beta,
   hyperpars_df$alpha
 )
@@ -161,7 +161,7 @@ peak_area <- max(total_area)
 scale_factor <- peak_area / max_hyperpars
 hyperpars_plot <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
-  ggplot2::geom_line(ggplot2::aes(age, d0, colour = "d0")) +
+  ggplot2::geom_line(ggplot2::aes(age, d_0, colour = "d_0")) +
   ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
   ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
   ggplot2::geom_line(ggplot2::aes(age, total_area / scale_factor, colour = "total area")) +

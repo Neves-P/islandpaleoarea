@@ -4,7 +4,7 @@
 #'
 #' @return A plot with the line
 #' @export
-plot_line_estimates <- function(ordered_results, standardisation = FALSE) {
+plot_line_estimates <- function(ordered_results, standardisation = FALSE, log_gamma) {
 
   if (identical(standardisation, "ratio")) {
     ordered_results$lambda_c0 <- ordered_results$lambda_c0 / ordered_results$lambda_c0[1]
@@ -17,22 +17,26 @@ plot_line_estimates <- function(ordered_results, standardisation = FALSE) {
     ordered_results$gamma_0 <- ordered_results$gamma_0 - ordered_results$gamma_0[1]
     ordered_results$lambda_a0 <- ordered_results$lambda_a0 - ordered_results$lambda_a0[1]
   }
-
+  if (log_gamma) {
+    ordered_results$gamma_0 <- log(ordered_results$gamma_0)
+  }
   param_plot <- ggplot2::ggplot(ordered_results) +
     ggplot2::geom_line(ggplot2::aes(age, lambda_c0, colour = "\U03BB\U1D9C")) +
     ggplot2::geom_line(ggplot2::aes(age, mu_0, colour = "\U03BC")) +
     ggplot2::geom_line(ggplot2::aes(age, lambda_a0, colour = "\U03BB\U1D43")) +
     ggplot2::geom_line(ggplot2::aes(age, gamma_0, colour = "\U03B3")) +
-    # ggplot2::scale_y_continuous(
-    #   name = "Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
-    #   sec.axis = ggplot2::sec_axis(~./15, name = "Estimated \U03B3"),
-    #   trans = "log10"
-    # ) +
     ggplot2::theme_classic() +
-    ggplot2::theme(axis.title.x = ggplot2::element_text(size = 6),
-                   axis.title.y = ggplot2::element_text(size = 6)) +
+    ggplot2::theme(axis.title.x = ggplot2::element_text(size = 8),
+                   axis.title.y = ggplot2::element_text(size = 8),
+                   legend.title = ggplot2::element_blank()) +
     ggplot2::xlab("Time before present") +
-    ggplot2::ylab("Standardised rates") +
-    ggplot2::labs(colour = "Parameter")
+    ggplot2::ylab("Estimated rates")
+
+  if (log_gamma) {
+    param_plot <- param_plot + ggplot2::scale_y_continuous(
+      name = "Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
+      sec.axis = ggplot2::sec_axis(~./0.5, name = "Estimated log(\U03B3)")
+    )
+  }
   param_plot
 }
