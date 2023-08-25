@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' data(ordered_results_paleo)
-#' model_sel_plot <- plot_model_sel_time(ordered_results)
+#' model_sel_plot <- plot_model_sel_time(ordered_results_paleo)
 plot_model_sel_time <- function(ordered_results,
                                 best_models = c(17, 19, 18)) {
   levels(ordered_results$model) <- c(levels(ordered_results$model), "Other\nmodels")
@@ -51,11 +51,12 @@ plot_model_sel_time <- function(ordered_results,
   out <- ggplot2::ggplot(plot_data_frame,
                          ggplot2::aes(x = age, y = bic_weights, fill = model)) +
     ggplot2::geom_area() +
-    ggplot2::scale_fill_brewer(palette = "Set2") +
     ggplot2::theme_classic() +
+    ggplot2::scale_fill_manual(values = c("#CAB2D6", "#FFFF99", "#A6CEE3", "#FB9A99")) +
     ggplot2::xlab("Age (ka)") +
     ggplot2::ylab("BIC weight") +
     ggplot2::guides(fill = ggplot2::guide_legend(title = "Model"))
+    # ggthemes::scale_fill_colorblind()
   out
 }
 
