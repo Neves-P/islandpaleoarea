@@ -66,19 +66,17 @@ area_plot_lord_howe <- ggplot2::ggplot(base_rates[[i]]) +
   ggplot2::geom_line(ggplot2::aes(age, area)) +
   ggplot2::theme_classic() +
   ggplot2::xlab("Time before present") +
-  ggplot2::ylab("Area") +
+  ggplot2::ylab("Archipelago area km\U00B2") +
   ggplot2::coord_cartesian(ylim = c(0, NA)) +
-  # ggplot2::scale_y_log10(breaks = scales::trans_breaks("log10", function(x) 10^x),
-  #               labels = scales::trans_format("log10", scales::math_format(10^.x))) +
-  # ggplot2::scale_y_continuous(
-  #   trans = "log10", labels = scales::math_format(10^.x, format = log10)
-  # ) +
-  ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank()) +
-  ggplot2::ggtitle(gsub("_", " ", names(base_rates[i])))
+  ggplot2::theme(legend.title = ggplot2::element_blank(),
+                 axis.title.x = ggplot2::element_blank())
+  # ggplot2::ggtitle(gsub("_", " ", names(base_rates[i])))
 rates_plots_lord_howe <- plot_line_estimates(base_rates[[i]], log_gamma = FALSE)
 rates_plots_lord_howe <- rates_plots_lord_howe +
   ggplot2::theme_classic() +
-  ggplot2::xlab("Time before present")
+  ggplot2::theme(legend.title = ggplot2::element_blank(),
+                 axis.title = ggplot2::element_blank(),
+                 axis.title.x = ggplot2::element_blank())
 
 
 # plot
@@ -87,18 +85,22 @@ area_plot_lord_galapagos <- ggplot2::ggplot(base_rates[[i]]) +
   ggplot2::geom_line(ggplot2::aes(age, area)) +
   ggplot2::theme_classic() +
   ggplot2::xlab("Time before present") +
-  ggplot2::ylab("Area") +
+  ggplot2::ylab("Archipelago area km\U00B2") +
   ggplot2::coord_cartesian(ylim = c(0, NA)) +
-  # ggplot2::scale_y_log10(breaks = scales::trans_breaks("log10", function(x) 10^x),
-  #               labels = scales::trans_format("log10", scales::math_format(10^.x))) +
-  # ggplot2::scale_y_continuous(
-  #   trans = "log10", labels = scales::math_format(10^.x, format = log10)
-  # ) +
-  ggplot2::theme(legend.title = ggplot2::element_blank(), axis.title = ggplot2::element_blank()) +
-  ggplot2::ggtitle(gsub(pattern = "_", replacement =  " ", x = names(base_rates[i])))
+  ggplot2::theme(legend.title = ggplot2::element_blank())
+                 # plot.title = element_text(size = 10)) +
+  # ggplot2::ggtitle(gsub(pattern = "_", replacement =  " ", x = names(base_rates[i])))
+
+
 rates_plots_galapagos <- plot_line_estimates(ordered_results = base_rates[[i]], log_gamma = FALSE)
 rates_plots_galapagos <- rates_plots_galapagos +
   ggplot2::theme_classic() +
-  ggplot2::xlab("Time before present")
+  ggplot2::theme(legend.title = ggplot2::element_blank())
+# TODO: break patchwork in multiple staments so that the annotations work properly
+final_plot <- ((global_area_plot_19 / global_estimate_plots_19) |
+                 (((area_plot_lord_howe + rates_plots_lord_howe) + patchwork::plot_annotation(title = "Lord Howe")) /
+                    ((area_plot_lord_galapagos + rates_plots_galapagos) = patchwork::plot_annotation(title = "Galápagos")))) +
+  patchwork::plot_layout(guides = "collect") +
+  patchwork::plot_annotation(tag_levels = "A")
+save_paper_plot(final_plot, "rates_areas_plots")
 
-((global_area_plot_19 / global_estimate_plots_19) | ((area_plot_lord_howe + rates_plots_lord_howe) / (area_plot_lord_galapagos + rates_plots_galapagos))) + patchwork::plot_layout(guides = "collect")
