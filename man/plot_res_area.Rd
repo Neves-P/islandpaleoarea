@@ -4,7 +4,7 @@
 \alias{plot_res_area}
 \title{Plot archipelago area and parameter estimates through time}
 \usage{
-plot_res_area(ordered_results)
+plot_res_area(ordered_results, log_gamma = FALSE)
 }
 \arguments{
 \item{ordered_results}{Data frame with all the results, BIC and BIC weights ordered

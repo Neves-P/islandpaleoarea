@@ -4,7 +4,7 @@
 \alias{plot_line_estimates}
 \title{Title}
 \usage{
-plot_line_estimates(ordered_results, standardisation = FALSE)
+plot_line_estimates(ordered_results, standardisation = FALSE, log_gamma)
 }
 \arguments{
 \item{ordered_results}{Data frame with all the results, BIC and BIC weights ordered

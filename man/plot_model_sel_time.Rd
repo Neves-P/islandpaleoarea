@@ -21,5 +21,5 @@ Plot model selection area plot
 }
 \examples{
 data(ordered_results_paleo)
-model_sel_plot <- plot_model_sel_time(ordered_results)
+model_sel_plot <- plot_model_sel_time(ordered_results_paleo)
 }
