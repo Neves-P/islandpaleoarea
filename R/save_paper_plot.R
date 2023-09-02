@@ -36,7 +36,7 @@ save_paper_plot <- function(plot_to_save, file_name, type_size = "full_size") {
     ggplot2::ggsave(
       plot = plot_to_save,
       filename = file.path("figures", paste0(file_name, ".pdf")),
-      device = "pdf",
+      device = cairo_pdf,
       width = 168,
       height = 150,
       units = "mm",
@@ -45,7 +45,7 @@ save_paper_plot <- function(plot_to_save, file_name, type_size = "full_size") {
     ggplot2::ggsave(
       plot = plot_to_save,
       filename = file.path("figures", paste0(file_name, ".png")),
-      device = "png",
+      device = cairo_pdf,
       width = 168 / 2,
       height = 150 / 2,
       units = "mm",
@@ -54,7 +54,7 @@ save_paper_plot <- function(plot_to_save, file_name, type_size = "full_size") {
     ggplot2::ggsave(
       plot = plot_to_save,
       filename = file.path("figures", paste0(file_name, ".pdf")),
-      device = "pdf",
+      device = cairo_pdf,
       width = 168 / 2,
       height = 150 / 2,
       units = "mm"

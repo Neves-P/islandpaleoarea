@@ -24,9 +24,9 @@ get_base_rates <- function(archipelago_data,
   beta <- pars_res_df$beta
   d0 <- pars_res_df$d_0
   age <- archipelago_data$island_age
-
+  model <- as.integer(model)
   # M16 & M19
-  if (isTRUE(model %in% c(16, 19))) {
+  if (isTRUE(model %in% c(16L, 19L))) {
     lambda_c <- lambda_c0 * area^(y + d0 * log(distance))
   }
 

@@ -1,4 +1,3 @@
-library(Cairo)
 
 model_numbers <- 17:19
 for (model_number in model_numbers) {
@@ -17,7 +16,7 @@ for (model_number in model_numbers) {
     z = model_res$z,
     alpha = model_res$alpha,
     beta = model_res$beta,
-    d0 = model_res$d_0,
+    d_0 = model_res$d_0,
     loglik = model_res$loglik
   )
   areas <- list()
@@ -46,12 +45,13 @@ for (model_number in model_numbers) {
   for (archipelago in names(archipelagos41_paleo[[1]])) {
     base_rates[[archipelago]]$age <- pars_res_df$age
   }
-  out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
-  out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio")
+  # out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
+  # out_ratio <- facet_archipelagos(base_rates, standardisation = "ratio")
   out <- facet_archipelagos(base_rates, standardisation = FALSE)
-  ggplot2::ggsave(paste0("figures/combined_diff_", model_number, ".pdf"), out_diff, width = 30, height = 10, device = cairo_pdf)
-  ggplot2::ggsave(paste0("figures/combined_ratio_", model_number, ".pdf"), out_ratio, width = 30, height = 10, device = cairo_pdf)
-  ggplot2::ggsave(paste0("figures/combined_", model_number, ".pdf"), out, width = 30, height = 10, device = cairo_pdf)
-}
+  save_paper_plot(plot_to_save = out[[1]], file_name = paste0("combined_1", "_m_", model_number))
+  save_paper_plot(plot_to_save = out[[2]], file_name = paste0("combined_2", "_m_", model_number))
+  save_paper_plot(plot_to_save = out[[3]], file_name = paste0("combined_3", "_m_", model_number))
+  save_paper_plot(plot_to_save = out[[4]], file_name = paste0("combined_4", "_m_", model_number))
 
+}
 

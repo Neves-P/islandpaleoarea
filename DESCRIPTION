@@ -20,12 +20,12 @@ Suggests:
     covr,
     testit,
     DAISIEutils,
-    dplyr,
-    Cairo
+    dplyr
 Depends: 
     R (>= 2.10)
 Remotes: 
     tece-lab/DAISIEutils
 Imports: 
+    Cairo,
     ggplot2,
     patchwork
