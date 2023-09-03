@@ -2,19 +2,6 @@ global_area_time <- c()
 data("ordered_results_paleo")
 
 
-total_area <- c()
-total_distance <- c()
-for (time_slice in seq_along(base_rates[[1]]$age)) { # Loop over ages for which there is data in all models
-  area <- c()
-  distance <- c()
-  for (archipelago in seq_along(archipelagos41_paleo[[time_slice]])) {
-    area <- c(area, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$area)
-    distance <- c(distance, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$distance_continent)
-
-  }
-  total_area[time_slice] <- sum(area)
-}
-
 
 model <- 19
 model_res <- dplyr::filter(ordered_results_paleo, model == 19)
@@ -81,6 +68,20 @@ for (i in seq_along(areas$Aldabra_Group)) {
 }
 
 
+total_area <- c()
+total_distance <- c()
+for (time_slice in seq_along(base_rates[[1]]$age)) { # Loop over ages for which there is data in all models
+  area <- c()
+  distance <- c()
+  for (archipelago in seq_along(archipelagos41_paleo[[time_slice]])) {
+    area <- c(area, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$area)
+    distance <- c(distance, archipelagos41_paleo[[time_slice]][[archipelago]][[1]]$distance_continent)
+
+  }
+  total_area[time_slice] <- sum(area)
+}
+
+
 
 
 hyperpars_df <- data.frame(base_rates[[1]], total_area, ratios_time_slice_sds)
@@ -125,3 +126,45 @@ areas_sd_ratio <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::xlab("Time before present") +
   ggplot2::ylab("Hyperparameter")
 save_paper_plot(plot_to_save = areas_sd_ratio, file_name = "area_sd_ratio")
+
+
+
+###
+ratios <- ratios_time_slice_sds  / ratios_time_slice_mean
+scale_factor_ratios <- max(ratios) / max_hyperpars
+hyperpars_plot_mean_sd <- ggplot2::ggplot(hyperpars_df) +
+  ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
+  ggplot2::geom_line(ggplot2::aes(age, y, colour = "y")) +
+  ggplot2::geom_line(ggplot2::aes(age, d_0, colour = "d_0")) +
+  ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "\U003B1")) +
+  ggplot2::geom_line(ggplot2::aes(age, beta, colour = "\U03B2")) +
+  ggplot2::geom_line(ggplot2::aes(age, ratios / scale_factor_ratios, colour = "sd ratio area")) +
+  # ggplot2::geom_line(ggplot2::aes(age, ratios_time_slice_sds, colour = "Ratio SD")) +
+  ggplot2::scale_y_continuous(
+    name = "Hyperparameters",
+    sec.axis = ggplot2::sec_axis(~.*scale_factor_ratios, name = "sd(area) / mean(area)")
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::theme(legend.title = ggplot2::element_blank()) +
+  ggplot2::xlab("Time before present") +
+  ggplot2::ylab("Hyperparameter")
+if (model != 19) {
+  hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, z, colour = "z"))
+}
+save_paper_plot(plot_to_save = hyperpars_plot_mean_sd, file_name = paste0("hyperpars_area_sd_area_ratio", "_", model))
+
+
+#areas sd plot
+peak_area <- max(total_area)
+scale_factor <- peak_area / max(ratios)
+areas_sd_ratio <- ggplot2::ggplot(hyperpars_df) +
+  ggplot2::geom_line(ggplot2::aes(age, total_area / scale_factor, colour = "Total area")) +
+  ggplot2::geom_line(ggplot2::aes(age, ratios, colour = "sd(area) / mean(area)")) +
+  ggplot2::scale_y_continuous(
+    name = "sd(area) / mean(area)",
+    sec.axis = ggplot2::sec_axis(~.*scale_factor, name = "Total area km")
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::theme(legend.title = ggplot2::element_blank()) +
+  ggplot2::xlab("Time before present")
+save_paper_plot(plot_to_save = areas_sd_ratio, file_name = paste0("area_sd_ratio", "_", model))
