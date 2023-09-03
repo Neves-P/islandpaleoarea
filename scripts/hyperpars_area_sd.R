@@ -29,7 +29,7 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
     archipelago_data = archipelagos41_paleo[[1]][[archipelago]][[1]],
     M = 1000,
     pars_res_df = model_res,
-    model = model,
+    model = model_num,
     area = areas[[archipelago]],
     distance = distances[[archipelago]]
   )
@@ -94,42 +94,6 @@ max_hyperpars <- max(
   hyperpars_df$beta,
   hyperpars_df$alpha
 )
-# peak_area <- max(total_area)
-# scale_factor <- max(ratios_time_slice_sds) / max_hyperpars
-# hyperpars_plot <- ggplot2::ggplot(hyperpars_df) +
-#   ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
-#   ggplot2::geom_line(ggplot2::aes(age, d_0, colour = "d_0")) +
-#   ggplot2::geom_line(ggplot2::aes(age, beta, colour = "beta")) +
-#   ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "alpha")) +
-#   ggplot2::geom_line(ggplot2::aes(age, ratios_time_slice_sds / scale_factor, colour = "sd ratio area")) +
-#   ggplot2::scale_y_continuous(
-#     name = "Hyperparameters",
-#     sec.axis = ggplot2::sec_axis(~.*scale_factor, name = "Standard deviation")
-#   ) +
-#   ggplot2::theme_classic() +
-#   ggplot2::theme(legend.title = ggplot2::element_blank()) +
-#   ggplot2::xlab("Time before present") +
-#   ggplot2::ylab("Hyperparameter")
-# save_paper_plot(plot_to_save = hyperpars_plot, file_name = "hyperpars_sd")
-#
-#
-# #areas sd plot
-# peak_area <- max(total_area)
-# scale_factor <- peak_area / max(ratios_time_slice_sds)
-# areas_sd_ratio <- ggplot2::ggplot(hyperpars_df) +
-#   ggplot2::geom_line(ggplot2::aes(age, total_area / scale_factor, colour = "total area")) +
-#   ggplot2::geom_line(ggplot2::aes(age, ratios_time_slice_sds, colour = "SD of area ratio")) +
-#   ggplot2::scale_y_continuous(
-#     name = "SD of area ratio",
-#     sec.axis = ggplot2::sec_axis(~.*scale_factor, name = "Area")
-#   ) +
-#   ggplot2::theme_classic() +
-#   ggplot2::theme(legend.title = ggplot2::element_blank()) +
-#   ggplot2::xlab("Time before present") +
-#   ggplot2::ylab("Hyperparameter")
-# save_paper_plot(plot_to_save = areas_sd_ratio, file_name = "area_sd_ratio")
-
-
 
 ###
 ratios <- ratios_time_slice_sds  / ratios_time_slice_mean
@@ -140,17 +104,17 @@ hyperpars_plot_mean_sd <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::geom_line(ggplot2::aes(age, d_0, colour = "d\U2080")) +
   ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "\U003B1")) +
   ggplot2::geom_line(ggplot2::aes(age, beta, colour = "\U03B2")) +
-  ggplot2::geom_line(ggplot2::aes(age, ratios / scale_factor_ratios, colour = "sd(area) /\nmean(area)")) +
+  ggplot2::geom_line(ggplot2::aes(age, ratios / scale_factor_ratios, colour = "\U03C3 A / \U0100")) +
   # ggplot2::geom_line(ggplot2::aes(age, ratios_time_slice_sds, colour = "Ratio SD")) +
   ggplot2::scale_y_continuous(
     name = "Hyperparameter value",
-    sec.axis = ggplot2::sec_axis(~.*scale_factor_ratios, name = "sd(area) / mean(area)")
+    sec.axis = ggplot2::sec_axis(~.*scale_factor_ratios, name = "\U03C3 A / \U0100")
   ) +
   ggplot2::theme_classic() +
   ggplot2::theme(legend.title = ggplot2::element_blank()) +
   ggplot2::xlab("Time before present")
-if (model != 19) {
-  hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, z, colour = "z"))
+if (model_num != 19) {
+  hyperpars_plot_mean_sd <- hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, z, colour = "z"))
 }
 save_paper_plot(plot_to_save = hyperpars_plot_mean_sd, file_name = paste0("hyperpars_area_sd_area_ratio", "_", model_num))
 
@@ -160,9 +124,9 @@ peak_area <- max(total_area)
 scale_factor <- peak_area / max(ratios)
 areas_sd_ratio <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::geom_line(ggplot2::aes(age, total_area / scale_factor, colour = "Total area")) +
-  ggplot2::geom_line(ggplot2::aes(age, ratios, colour = "sd(area) /\nmean(area)")) +
+  ggplot2::geom_line(ggplot2::aes(age, ratios, colour = "\U03C3 A / \U0100")) +
   ggplot2::scale_y_continuous(
-    name = "sd(area) / mean(area)",
+    name = "\U03C3 A / \U0100",
     sec.axis = ggplot2::sec_axis(~.*scale_factor, name = "Total area km\U00B2")
   ) +
   ggplot2::theme_classic() +
