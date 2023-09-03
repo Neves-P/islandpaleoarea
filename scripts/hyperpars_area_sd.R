@@ -9,7 +9,7 @@ for (model_num in 17:19) {
 model_res <- dplyr::filter(ordered_results_paleo, model == model_num)
 
 
-
+# Get individual archipelago areas
 names(archipelagos41_paleo[[1]])
 areas <- list()
 distances <- list()
@@ -23,6 +23,8 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
   areas[[archipelago]] <- area
   distances[[archipelago]] <- distance
 }
+
+# Get base rates
 base_rates <- list()
 for (archipelago in names(archipelagos41_paleo[[1]])) {
   base_rates[[archipelago]] <- get_base_rates(
@@ -38,7 +40,7 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
   base_rates[[archipelago]]$age <- model_res$age
 }
 
-# Get area SDs
+# Get present area / past areas
 data("archipelagos41_paleo")
 names(archipelagos41_paleo[[1]])
 areas <- list()
@@ -58,7 +60,7 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
   areas[[archipelago]] <- area
 }
 
-
+# Get SD and mean of ratios from above
 ratios_time_slice_sds <- c()
 ratios_time_slice_mean <- c()
 for (i in seq_along(areas$Aldabra_Group)) {
@@ -70,7 +72,7 @@ for (i in seq_along(areas$Aldabra_Group)) {
   ratios_time_slice_mean[i] <- mean(ratios_time_slice)
 }
 
-
+# Get total areas
 total_area <- c()
 total_distance <- c()
 for (time_slice in seq_along(base_rates[[1]]$age)) { # Loop over ages for which there is data in all models
@@ -86,7 +88,7 @@ for (time_slice in seq_along(base_rates[[1]]$age)) { # Loop over ages for which 
 
 
 
-
+# Get hyperparameters (from first archipelago, they are always the same value in all of them)
 hyperpars_df <- data.frame(base_rates[[1]], total_area, ratios_time_slice_sds)
 max_hyperpars <- max(
   hyperpars_df$x,
@@ -95,7 +97,7 @@ max_hyperpars <- max(
   hyperpars_df$alpha
 )
 
-###
+#### Plots ####
 ratios <- ratios_time_slice_sds  / ratios_time_slice_mean
 scale_factor_ratios <- max(ratios) / max_hyperpars
 hyperpars_plot_mean_sd <- ggplot2::ggplot(hyperpars_df) +
