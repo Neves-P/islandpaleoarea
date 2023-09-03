@@ -100,7 +100,6 @@ ratios <- ratios_time_slice_sds  / ratios_time_slice_mean
 scale_factor_ratios <- max(ratios) / max_hyperpars
 hyperpars_plot_mean_sd <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::geom_line(ggplot2::aes(age, x, colour = "x")) +
-  ggplot2::geom_line(ggplot2::aes(age, y, colour = "y")) +
   ggplot2::geom_line(ggplot2::aes(age, d_0, colour = "d\U2080")) +
   ggplot2::geom_line(ggplot2::aes(age, alpha, colour = "\U003B1")) +
   ggplot2::geom_line(ggplot2::aes(age, beta, colour = "\U03B2")) +
@@ -114,7 +113,7 @@ hyperpars_plot_mean_sd <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::theme(legend.title = ggplot2::element_blank()) +
   ggplot2::xlab("Time before present")
 if (model_num != 19) {
-  hyperpars_plot_mean_sd <- hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, z, colour = "z"))
+  hyperpars_plot_mean_sd <- hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, y, colour = "y"))
 }
 save_paper_plot(plot_to_save = hyperpars_plot_mean_sd, file_name = paste0("hyperpars_area_sd_area_ratio", "_", model_num))
 
