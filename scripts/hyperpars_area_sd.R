@@ -143,13 +143,12 @@ hyperpars_plot_mean_sd <- ggplot2::ggplot(hyperpars_df) +
   ggplot2::geom_line(ggplot2::aes(age, ratios / scale_factor_ratios, colour = "sd(area) /\nmean(area)")) +
   # ggplot2::geom_line(ggplot2::aes(age, ratios_time_slice_sds, colour = "Ratio SD")) +
   ggplot2::scale_y_continuous(
-    name = "Total area km\U00B2",
+    name = "Hyperparameter value",
     sec.axis = ggplot2::sec_axis(~.*scale_factor_ratios, name = "sd(area) / mean(area)")
   ) +
   ggplot2::theme_classic() +
   ggplot2::theme(legend.title = ggplot2::element_blank()) +
-  ggplot2::xlab("Time before present") +
-  ggplot2::ylab("Hyperparameter")
+  ggplot2::xlab("Time before present")
 if (model != 19) {
   hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, z, colour = "z"))
 }
