@@ -23,5 +23,5 @@ loglik_plot_19 <- ggplot2::ggplot(m_19) +
   ggplot2::theme(legend.title = ggplot2::element_blank()) +
   ggplot2::xlab("Time before present") +
   ggplot2::ylab("Loglikelihood")
-loglik_plot_17 + loglik_plot_18 + loglik_plot_19 + patchwork::plot_layout(guides = "collect")
+loglik_plots <- loglik_plot_17 + loglik_plot_18 + loglik_plot_19 + patchwork::plot_layout(guides = "collect")
 

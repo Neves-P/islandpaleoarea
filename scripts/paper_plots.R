@@ -62,46 +62,8 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
   base_rates[[archipelago]]$age <- model_res$age
 }
 
-# plot
-i <- 20 # Lord Howe
-area_plot_lord_howe <- ggplot2::ggplot(base_rates[[i]]) +
-  ggplot2::geom_line(ggplot2::aes(age, area)) +
-  ggplot2::theme_classic() +
-  ggplot2::xlab("Time before present") +
-  ggplot2::ylab("Archipelago area km\U00B2") +
-  ggplot2::coord_cartesian(ylim = c(0, NA)) +
-  ggplot2::ggtitle("Lord Howe") +
-  ggplot2::theme(legend.title = ggplot2::element_blank(),
-                 axis.title.x = ggplot2::element_blank(),
-                 title = ggplot2::element_text(size = 10))
-rates_plots_lord_howe <- plot_line_estimates(base_rates[[i]], log_gamma = FALSE)
-rates_plots_lord_howe <- rates_plots_lord_howe +
-  ggplot2::theme_classic() +
-  ggplot2::theme(legend.title = ggplot2::element_blank(),
-                 axis.title.x = ggplot2::element_blank())
 
-
-# plot
-i <- 13 # Galapagos
-area_plot_galapagos <- ggplot2::ggplot(base_rates[[i]]) +
-  ggplot2::geom_line(ggplot2::aes(age, area)) +
-  ggplot2::theme_classic() +
-  ggplot2::xlab("Time before present") +
-  ggplot2::ylab("Archipelago area km\U00B2") +
-  ggplot2::coord_cartesian(ylim = c(0, NA)) +
-  ggplot2::ggtitle("Galápagos") +
-  ggplot2::theme(legend.title = ggplot2::element_blank())
-                 plot.title = ggplot2::element_text(size = 10)
-
-
-rates_plots_galapagos <- plot_line_estimates(ordered_results = base_rates[[i]], log_gamma = FALSE)
-rates_plots_galapagos <- rates_plots_galapagos +
-  ggplot2::theme_classic() +
-  ggplot2::theme(legend.title = ggplot2::element_blank())
-
-final_plot <- ((global_area_plot_19 / global_estimate_plots_19) |
-                 (((area_plot_lord_howe + rates_plots_lord_howe)) /
-                    ((area_plot_galapagos + rates_plots_galapagos)))) +
+final_plot <- (global_area_plot_19 + global_estimate_plots_19) +
   patchwork::plot_layout(guides = "collect", widths = c(1, 2)) +
   patchwork::plot_annotation(tag_levels = "A")
 
