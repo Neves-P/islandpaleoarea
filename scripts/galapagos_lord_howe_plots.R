@@ -75,19 +75,23 @@ for (i in seq_along(models)) {
     ggplot2::geom_line(ggplot2::aes(age, area)) +
     ggplot2::theme_classic() +
     ggplot2::xlab("Time before present") +
-    ggplot2::ylab("Archipelago area km\U00B2") +
+    ggplot2::ylab("Area km\U00B2") +
     ggplot2::coord_cartesian(ylim = c(0, NA)) +
     ggplot2::ggtitle("Lord Howe") +
     ggplot2::theme(legend.title = ggplot2::element_blank(),
-                   axis.title.x = ggplot2::element_blank(),
-                   title = ggplot2::element_text(size = 10))
+                   axis.title.x = ggplot2::element_blank())
   rates_plots_lord_howe[[i]] <- plot_line_estimates(base_rates[[j]], log_gamma = FALSE)
   rates_plots_lord_howe[[i]] <- rates_plots_lord_howe[[i]] +
     ggplot2::theme_classic() +
+    ggplot2::ggtitle(paste0("M", models[i])) +
     ggplot2::theme(legend.title = ggplot2::element_blank(),
-                   axis.title.x = ggplot2::element_blank())
-  if (i > 1) {
-    rates_plots_lord_howe[[i]] <- rates_plots_lord_howe[[i]] + ggplot2::theme(axis.title.y = ggplot2::element_blank())
+                   axis.title.y = ggplot2::element_text(size = 10),
+                   title = ggplot2::element_text(size = 10),
+                   plot.title = ggplot2::element_text(hjust = 1, size = 10),
+                   axis.title.x = ggplot2::element_text(size = 10))
+  if (i < 3) {
+    rates_plots_lord_howe[[i]] <- rates_plots_lord_howe[[i]] +
+      ggplot2::theme(axis.title.x = ggplot2::element_blank())
   }
 
 
@@ -98,25 +102,32 @@ for (i in seq_along(models)) {
     ggplot2::geom_line(ggplot2::aes(age, area)) +
     ggplot2::theme_classic() +
     ggplot2::xlab("Time before present") +
-    ggplot2::ylab("Archipelago area km\U00B2") +
+    ggplot2::ylab("Area km\U00B2") +
     ggplot2::coord_cartesian(ylim = c(0, NA)) +
     ggplot2::ggtitle("Galápagos") +
-    ggplot2::theme(legend.title = ggplot2::element_blank())
-  plot.title = ggplot2::element_text(size = 10)
+    ggplot2::theme(legend.title = ggplot2::element_blank(),
+                   axis.title.x = ggplot2::element_blank(),
+                   axis.title.y = ggplot2::element_blank())
 
 
   rates_plots_galapagos[[i]] <- plot_line_estimates(ordered_results = base_rates[[j]], log_gamma = FALSE)
   rates_plots_galapagos[[i]] <- rates_plots_galapagos[[i]] +
     ggplot2::theme_classic() +
-    ggplot2::theme(legend.title = ggplot2::element_blank())
-  if (i > 1) {
-    rates_plots_galapagos[[i]] <- rates_plots_galapagos[[i]] + ggplot2::theme(axis.title.y = ggplot2::element_blank())
+    ggplot2::ggtitle(paste0("M", models[i])) +
+    ggplot2::theme(legend.title = ggplot2::element_blank(),
+                   axis.title.y = ggplot2::element_blank(),
+                   plot.title = ggplot2::element_text(hjust = 1, size = 10),
+                   axis.title.x = ggplot2::element_text(size = 10))
+  if (i < 3) {
+    rates_plots_galapagos[[i]] <- rates_plots_galapagos[[i]] +
+      ggplot2::theme(axis.title.x = ggplot2::element_blank())
   }
 }
 
 final_plot <- (area_plot_lord_howe + rates_plots_lord_howe[[1]] + rates_plots_lord_howe[[2]] + rates_plots_lord_howe[[3]] +
-  area_plot_galapagos + rates_plots_galapagos[[1]] + rates_plots_galapagos[[2]] + rates_plots_galapagos[[3]]) +
-  patchwork::plot_layout(guides = "collect", ncol = 4, nrow = 2) +
-  patchwork::plot_annotation(tag_levels = "A")
+                 area_plot_galapagos + rates_plots_galapagos[[1]] + rates_plots_galapagos[[2]] + rates_plots_galapagos[[3]]) +
+  patchwork::plot_layout(guides = "collect", ncol = 2, nrow = 4, byrow = FALSE) +
+  patchwork::plot_annotation(tag_levels = "A") &
+  ggplot2::theme(legend.position = 'bottom')
 save_paper_plot(final_plot, "galapagos_lord_howe")
 

@@ -28,4 +28,5 @@ Remotes:
 Imports: 
     Cairo,
     ggplot2,
+    ggthemes,
     patchwork

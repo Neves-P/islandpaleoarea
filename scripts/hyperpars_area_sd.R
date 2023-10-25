@@ -123,4 +123,7 @@ save_paper_plot(plot_to_save = hyperpars_plot_mean_sd, file_name = paste0("hyper
 final_plot <- (global_area_plot_19 + global_estimate_plots_19 + hyperpars_plot_mean_sd) +
   patchwork::plot_layout(guides = "collect") +
   patchwork::plot_annotation(tag_levels = "A")
+save_paper_plot(final_plot, "m19_pars_hyperpars")
+cairo_pdf(file = "m19_pars_hyperpars.pdf", width = 5.10, height = 3.54)
+ggplot2::ggsave(plot = final_plot, filename = "m19_pars_hyperpars.pdf", device = cairo_pdf, width = 150, height = 60, units = "mm")
 
