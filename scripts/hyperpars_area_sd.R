@@ -63,14 +63,21 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 # Get SD and mean of ratios from above
 ratios_time_slice_sds <- c()
 ratios_time_slice_mean <- c()
-for (i in seq_along(areas$Aldabra_Group)) {
+ratios_time_slices <- list()
+for (i in seq_along(areas$Aldabra_Group)) { # loops over time slice
   ratios_time_slice <- c()
-  for (j in seq_along(areas)) {
+  for (j in seq_along(areas)) { # seq_along(areas) loops over archipelagos
     ratios_time_slice <- c(ratios_time_slice, areas[[j]][i] / areas[[j]][1])
   }
+  ratios_time_slices[[i]] <- ratios_time_slice
+  # boxplot(ratios_time_slice)
   ratios_time_slice_sds[i] <- sd(ratios_time_slice)
   ratios_time_slice_mean[i] <- mean(ratios_time_slice)
 }
+
+ratios_time_slices_df <- data.frame(arch = 1:41, ratios_time_slices[[1]])
+ggplot2::ggplot(ratios_time_slices[[1]]) +
+  ggplot2::geom_point()
 
 # Get total areas
 total_area <- c()
