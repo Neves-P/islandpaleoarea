@@ -4,7 +4,12 @@
 \alias{facet_archipelagos}
 \title{Rates and area archipelago faceted}
 \usage{
-facet_archipelagos(base_rates, standardisation = FALSE, transformation = FALSE)
+facet_archipelagos(
+  base_rates,
+  standardisation = FALSE,
+  transformation = FALSE,
+  log_gamma = FALSE
+)
 }
 \arguments{
 \item{base_rates}{}

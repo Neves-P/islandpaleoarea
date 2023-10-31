@@ -64,19 +64,24 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 ratios_time_slice_sds <- c()
 ratios_time_slice_mean <- c()
 ratios_time_slices <- list()
+ratios_time_slices_df <- data.frame()
 for (i in seq_along(areas$Aldabra_Group)) { # loops over time slice
   ratios_time_slice <- c()
+  archipelago_names <- c()
   for (j in seq_along(areas)) { # seq_along(areas) loops over archipelagos
     ratios_time_slice <- c(ratios_time_slice, areas[[j]][i] / areas[[j]][1])
+    archipelago_names <- c(archipelago_names, names(areas[j]))
   }
-  ratios_time_slices[[i]] <- ratios_time_slice
-  # boxplot(ratios_time_slice)
+  times <- rep(i, length(areas))
+  temp_df <- data.frame(archipelago_names, times, ratios_time_slice)
+  ratios_time_slices_df <- rbind(ratios_time_slices_df, temp_df)
+
+  ## Older calculations
   ratios_time_slice_sds[i] <- sd(ratios_time_slice)
   ratios_time_slice_mean[i] <- mean(ratios_time_slice)
 }
-
-ratios_time_slices_df <- data.frame(arch = 1:41, ratios_time_slices[[1]])
-ggplot2::ggplot(ratios_time_slices[[1]]) +
+colnames(ratios_time_slices_df) <- c("Archipelagos", "Times", "Ratios")
+ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Times, Ratios, colour = Archipelagos)) +
   ggplot2::geom_point()
 
 # Get total areas
