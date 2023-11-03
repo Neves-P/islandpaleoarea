@@ -10,7 +10,6 @@ model_res <- dplyr::filter(ordered_results_paleo, model == model_num)
 
 
 # Get individual archipelago areas
-names(archipelagos41_paleo[[1]])
 areas <- list()
 distances <- list()
 for (archipelago in names(archipelagos41_paleo[[1]])) {
@@ -82,7 +81,14 @@ for (i in seq_along(areas$Aldabra_Group)) { # loops over time slice
 }
 colnames(ratios_time_slices_df) <- c("Archipelagos", "Times", "Ratios")
 ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Times, Ratios, colour = Archipelagos)) +
-  ggplot2::geom_point()
+  ggplot2::geom_line()
+
+ratios_time_slices_df <- dplyr::group_by(ratios_time_slices_df, Archipelagos)
+
+ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Archipelagos, Ratios)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::geom_jitter() +
+  ggplot2::scale_x_discrete(guide = ggplot2::guide_axis(angle = 45))
 
 # Get total areas
 total_area <- c()
