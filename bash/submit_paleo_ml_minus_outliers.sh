@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=regular
 #SBATCH --array=1-45
-#SBATCH --time=3-00:00:00
+#SBATCH --time=2-23:55:00
 #SBATCH --mem=1000
 #SBATCH --cpus-per-task=6
 #SBATCH --job-name=paleo_ml_minus_outliers
