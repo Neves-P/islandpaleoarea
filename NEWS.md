@@ -1,4 +1,7 @@
-# islandpaleoarea (development version)
+# islandpaleoarea 1.1.0
+
+* Jobs that run without 4 area outlier archipelagos: Lord Howe, Norfolk, Chagos, Seychelles Inner.
+* Various plotting functions
 
 # islandpaleoarea 1.0.0
 
