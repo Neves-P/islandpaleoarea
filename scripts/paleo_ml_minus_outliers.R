@@ -37,7 +37,7 @@ output_folder_path <- DAISIEutils::create_output_folder(
 )
 
 datalist <- archipelagos41_paleo[[time_slice]]
-
+arch_to_remove <- c("Lord_Howe", "Norfolk", "Chagos", "Seychelles_Inner")
 datalist <- datalist[which(!names(archipelagos41_paleo[[1]]) %in% arch_to_remove)]
 message("Removed archipelagos: ", paste(arch_to_remove, collapse = " "))
 message("Kept archipelagos: ", paste(names(datalist), collapse = " "))
