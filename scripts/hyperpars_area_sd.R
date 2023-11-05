@@ -80,16 +80,16 @@ for (i in seq_along(areas$Aldabra_Group)) { # loops over time slice
   ratios_time_slice_mean[i] <- mean(ratios_time_slice)
 }
 colnames(ratios_time_slices_df) <- c("Archipelagos", "Times", "Ratios")
-ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Times, Ratios, colour = Archipelagos)) +
+line_plot <- ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Times, Ratios, colour = Archipelagos)) +
   ggplot2::geom_line()
-
+save_paper_plot(line_plot, "ratios_line")
 ratios_time_slices_df <- dplyr::group_by(ratios_time_slices_df, Archipelagos)
 
-ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Archipelagos, Ratios)) +
+box_plot <- ggplot2::ggplot(ratios_time_slices_df, ggplot2::aes(Archipelagos, Ratios)) +
   ggplot2::geom_boxplot() +
   ggplot2::geom_jitter() +
   ggplot2::scale_x_discrete(guide = ggplot2::guide_axis(angle = 45))
-
+save_paper_plot(box_plot, "box_plot")
 # Get total areas
 total_area <- c()
 total_distance <- c()
