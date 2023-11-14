@@ -17,7 +17,7 @@ facet_archipelagos <- function(base_rates,
   area_plots <- list()
   # ylim_max_global <- max(unlist(lapply(base_rates, `[[`, 8)))
   # ylim_max_global <- ifelse(transformation == TRUE, log10(ylim_max_global), ylim_max_global)
-  for(i in 1:41) {
+  for (i in seq_along(base_rates)) {
 
     rates_plots[[i]] <-
       plot_line_estimates(

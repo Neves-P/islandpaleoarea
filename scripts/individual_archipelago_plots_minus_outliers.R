@@ -21,7 +21,13 @@ for (model_number in model_numbers) {
   )
   areas <- list()
   distances <- list()
-  for (archipelago in names(archipelagos41_paleo[[1]])) {
+
+  # TODO: Check why these were being plotted anyways, and what was plotted
+  # datalist <- archipelagos41_paleo[[1]]
+  # arch_to_remove <- c("Lord_Howe", "Norfolk", "Chagos", "Seychelles_Inner")
+  # datalist <- datalist[which(!names(archipelagos41_paleo[[1]]) %in% arch_to_remove)]
+
+  for (archipelago in names(datalist)) {
     area <- c()
     distance <- c()
     for (time_slice in pars_res_df$age) {
@@ -32,7 +38,7 @@ for (model_number in model_numbers) {
     distances[[archipelago]] <- distance
   }
   base_rates <- list()
-  for (archipelago in names(archipelagos41_paleo[[1]])) {
+  for (archipelago in names(datalist)) {
     base_rates[[archipelago]] <- get_base_rates(
       archipelago_data = archipelagos41_paleo[[1]][[archipelago]][[1]],
       M = 1000,
@@ -42,7 +48,7 @@ for (model_number in model_numbers) {
       distance = distances[[archipelago]]
     )
   }
-  for (archipelago in names(archipelagos41_paleo[[1]])) {
+  for (archipelago in names(datalist)) {
     base_rates[[archipelago]]$age <- pars_res_df$age
   }
   # out_diff <- facet_archipelagos(base_rates, standardisation = "difference")
