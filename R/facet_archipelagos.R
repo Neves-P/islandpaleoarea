@@ -77,7 +77,7 @@ facet_archipelagos <- function(base_rates,
     ggplot2::theme(legend.position = "bottom")
   out4 <-
     patchwork::wrap_plots(
-      combined_plots[31:41],
+      combined_plots[31:length(combined_plots)],
       guides = "collect",
       ncol = 3,
       nrow = 4,
