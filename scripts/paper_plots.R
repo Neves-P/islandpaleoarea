@@ -22,13 +22,18 @@ m_18 <- cbind(m_18, total_area = total_area[m_18$age])
 m_17 <- ordered_results_paleo |> dplyr::filter(model == 17)
 m_17 <- cbind(m_17, total_area = total_area[m_17$age])
 
-global_estimate_plots_19 <- plot_line_estimates(ordered_results = m_19, log_gamma = TRUE)
+global_estimate_plots_19 <- plot_line_estimates(ordered_results = m_19, log_gamma = TRUE) +
+  ggplot2::ggtitle(paste0("M19"))
 global_area_plot_19 <- plot_area_time(m_19)
 
-global_estimate_plots_18 <- plot_line_estimates(ordered_results = m_18, log_gamma = TRUE)
+global_estimate_plots_18 <- plot_line_estimates(ordered_results = m_18, log_gamma = TRUE) +
+  ggplot2::ggtitle(paste0("M18")) +
+  ggplot2::theme(axis.title.x = ggplot2::element_blank())
 global_area_plot_18 <- plot_area_time(m_18)
 
-global_estimate_plots_17 <- plot_line_estimates(ordered_results = m_17, log_gamma = TRUE)
+global_estimate_plots_17 <- plot_line_estimates(ordered_results = m_17, log_gamma = TRUE) +
+  ggplot2::ggtitle(paste0("M17")) +
+  ggplot2::theme(axis.title.x = ggplot2::element_blank())
 global_area_plot_17 <- plot_area_time(m_17)
 
 # 2 archipelagos plots m_19
@@ -63,9 +68,11 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 }
 
 
-final_plot <- (global_area_plot_19 + global_estimate_plots_19) +
-  patchwork::plot_layout(guides = "collect", widths = c(1, 2)) +
-  patchwork::plot_annotation(tag_levels = "A")
+final_plot <- global_area_plot_17 | (global_estimate_plots_17 /
+  global_estimate_plots_18 / global_estimate_plots_19) +
+  patchwork::plot_annotation(tag_levels = "A", ) +
+  patchwork::plot_layout(guides = "collect")
+  # patchwork::plot_layout(guides = "collect", widths = c(1, 2)) +
 
 
 save_paper_plot(final_plot, "rates_areas_plots")
