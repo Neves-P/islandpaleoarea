@@ -34,7 +34,10 @@ global_area_plot_18 <- plot_area_time(m_18)
 global_estimate_plots_17 <- plot_line_estimates(ordered_results = m_17, log_gamma = TRUE) +
   ggplot2::ggtitle(paste0("M17")) +
   ggplot2::theme(axis.title.x = ggplot2::element_blank())
-global_area_plot_17 <- plot_area_time(m_17)
+
+global_area_plot_17 <- plot_area_time(m_17) +
+  ggplot2::theme(axis.title.x = ggplot2::element_text()) +
+  ggplot2::xlab("Time before present")
 
 # 2 archipelagos plots m_19
 model_res <- m_19
@@ -68,12 +71,10 @@ for (archipelago in names(archipelagos41_paleo[[1]])) {
 }
 
 
-final_plot <- global_area_plot_17 | (global_estimate_plots_17 /
-  global_estimate_plots_18 / global_estimate_plots_19) +
-  patchwork::plot_annotation(tag_levels = "A", ) +
-  patchwork::plot_layout(guides = "collect")
-  # patchwork::plot_layout(guides = "collect", widths = c(1, 2)) +
-
+final_plot <- (global_area_plot_17 | (global_estimate_plots_17 /
+  global_estimate_plots_18 / global_estimate_plots_19)) +
+  patchwork::plot_layout(guides = "collect") +
+  patchwork::plot_annotation(tag_levels = c("A"))
 
 save_paper_plot(final_plot, "rates_areas_plots")
 
