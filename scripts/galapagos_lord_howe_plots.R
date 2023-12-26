@@ -124,10 +124,11 @@ for (i in seq_along(models)) {
   }
 }
 
-final_plot <- (area_plot_lord_howe + rates_plots_lord_howe[[1]] + rates_plots_lord_howe[[2]] + rates_plots_lord_howe[[3]] +
-                 area_plot_galapagos + rates_plots_galapagos[[1]] + rates_plots_galapagos[[2]] + rates_plots_galapagos[[3]]) +
-  patchwork::plot_layout(guides = "collect", ncol = 2, nrow = 4, byrow = FALSE) +
-  patchwork::plot_annotation(tag_levels = "A") &
+final_plot <- (((area_plot_lord_howe / rates_plots_lord_howe[[1]] / rates_plots_lord_howe[[2]] / rates_plots_lord_howe[[3]]) + patchwork::plot_layout(tag_level = "new") |
+                 (area_plot_galapagos / rates_plots_galapagos[[1]] / rates_plots_galapagos[[2]] / rates_plots_galapagos[[3]]) + patchwork::plot_layout(tag_level = "new"))) +
+  patchwork::plot_layout(guides = "collect") +
+  patchwork::plot_annotation(tag_levels = c("A", "1")) &
   ggplot2::theme(legend.position = 'bottom')
 save_paper_plot(final_plot, "galapagos_lord_howe")
+
 
