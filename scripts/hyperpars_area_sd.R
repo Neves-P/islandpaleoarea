@@ -140,9 +140,9 @@ for (model_num in 17:19) {
 
 # Composite figure source(paper_plots.R) first
 
-final_plot <- (global_area_plot_19 + ggplot2::xlab("Time before present") + ggplot2::theme(axis.title.x = ggplot2::element_text()) +
-                 global_estimate_plots_19 + ggplot2::theme(plot.title = ggplot2::element_blank()) +
-                 hyperpars_plot_mean_sd) +
+final_plot <- (global_area_plot_19 + ggplot2::xlab("Time before present") + ggplot2::theme(axis.title.x = ggplot2::element_text(size = 9)) +
+                 global_estimate_plots_19 + ggplot2::theme(plot.title = ggplot2::element_blank(), axis.title.x = ggplot2::element_text(size = 9)) +
+                 hyperpars_plot_mean_sd) + ggplot2::theme(axis.title.x = ggplot2::element_text(size = 9)) +
   patchwork::plot_layout(guides = "collect") +
   patchwork::plot_annotation(tag_levels = "A")
 save_paper_plot(final_plot, "m19_pars_hyperpars")
