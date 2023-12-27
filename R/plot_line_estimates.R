@@ -33,7 +33,7 @@ plot_line_estimates <- function(ordered_results, standardisation = FALSE, log_ga
 
   if (log_gamma) {
     # param_plot <- param_plot + ggplot2::scale_y_continuous(
-    #   name = "Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
+    #   name = "  Estimated \U03BB\U1D9C; \U03BC; \U03BB\U1D43",
     #   sec.axis = ggplot2::sec_axis(~log(.), name = "Estimated log(\U03B3)", breaks = seq(1, 4, 0.1))
     # )
     param_plot <- param_plot + ggplot2::scale_y_continuous(
