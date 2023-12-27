@@ -145,7 +145,9 @@ final_plot <- (global_area_plot_19 + ggplot2::xlab("Time before present") + ggpl
                  hyperpars_plot_mean_sd) + ggplot2::theme(axis.title.x = ggplot2::element_text(size = 9)) +
   patchwork::plot_layout(guides = "collect") +
   patchwork::plot_annotation(tag_levels = "A")
-save_paper_plot(final_plot, "m19_pars_hyperpars")
-cairo_pdf(file = "m19_pars_hyperpars.pdf", width = 5.10, height = 3.54)
-ggplot2::ggsave(plot = final_plot, filename = "m19_pars_hyperpars.pdf", device = cairo_pdf, width = 150, height = 60, units = "mm")
+# save_paper_plot(final_plot, "m19_pars_hyperpars", type_size = "half_size")
+ggplot2::ggsave(plot = final_plot, filename = "figures/m19_pars_hyperpars.png", device = "png", width = 150, height = 60, units = "mm")
+ggplot2::ggsave(plot = final_plot, filename = "figures/m19_pars_hyperpars.pdf", device = "pdf", width = 150, height = 60, units = "mm")
+# cairo_pdf(file = "m19_pars_hyperpars.pdf", width = 5.10, height = 3.54)
+
 
