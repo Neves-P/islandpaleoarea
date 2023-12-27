@@ -20,7 +20,8 @@ Suggests:
     covr,
     testit,
     DAISIEutils,
-    dplyr
+    dplyr,
+    ggtext
 Depends: 
     R (>= 2.10)
 Remotes: 
