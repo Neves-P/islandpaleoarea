@@ -2,7 +2,6 @@ global_area_time <- c()
 data("ordered_results_paleo")
 
 
-
 for (model_num in 17:19) {
 
 
@@ -129,7 +128,8 @@ for (model_num in 17:19) {
     ) +
     ggplot2::theme_classic() +
     ggplot2::theme(legend.title = ggplot2::element_blank(),
-                   legend.text = ggtext::element_markdown()) +
+                   legend.text = ggtext::element_markdown(),
+                   plot.title = ggplot2::element_blank()) +
     ggplot2::xlab("Time before present")
   if (model_num != 19) {
     hyperpars_plot_mean_sd <- hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, y, colour = "y"))
@@ -140,7 +140,9 @@ for (model_num in 17:19) {
 
 # Composite figure source(paper_plots.R) first
 
-final_plot <- (global_area_plot_19 + global_estimate_plots_19 + hyperpars_plot_mean_sd) +
+final_plot <- (global_area_plot_19 + ggplot2::xlab("Time before present") + ggplot2::theme(axis.title.x = ggplot2::element_text()) +
+                 global_estimate_plots_19 + ggplot2::theme(plot.title = ggplot2::element_blank()) +
+                 hyperpars_plot_mean_sd) +
   patchwork::plot_layout(guides = "collect") +
   patchwork::plot_annotation(tag_levels = "A")
 save_paper_plot(final_plot, "m19_pars_hyperpars")
