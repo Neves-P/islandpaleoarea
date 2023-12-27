@@ -130,6 +130,7 @@ for (model_num in 17:19) {
     ggplot2::theme(legend.title = ggplot2::element_blank(),
                    legend.text = ggtext::element_markdown(),
                    plot.title = ggplot2::element_blank()) +
+    ggplot2::scale_color_manual(values = c("#E69F00", "#0072B2", "#D41159", "#CC79A7", "#D55E00")) +
     ggplot2::xlab("Time before present")
   if (model_num != 19) {
     hyperpars_plot_mean_sd <- hyperpars_plot_mean_sd + ggplot2::geom_line(ggplot2::aes(age, y, colour = "y"))
