@@ -12,6 +12,6 @@ age_model_table <- ordered_results_paleo_selected |>
 
 
 
-latex_table <- xtable(age_model_table[,-1], digits = 2)
+latex_table <- xtable::xtable(age_model_table[,17:19], digits = 2)
 
 
