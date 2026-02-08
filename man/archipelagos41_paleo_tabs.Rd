@@ -19,7 +19,8 @@ Groeve, Johannes De, Kenneth F. Rijsdijk, Eline S. Rentier,
 Suzette G. A. Flantua, Sietze J. Norder.
 Temporal Altitudinal Biogeographic Shifts (tabs): R Package for
 Reconstructing Biogeographic Shifts in Terrestrial and Marine Systems over
-Time. Frontiers of Biogeography. https://doi.org/10.21425/fob.18.151677.
+Time. Frontiers of Biogeography.
+\url{https://doi.org/10.21425/fob.18.151677}.
 \url{https://gitlab.com/uva_ibed_piac/projects/global_archipelago/-/tree/eea112f97343b02fea2128d88dc60e07ac2d920b/}
 
 Norder, Sietze Johannes; Baumgartner, John B; Borges, Paulo A V; Hengl,
