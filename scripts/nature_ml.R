@@ -9,7 +9,7 @@ optimmethod <- args[3]
 
 model_vec <- sort(rep(1:28, 15))
 model <- model_vec[array_index]
-parallel <- "local"
+parallel <- "cluster"
 data_name <- data(archipelagos41)
 
 seed <- as.integer(Sys.time()) %% 10000L * array_index

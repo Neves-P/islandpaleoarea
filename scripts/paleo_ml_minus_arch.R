@@ -9,7 +9,7 @@ methode <- args[3]
 optimmethod <- args[4]
 arch_to_remove <- as.numeric(args[5])
 model_to_run <- array_index
-parallel <- "local"
+parallel <- "cluster"
 
 data_name <- data(archipelagos41_paleo)
 

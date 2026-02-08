@@ -24,15 +24,15 @@
 # Example job using defaults
 # sbatch islandpaleoarea/bash/submit_paleo_ml.sh 1
 # Example job using non-default arguments
-# sbatch islandpaleoarea/bas/submit_paleo_ml.sh 1 lsoda simplex
+# sbatch islandpaleoarea/bas/submit_paleo_ml.sh 1 lsoda subplex
 
 mkdir -p logs
 ml R
 
 array_index=$SLURM_ARRAY_TASK_ID
 time_slice=$1
-methode=${2-lsodes}
-optimmethod=${3-subplex}
+methode=${3-odeint::runge_kutta_cash_karp54}
+optimmethod=${4-simplex}
 
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
                                                      ${time_slice} \

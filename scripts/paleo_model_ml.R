@@ -9,7 +9,7 @@ model <- as.numeric(args[3])
 methode <- args[4]
 optimmethod <- args[5]
 
-parallel <- "local"
+parallel <- "cluster"
 data_name <- data(archipelagos41_paleo)
 
 seed <- as.integer(Sys.time()) %% 10000L * array_index

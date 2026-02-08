@@ -7,11 +7,12 @@ array_index <- as.numeric(args[1])
 time_slice <- as.numeric(args[2])
 methode <- args[3]
 optimmethod <- args[4]
-
+data_name <- args[5]
 model_vec <- sort(rep(1:28, 15))
 model <- model_vec[array_index]
-parallel <- "local"
-data_name <- data(archipelagos41_paleo)
+parallel <- "cluster"
+# Load data
+data(data_name)
 
 seed <- as.integer(Sys.time()) %% 10000L * array_index
 set.seed(
