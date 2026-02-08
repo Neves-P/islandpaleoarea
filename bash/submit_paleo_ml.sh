@@ -38,4 +38,5 @@ data_name=${4-area_database_tabs}
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
                                                      ${time_slice} \
                                                      ${methode} \
-                                                     ${optimmethod}
+                                                     ${optimmethod} \
+                                                     ${data_name}
