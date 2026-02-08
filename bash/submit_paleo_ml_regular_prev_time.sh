@@ -27,7 +27,7 @@
 # sbatch islandpaleoarea/bash/submit_paleo_ml_prev_time.sh 2 lsoda simplex
 
 mkdir -p logs
-ml R
+module load R/4.5.1-gfbf-2025a
 
 array_index=$SLURM_ARRAY_TASK_ID
 time_slice=$1

@@ -8,7 +8,7 @@
 #SBATCH --mem=2GB
 
 mkdir -p logs
-ml R
+module load R/4.5.1-gfbf-2025a
 Rscript -e "remotes::install_github('rsetienne/DAISIE')"
 Rscript -e "remotes::install_github('tece-lab/DAISIEutils', upgrade = 'always')"
 Rscript -e "remotes::install_github('Neves-P/islandpaleoarea', upgrade = 'always')"
