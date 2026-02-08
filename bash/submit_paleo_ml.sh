@@ -5,7 +5,7 @@
 #SBATCH --mem=1000
 #SBATCH --cpus-per-task=6
 #SBATCH --job-name=paleo_ml
-#SBATCH --output=logs/%x-%j-array-%a.log
+#SBATCH --output=logs/%x-%J-array-%a.log
 # islandpaleoarea: Paleo-Area Influence on Island Evolutionary Models
 # Copyright (C) 2022 Pedro Santos Neves
 #
@@ -33,7 +33,7 @@ array_index=$SLURM_ARRAY_TASK_ID
 time_slice=$1
 methode=${3-odeint::runge_kutta_cash_karp54}
 optimmethod=${4-simplex}
-data_name=${5-area_database_tabs}
+data_name=${5-archipelagos41_paleo_tabs}
 
 echo $array_index $time_slice $methode $optimmethod $data_name
 
