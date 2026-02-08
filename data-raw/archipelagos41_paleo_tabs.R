@@ -31,31 +31,33 @@ testit::assert(
 
 # Add another level to list, each one a time slice in the past
 n_time_slices <- length(
-  unique(area_database_tabs$year_before_after_present)
+  unique(area_database_tabs$year)
 )
-age_slices <- sort(unique(
-  area_database_tabs$year_before_after_present
-))
-archipelagos41_paleo <- vector(mode = "list", length = n_time_slices)
-names(archipelagos41_paleo) <- as.character(age_slices)
+age_slices <- -unique(
+  area_database_tabs$year
+)
+area_database_tabs$year <- -area_database_tabs$year
+
+archipelagos41_paleo_tabs <- vector(mode = "list", length = n_time_slices)
+names(archipelagos41_paleo_tabs) <- as.character(age_slices)
 
 # Loop over ages
-for (i in seq_along(archipelagos41_paleo)) {
+for (i in seq_along(archipelagos41_paleo_tabs)) {
   # Fill list with old archipelagos41 with area to be overwritten
-  archipelagos41_paleo[[i]] <- archipelagos41
+  archipelagos41_paleo_tabs[[i]] <- archipelagos41
   # Loop over archipelagos
   for (j in seq_along(archipelagos41)) {
     # Extract area of time slice i for archipelago j
     area_slice <- dplyr::filter(
       area_database_tabs,
       archipelago == archipelagos41[[j]][[1]]$name,
-      year_before_after_present == age_slices[i]
+      year == age_slices[i]
     ) |> dplyr::select(archipelago, area_km)
-    archipelagos41_paleo[[i]][[j]][[1]]$area <- area_slice$area_km
+    archipelagos41_paleo_tabs[[i]][[j]][[1]]$area <- area_slice$area_km
     testit::assert(
-      archipelagos41_paleo[[i]][[j]][[1]]$name == area_slice$archipelago
+      archipelagos41_paleo_tabs[[i]][[j]][[1]]$name == area_slice$archipelago
     )
   }
 }
 
-usethis::use_data(archipelagos41_paleo, overwrite = TRUE)
+usethis::use_data(archipelagos41_paleo_tabs, overwrite = TRUE)
