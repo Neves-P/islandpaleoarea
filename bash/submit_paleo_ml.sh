@@ -35,6 +35,8 @@ methode=${3-odeint::runge_kutta_cash_karp54}
 optimmethod=${4-simplex}
 data_name=${5-area_database_tabs}
 
+echo $array_index $time_slice $methode $optimmethod $data_name
+
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
                                                      ${time_slice} \
                                                      ${methode} \
