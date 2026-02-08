@@ -33,6 +33,7 @@ array_index=$SLURM_ARRAY_TASK_ID
 time_slice=$1
 methode=${3-odeint::runge_kutta_cash_karp54}
 optimmethod=${4-simplex}
+data_name=${4-area_database_tabs}
 
 Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
                                                      ${time_slice} \
