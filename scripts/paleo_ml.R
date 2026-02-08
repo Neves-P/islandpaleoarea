@@ -12,7 +12,7 @@ model_vec <- sort(rep(1:28, 15))
 model <- model_vec[array_index]
 parallel <- "cluster"
 # Load data
-data(data_name)
+loaded_data <- get(data_name)
 
 seed <- as.integer(Sys.time()) %% 10000L * array_index
 set.seed(
@@ -36,7 +36,7 @@ output_folder_path <- DAISIEutils::create_output_folder(
   results_dir = NULL
 )
 
-datalist <- archipelagos41_paleo[[time_slice]]
+datalist <- loaded_data[[time_slice]]
 
 model_args <- setup_mw_model(model)
 initparsopt <- model_args$initparsopt
