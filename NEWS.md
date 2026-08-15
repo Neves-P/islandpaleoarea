@@ -1,3 +1,9 @@
+# islandpaleoarea 1.2.0
+
+* Add new Imports: `tidyverse`, `usethis`, `xtable`, `BiocManager`
+* Use `renv` for better replication.
+* Initialize scripts with `renv::load()`.
+
 # islandpaleoarea 1.1.0
 
 * Jobs that run without 4 area outlier archipelagos: Lord Howe, Norfolk, Chagos, Seychelles Inner.
