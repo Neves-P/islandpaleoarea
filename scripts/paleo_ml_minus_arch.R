@@ -1,5 +1,6 @@
 args <- commandArgs(trailingOnly = TRUE)
 
+renv::load(project = "islandpaleoarea")
 library(DAISIE)
 library(islandpaleoarea)
 
