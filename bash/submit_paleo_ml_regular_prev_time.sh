@@ -34,7 +34,7 @@ time_slice=$1
 methode=${2-lsodes}
 optimmethod=${3-subplex}
 
-Rscript --vanilla islandpaleoarea/scripts/paleo_ml_prev_time.R ${array_index} \
+Rscript islandpaleoarea/scripts/paleo_ml_prev_time.R ${array_index} \
                                                                ${time_slice} \
                                                                ${methode} \
                                                                ${optimmethod}

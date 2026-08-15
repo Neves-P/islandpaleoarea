@@ -33,6 +33,6 @@ array_index=$SLURM_ARRAY_TASK_ID
 methode=${2-lsodes}
 optimmethod=${3-subplex}
 
-Rscript --vanilla islandpaleoarea/scripts/nature_ml.R ${array_index} \
+Rscript islandpaleoarea/scripts/nature_ml.R ${array_index} \
                                                       ${methode} \
                                                       ${optimmethod}

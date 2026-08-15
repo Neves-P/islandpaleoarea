@@ -35,7 +35,7 @@ model=$2
 methode=${3-odeint::runge_kutta_cash_karp54}
 optimmethod=${4-simplex}
 
-Rscript --vanilla islandpaleoarea/scripts/paleo_model_ml.R ${array_index} \
+Rscript islandpaleoarea/scripts/paleo_model_ml.R ${array_index} \
 ${time_slice} \
 ${model} \
 ${methode} \

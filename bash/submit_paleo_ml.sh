@@ -37,7 +37,7 @@ data_name=${5-archipelagos41_paleo_tabs}
 
 echo $array_index $time_slice $methode $optimmethod $data_name
 
-Rscript --vanilla islandpaleoarea/scripts/paleo_ml.R ${array_index} \
+Rscript islandpaleoarea/scripts/paleo_ml.R ${array_index} \
                                                      ${time_slice} \
                                                      ${methode} \
                                                      ${optimmethod} \
