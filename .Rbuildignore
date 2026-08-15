@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^islandpaleoarea\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$

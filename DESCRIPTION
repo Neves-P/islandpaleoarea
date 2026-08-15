@@ -31,3 +31,7 @@ Imports:
     ggplot2,
     ggthemes,
     patchwork
+    tidyverse,
+    usethis,
+    xtable,
+    BiocManager
