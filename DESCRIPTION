@@ -21,7 +21,8 @@ Suggests:
     testit,
     DAISIEutils,
     dplyr,
-    ggtext
+    ggtext,
+    renv
 Depends: 
     R (>= 3.5)
 Remotes: 
@@ -30,7 +31,7 @@ Imports:
     Cairo,
     ggplot2,
     ggthemes,
-    patchwork
+    patchwork,
     tidyverse,
     usethis,
     xtable,
